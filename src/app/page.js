@@ -15,7 +15,7 @@ import React from "react";
 const page = () => {
   return (
     <>
-      {/* <HeroComp/> */}
+      <HeroComp/>
       <About/>
       <Work/>
       <SectionBreak/>

@@ -207,19 +207,34 @@ const groupRef = useRef(null);
     })
   }
 
-  const materialsProps = useControls({
-    thickness: { value: 3.51, min: 0, max: 10, step: 0.05 },
-    backsideThickness: { value: 0.0, min: 0, max: 3 },
-    roughness: { value: 0.5, min: 0, max: 1, step: 0.1 },
-    reflectivity: { value: 0.0, min: 0, max: 1, step: 0.01 },
-    anisotropy: { value: 0, min: 0, max: 1, step: 0.01 },
-    chromaticAberration: { value: 1.0, min: 0, max: 1 },
-    distortion: { value: 0.0, min: 0, max: 4, step: 0.01 },
-    temporalDistortion: { value: 0.0, min: 0, max: 1, step: 0.01 },
-    anisotropicBlur: { value: 5.0, min: 0, max: 5, step: 0.01 },
-    color: '#ffffff',
-    backside: { value: false }
-  })
+  // const materialsProps = useControls({
+  //   thickness: { value: 3.51, min: 0, max: 10, step: 0.05 },
+  //   backsideThickness: { value: 0.0, min: 0, max: 3 },
+  //   roughness: { value: 0.5, min: 0, max: 1, step: 0.1 },
+  //   reflectivity: { value: 0.0, min: 0, max: 1, step: 0.01 },
+  //   anisotropy: { value: 0, min: 0, max: 1, step: 0.01 },
+  //   chromaticAberration: { value: 1.0, min: 0, max: 1 },
+  //   distortion: { value: 0.0, min: 0, max: 4, step: 0.01 },
+  //   temporalDistortion: { value: 0.0, min: 0, max: 1, step: 0.01 },
+  //   anisotropicBlur: { value: 5.0, min: 0, max: 5, step: 0.01 },
+  //   color: '#ffffff',
+  //   backside: { value: false }
+  // })
+
+  const materialPropsCopy = {
+    thickness:3.51,
+    backsideThickness:0.90,
+    roughness:0.5,
+    reflectivity:0.1,
+    antisotrophy:0.81,
+    chromaticAberration:0.12,
+    distortion:0.14,
+    temporalDistortion:0.0,
+    anisotropicBlur:1.52,
+    color:"#ffffff",
+    backSide:false,
+
+}
   useEffect(() => {
     const handleMouseMove = (e) => {
       const x = (e.clientX / window.innerWidth) * 2 - 1
@@ -262,22 +277,22 @@ const groupRef = useRef(null);
     >
       <group ref={ModelPart1}>
         <mesh geometry={nodes.Low_Poly.geometry}>
-          <MeshTransmissionMaterial {...materialsProps} />
+          <MeshTransmissionMaterial {...materialPropsCopy} />
         </mesh>
       </group>
       <group ref={ModelPart2}>
         <mesh geometry={nodes.Low_Poly001.geometry}>
-          <MeshTransmissionMaterial {...materialsProps} />
+          <MeshTransmissionMaterial {...materialPropsCopy} />
         </mesh>
       </group>
       <group ref={ModelPart3}>
         <mesh geometry={nodes.Low_Poly002.geometry}>
-          <MeshTransmissionMaterial {...materialsProps} />
+          <MeshTransmissionMaterial {...materialPropsCopy} />
         </mesh>
       </group>
       <group ref={ModelPart4}>
         <mesh geometry={nodes.Low_Poly003.geometry}>
-          <MeshTransmissionMaterial {...materialsProps} />
+          <MeshTransmissionMaterial {...materialPropsCopy} />
         </mesh>
       </group>
     </group>
