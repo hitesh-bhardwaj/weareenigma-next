@@ -224,17 +224,17 @@ const EnigmaModel = () => {
   // })
 
   const materialsProps= {
-    thickness:8.11,
-    backsideThickness:1.71,
-    roughness:0.2,
-    reflectivity:0.04,
-    antisotrophy:0.00,
-    chromaticAberration:1.00,
-    distortion:0.0,
-    temporalDistortion:0.0,
-    anisotropicBlur:5.00,
-    color:"#fcf7f7",
-    backSide:false,
+    thickness: 2.8,
+    backsideThickness: 0.0,
+    reflectivity: 0.14,
+    roughness: 0.2,
+    antisotropy: 0.4,
+    chromaticAberration: 0.05,
+    distortion: 0.3,
+    temporalDistortion: 0.1,
+    anisotropicBlur: 4.0,
+    color: "#ffffff",
+    backSide: false,
 }
   useEffect(() => {
     const handleMouseMove = (e) => {

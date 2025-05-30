@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Hero from "../Hero"
-import Hero2 from './Hero2'
+
 
 const HeroComp = () => {
   return (
@@ -22,7 +22,7 @@ const HeroComp = () => {
         </div>
         </div>
         <div className='absolute top-0 left-0 z-[1]'>
-        <Hero2/>
+        <Hero/>
         </div>
     </section>
   )

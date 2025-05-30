@@ -22,11 +22,36 @@ function EnigmaModelWeb({}) {
   const bgref = useRef(null);
   const backgroundModel = useGLTF("/assets/models/fractalGlassModel.glb");
   const texture = useTexture("/assets/models/hero-bg.png")
+  const webModelRef = useRef(null);
+
   texture.center.set(0.5, 0.5);
   texture.rotation = Math.PI;
   texture.needsUpdate = true;
+
+  useEffect(() => {
+    if (!webModelRef.current) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#hero-section",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
+    tl.to(webModelRef.current.position, {
+      y: 100, // Move upward
+      ease: "none",
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
   return (
-    <group position={[0, 0, 0]}>
+    <group position={[0, 0, 0]} ref={webModelRef}>
       <group
         ref={bgref}
         scale={1}
@@ -52,18 +77,19 @@ const EnigmaModel = () => {
   const ModelPart3 = useRef()
   const ModelPart4 = useRef()
   const mouse = useRef({ x: 0, y: 0 })
+  const planeRef= useRef(null);
   const materialsProps= {
-    thickness:8.11,
-    backsideThickness:1.71,
-    roughness:0.2,
-    reflectivity:0.04,
-    antisotrophy:0.00,
-    chromaticAberration:1.00,
-    distortion:0.0,
-    temporalDistortion:0.0,
-    anisotropicBlur:5.00,
-    color:"#fcf7f7",
-    backSide:false,
+    thickness: 2.8,
+    backsideThickness: 0.0,
+    reflectivity: 0.14,
+    roughness: 0.2,
+    antisotropy: 0.4,
+    chromaticAberration: 0.05,
+    distortion: 0.3,
+    temporalDistortion: 0.1,
+    anisotropicBlur: 4.0,
+    color: "#ffffff",
+    backSide: false,
   }
 
   useEffect(() => {
@@ -98,53 +124,35 @@ const EnigmaModel = () => {
   useEffect(() => {
     if (!groupRef.current) return;
   
-    // Create a timeline for coordinated animations
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#hero-section", 
-        start: "top top",
+        start: "-20% top",
         end: "bottom top",
-        scrub: 1, // Smooth scrubbing
-        onUpdate: (self) => {
-          // Optional: Add any custom logic during scroll
-          console.log("Scroll progress:", self.progress);
-        }
+        markers: true,
+        scrub: 1, 
       }
     });
-
-    // Move model to center of screen
     tl.to(groupRef.current.position, {
-      x: 0, // Move to center X
-      y: 0, // Move to center Y
-      z: 0, // Move to center Z
-      duration: 1,
+      x: 0,
+      y: 0,
+      z: 0, 
       ease: "power2.inOut",
+      duration: 1,
     })
-    
-    // Scale up the model
-    .to(groupRef.current.scale, {
-      x: 2,
-      y: 2,
-      z: 2,
-      duration: 1,
+  
+    .to(groupRef.current.rotation, {
+      y: `+=${Math.PI * 2.3}`, 
       ease: "power2.inOut",
-    }, 0) // Start at the same time as position animation
-    
-    // 360-degree rotation on Y-axis
-    .to(groupRef.current.rotation, {
-      y: "+=6.28318", // 2 * Math.PI for full 360° rotation
       duration: 1,
-      ease: "none", // Linear rotation for smooth spinning
-    }, 0.3) // Start slightly after position animation begins
-    
-    // Optional: Add additional rotation on other axes for more dynamic effect
-    .to(groupRef.current.rotation, {
-      x: "+=3.14159", // Additional 180° rotation on X-axis
-      duration: 1,
-      ease: "power1.inOut",
-    }, 0.5); // Start halfway through
-
-    // Cleanup function
+    }, 0)
+    .to(groupRef.current.position,{
+        z:45,
+        y:0.5,
+        ease:"power2.out",
+        duration:1
+    })
+  
     return () => {
       ScrollTrigger.getAll().forEach(trigger => {
         if (trigger.trigger === "#hero-section") {
@@ -153,12 +161,16 @@ const EnigmaModel = () => {
       });
     };
   }, []);
+  
+  const videoTexture = useVideoTexture(
+    "https://cdn.pixabay.com/video/2023/10/20/185787-876545918_large.mp4"
+  );
       
   return (
     <group
-      position={[6, 0, 5]} // Initial position (will animate to center)
-      scale={1.2} // Initial scale (will animate to 2)
-      rotation={[Math.PI / 15, -Math.PI / 25, 0]} // Initial rotation
+      position={[6, 0, 5]} 
+      scale={1.2} 
+      rotation={[Math.PI / 15, -Math.PI / 25, 0]} 
       ref={groupRef}
     >
       <group ref={ModelPart1}>
@@ -181,6 +193,18 @@ const EnigmaModel = () => {
           <MeshTransmissionMaterial {...materialsProps} />
         </mesh>
       </group>
+      <group
+        ref={planeRef}
+        position={[0, 3.5, 20]}
+        rotation={[
+          0,-Math.PI/2,0
+        ]}
+      >
+        <mesh rotation={[0,-Math.PI/2,0]}>
+          <planeGeometry args={[3, 1.5]} />
+          <meshBasicMaterial map={videoTexture} toneMapped={false} />
+        </mesh>
+        </group>
     </group>
   )
 }
@@ -223,22 +247,24 @@ const Hero2 = () => {
 
     return <directionalLight ref={lightRef} intensity={3} />;
   };
-
+  
   return (
     <>
-      <div ref={containerRef} className="h-screen w-screen" id="hero-section">
+      <div ref={containerRef} className="h-[400vh] w-screen" id="hero-section">
         {/* Add some content below to enable scrolling */}
         <Canvas
-          className="h-full w-full"
+          className="h-screen w-screen !sticky top-0"
           camera={{ fov: 20, position: [0, 0, 40] }}
           style={{
             background: "#000000",
+            height: "100vh",
+            width: "100vw",
           }}
         >
           <ambientLight intensity={0.8} />
           <LightFollower target={lightTargetRef} />
           <Suspense>
-            <EnigmaModelWeb/>
+            <EnigmaModelWeb />
             <EnigmaModel/>
           </Suspense>
         </Canvas>
