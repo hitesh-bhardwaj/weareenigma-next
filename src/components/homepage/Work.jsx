@@ -16,7 +16,7 @@ const Work = () => {
           start: "top top",
           end: "80% bottom",
           scrub: true,
-          markers: true,
+          // markers: true,
         },
         defaults: {
           ease: "none",
