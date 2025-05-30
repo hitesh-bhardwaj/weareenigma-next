@@ -20,6 +20,7 @@ const page = () => {
     <>
       <Header/>
       <HeroComp/>
+      {/* <Hero2/> */}
       <About/>
       <Work/>
       <SectionBreak/>

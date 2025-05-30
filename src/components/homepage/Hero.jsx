@@ -1,6 +1,6 @@
 "use client";
 import {
-    Environment,
+  Environment,
   MeshTransmissionMaterial,
   OrbitControls,
   shaderMaterial,
@@ -10,7 +10,7 @@ import {
 } from "@react-three/drei";
 import { useControls } from "leva";
 import React, { Suspense, useEffect, useRef, useState } from "react";
-import { degToRad} from "three/src/math/MathUtils";
+import { degToRad } from "three/src/math/MathUtils";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import * as THREE from "three";
@@ -19,26 +19,26 @@ import { Canvas, extend, useFrame } from "@react-three/fiber";
 gsap.registerPlugin(ScrollTrigger);
 
 const WaveShaderMaterial = shaderMaterial(
-        {
-          u_time: 0,
-          u_resolution: new THREE.Vector2(),
-          u_amplitude: 0.1,
-          u_frequency: 10.0,
-          u_speed: 1.5,
-          u_colorTop: new THREE.Color(0xffffff),
-          u_colorMiddle: new THREE.Color(0xffa500),
-          u_colorBottom: new THREE.Color(0x000000),
-        },
-        // Vertex Shader
-        `
+  {
+    u_time: 0,
+    u_resolution: new THREE.Vector2(),
+    u_amplitude: 0.1,
+    u_frequency: 10.0,
+    u_speed: 1.5,
+    u_colorTop: new THREE.Color(0xffffff),
+    u_colorMiddle: new THREE.Color(0xffa500),
+    u_colorBottom: new THREE.Color(0x000000),
+  },
+  // Vertex Shader
+  `
           varying vec2 v_uv;
           void main() {
             v_uv = uv;
             gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
           }
         `,
-        // Fragment Shader
-        `
+  // Fragment Shader
+  `
           precision mediump float;
       
           varying vec2 v_uv;
@@ -74,21 +74,21 @@ const WaveShaderMaterial = shaderMaterial(
       gl_FragColor = vec4(color*1.5, 5.0);
     }
         `
-      )
-      extend({ WaveShaderMaterial });
-      
+)
+extend({ WaveShaderMaterial });
+
 function WaveBackground() {
-        const meshRef = useRef()
-        useFrame(({ clock, size }) => {
-            if (meshRef.current) {
-                meshRef.current.material.u_time = clock.getElapsedTime()
-                meshRef.current.material.u_resolution.set(size.width, size.height)
-            }
-        })
-        return (
-            <mesh scale={2} ref={meshRef} position={[0, 0, -5]} >
-                <planeGeometry args={[16, 9]} />
-                <waveShaderMaterial
+  const meshRef = useRef()
+  useFrame(({ clock, size }) => {
+    if (meshRef.current) {
+      meshRef.current.material.u_time = clock.getElapsedTime()
+      meshRef.current.material.u_resolution.set(size.width, size.height)
+    }
+  })
+  return (
+    <mesh scale={2} ref={meshRef} position={[0, 0, -5]} >
+      <planeGeometry args={[16, 9]} />
+      <waveShaderMaterial
         u_time={0.3}
         u_amplitude={0.1}
         u_frequency={8.0}
@@ -97,11 +97,11 @@ function WaveBackground() {
         u_colorMiddle={new THREE.Color('#FE9D50')}
         u_colorBottom={new THREE.Color('#FFFFFF')}
       />
-            </mesh>
-        )
-    }
+    </mesh>
+  )
+}
 
- function EnigmaModelWeb({}) {
+function EnigmaModelWeb({ }) {
   const bgref = useRef(null);
   const backgroundModel = useGLTF("/assets/models/fractalGlassModel.glb");
   const texture = useTexture("/assets/models/hero-bg.png")
@@ -114,39 +114,39 @@ texture.needsUpdate = true;
   //   thickness: { value: 0.02, min: 0, max: 2, step: 0.01 },
   //   roughness: { value: 0.05, min: 0, max: 1, step: 0.01 },
   //   ior: { value: 1.05, min: 1, max: 2.5, step: 0.01 },
-    
+
   //   // Color and brightness controls
   //   chromaticAberration: { value: 0.1, min: 0, max: 1, step: 0.01 },
   //   anisotropy: { value: 0, min: 0, max: 1, step: 0.01 },
   //   distortion: { value: 0.1, min: 0, max: 1, step: 0.01 },
   //   distortionScale: { value: 0.2, min: 0.01, max: 1, step: 0.01 },
   //   temporalDistortion: { value: 0.1, min: 0, max: 1, step: 0.01 },
-    
+
   //   // Attenuation (color preservation)
   //   attenuationDistance: { value: 0.1, min: 0.01, max: 10, step: 0.01 },
   //   attenuationColor: "#ffffff",
-    
+
   //   // Surface properties
   //   clearcoat: { value: 0.05, min: 0, max: 1, step: 0.01 },
   //   clearcoatRoughness: { value: 0.01, min: 0, max: 1, step: 0.01 },
   //   reflectivity: { value: 0.05, min: 0, max: 1, step: 0.01 },
-    
+
   //   // Color tinting
   //   color: "#ffffff",
-    
+
   //   // Advanced properties for vibrant colors
   //   iridescence: { value: 0.2, min: 0, max: 1, step: 0.01 },
   //   iridescenceIOR: { value: 1.3, min: 1, max: 2.333, step: 0.01 },
   //   iridescenceThicknessRange: { value: [100, 400], min: 0, max: 1000, step: 1 },
-    
+
   //   // Transparency and opacity
   //   opacity: { value: 1, min: 0, max: 1, step: 0.01 },
   //   transparent: true,
-    
+
   //   // Backside properties
   //   backside: true,
   //   backsideThickness: { value: 0.1, min: 0, max: 2, step: 0.01 },
-    
+
   //   // Sampling for quality
   //   samples: { value: 16, min: 1, max: 32, step: 1 },
   //   resolution: { value: 1024, min: 64, max: 2048, step: 64 },
@@ -161,7 +161,8 @@ texture.needsUpdate = true;
       >
         <mesh geometry={backgroundModel.nodes.Plane002.geometry}>
           {/* <MeshTransmissionMaterial {...materialsProps}/> */}
-          <meshStandardMaterial map={texture} side={THREE.DoubleSide}/>
+          <meshStandardMaterial map={texture} side={THREE.DoubleSide} />
+
         </mesh>
       </group>
     </group>
@@ -253,29 +254,28 @@ const EnigmaModel = () => {
   }, [])
 
   useFrame(() => {
-      if (!groupRef.current) return;
-  
-      const targetX = mouse.current.x * 0.3;
-      const targetY = mouse.current.y * 0.3;
-  
-      groupRef.current.rotation.y = THREE.MathUtils.lerp(
-        groupRef.current.rotation.y,
-        targetX,
-        0.1
-      );
-      groupRef.current.rotation.x = THREE.MathUtils.lerp(
-        groupRef.current.rotation.x,
-        -targetY,
-        0.1
-      );
-    });
+    if (!groupRef.current) return
+
+    const targetX = mouse.current.x * 0.3
+    const targetY = mouse.current.y * 0.3
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(
+      groupRef.current.rotation.y,
+      targetX,
+      0.1
+    )
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(
+      groupRef.current.rotation.x,
+      -targetY,
+      0.1
+    )
+  })
   return (
     <group
       position={[6, 0, 5]}
       scale={1.2}
       rotation={[Math.PI / 15, -Math.PI / 25, 0]}
       ref={groupRef}
-     
+
     >
       <group ref={ModelPart1}>
         <mesh geometry={nodes.Low_Poly.geometry}>
@@ -367,7 +367,7 @@ const Hero = () => {
         </Suspense>
       </Canvas>
       </div>
-   </>
+    </>
   )
 }
 
