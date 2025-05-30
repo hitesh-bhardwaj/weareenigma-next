@@ -1,29 +1,65 @@
-import Link from "next/link";
-import { client } from "../sanity/client";
+import About from "@/components/homepage/About";
+import Achievements from "@/components/homepage/Achievements";
+import Clients from "@/components/homepage/Clients";
+import FAQs from "@/components/homepage/FAQ";
+import Footer from "@/components/homepage/Footer";
+import HeroComp from "@/components/homepage/Hero/HeroComp";
+import Industries from "@/components/homepage/Industries";
+import SectionBreak from "@/components/homepage/SectionBreak";
+import Solutions from "@/components/homepage/Solutions";
+import Testimonials from "@/components/homepage/Testimonials";
+import Work from "@/components/homepage/Work";
+import React from "react";
 
-const POSTS_QUERY = `*[
-  _type == "post"
-  && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
 
-const options = { next: { revalidate: 30 } };
-
-export default async function IndexPage() {
-  const posts = await client.fetch(POSTS_QUERY, {}, options);
-
+const page = () => {
   return (
-    <main className="container mx-auto min-h-screen max-w-3xl p-8">
-      <h1 className="text-4xl font-bold mb-8">Posts</h1>
-      <ul className="flex flex-col gap-y-4">
-        {posts.map((post) => (
-          <li className="hover:underline" key={post._id}>
-            <Link href={`/${post.slug.current}`}>
-              <h2 className="text-xl font-semibold">{post.title}</h2>
-              <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </main>
+    <>
+      {/* <HeroComp/> */}
+      <About/>
+      <Work/>
+      <SectionBreak/>
+      <Testimonials/>
+      <Solutions/>
+      <Industries/>
+      <Achievements/>
+      <Clients/>
+      <FAQs content={faqContent} />
+      {/* <Footer/> */}
+    </>
   );
-}
+};
+
+export default page;
+const faqContent = [
+  {
+    question: "How long does a project usually take?",
+    answer:
+      "Choosing between different options such as online banking, mobile apps, in-person transfers at a bank branch, or using a bank's ATM.",
+  },
+  {
+    question: "How long does a project usually take?",
+    answer:
+      "Choosing between different options such as online banking, mobile apps, in-person transfers at a bank branch, or using a bank's ATM. Choosing between different options such as online banking, mobile apps, in-person transfers at a bank branch, or using a bank's ATM.",
+  },
+  {
+    question: "How long does a project usually take?",
+    answer:
+      "Choosing between different options such as online banking, mobile apps, in-person transfers at a bank branch, or using a bank's ATM.",
+  },
+  {
+    question: "How long does a project usually take?",
+    answer:
+      "Choosing between different options such as online banking, mobile apps, in-person transfers at a bank branch, or using a bank's ATM. Choosing between different options such as online banking.",
+  },
+  {
+    question: "How long does a project usually take?",
+    answer:
+      "Choosing between different options such as online banking, mobile apps, in-person transfers at a bank branch, or using a bank's ATM.",
+  },
+  {
+    question: "How long does a project usually take?",
+    answer:
+      "Choosing between different options such as online banking, mobile apps, in-person transfers at a bank branch, or using a bank's ATM.",
+  },
+];
