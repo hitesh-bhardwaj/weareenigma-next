@@ -63,7 +63,7 @@ const TestimonialSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex(prev => (prev + 1) % data.length)
-    }, 4000) // Change testimonial every 4 seconds
+    }, 4000) 
 
     return () => clearInterval(interval)
   }, [])
@@ -94,10 +94,10 @@ const TestimonialSection = () => {
         return (
           <span
             key={i} 
-            className="line bg-white  w-[1px] line block"
+            className="line bg-white  w-[1px] block"
             style={{
-              height: `${height}vh`,
-              animationDelay: `${delay}s`,
+              // height: `${height}vh`,
+              // animationDelay: `${delay}s`,
             }}
           />
         );
