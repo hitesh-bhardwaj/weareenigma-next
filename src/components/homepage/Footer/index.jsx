@@ -169,58 +169,67 @@ function EnigmaModelWeb({ }) {
     );
 }
 const FooterBg = () => {
-    const [lightPosition, setLightPosition] = useState({
-        x: 10,
-        y: 10,
-    });
-
-    const mouseMove = (e) => {
-        const targetX = (e.clientX / window.innerWidth) * 20 - 10;
-        setLightPosition((prevPos) => ({
-            x: prevPos.x + (targetX - prevPos.x) * 0.5,
-            y: 0,
-            z: 5,
-            duration: 1,
-            ease: "power2.out",
-        }));
+    const lightTargetRef = useRef(new THREE.Vector3(10, 10, 10));
+    const containerRef = useRef(null);
+  
+    const handleMouseMove = (e) => {
+      if (!containerRef.current) return;
+  
+      const bounds = containerRef.current.getBoundingClientRect();
+  
+      if (
+        e.clientX >= bounds.left &&
+        e.clientX <= bounds.right &&
+        e.clientY >= bounds.top &&
+        e.clientY <= bounds.bottom
+      ) {
+        const x = ((e.clientX - bounds.left) / bounds.width) * 20 - 10;
+        const y = -((e.clientY - bounds.top) / bounds.height) * 20 + 10;
+  
+        lightTargetRef.current.set(x, y, 10);
+      }
     };
+  
     useEffect(() => {
-        window.addEventListener("mousemove", mouseMove);
-        return () => {
-            window.removeEventListener("mousemove", mouseMove);
-        };
+      window.addEventListener("mousemove", handleMouseMove);
+      return () => {
+        window.removeEventListener("mousemove", handleMouseMove);
+      };
     }, []);
+  
+    const LightFollower = ({ target }) => {
+      const lightRef = useRef();
+      useFrame(() => {
+        if (!lightRef.current || !target.current) return;
+        lightRef.current.position.lerp(target.current, 0.1);
+      });
+  
+      return <directionalLight ref={lightRef} intensity={3} />;
+    };
+  
     return (
-        <>
-            <div className="h-screen w-screen absolute top-0 left-0">
-                <Canvas
-                    className="h-full w-full"
-                    camera={{ fov: 20, position: [0, 0, 40] }}
-                    gl={{
-                        antialias: true,
-                        // toneMapping: THREE.ACESFilmicToneMapping,
-                        // outputEncoding: THREE.sRGBEncoding,
-                    }}
-                    style={{
-                        background: "#000000",
-                    }}
-                >
-                    <ambientLight intensity={0.8} />
+      <div
+        ref={containerRef}
+        className="h-screen w-screen absolute top-0 left-0"
+      >
+        <Canvas
+          className="h-full w-full"
+          camera={{ fov: 20, position: [0, 0, 40] }}
+          gl={{ antialias: true }}
+          style={{ background: "#000000" }}
+        >
+          <ambientLight intensity={0.8} />
+          <LightFollower target={lightTargetRef} />
+          <Suspense>
+            <EnigmaModelWeb />
+            <WaveBackground />
+          </Suspense>
+        </Canvas>
+      </div>
+    );
+  };
+  
 
-                    <directionalLight
-                        position={[lightPosition.x, lightPosition.y, 10]}
-                        intensity={3}
-                    />
-                    <Suspense>
-                        <EnigmaModelWeb />
-                        <WaveBackground />
-
-                    </Suspense>
-                </Canvas>
-            </div>
-        </>
-    )
-}
 const Footer = () => {
     return (
         <>
@@ -230,7 +239,6 @@ const Footer = () => {
                     <div className='w-screen h-screen absolute'>
                         <FooterBg />
                     </div>
-
                     <div className='z-[10] relative h-full py-[4vw] px-[4vw]'>
                         <div className='flex flex-col items-start justify-bewteen gap-[28vw]'>
                             <div className='flex items-center justify-between w-full h-full text-white'>

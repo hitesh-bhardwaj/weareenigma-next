@@ -3,6 +3,7 @@ import Achievements from "@/components/homepage/Achievements";
 import Clients from "@/components/homepage/Clients";
 import FAQs from "@/components/homepage/FAQ";
 import Footer from "@/components/homepage/Footer";
+import Hero2 from "@/components/homepage/Hero/Hero2";
 import HeroComp from "@/components/homepage/Hero/HeroComp";
 import Industries from "@/components/homepage/Industries";
 import SectionBreak from "@/components/homepage/SectionBreak";
@@ -25,7 +26,8 @@ const page = () => {
       <Achievements/>
       <Clients/>
       <FAQs content={faqContent} />
-      {/* <Footer/> */}
+      <Footer/>
+      {/* <Hero2/> */}
     </>
   );
 };

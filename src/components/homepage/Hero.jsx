@@ -104,7 +104,10 @@ function WaveBackground() {
  function EnigmaModelWeb({}) {
   const bgref = useRef(null);
   const backgroundModel = useGLTF("/assets/models/fractalGlassModel.glb");
-  const texture = useTexture("/assets/models/bg.png")
+  const texture = useTexture("/assets/models/hero-bg.png")
+  texture.center.set(0.5, 0.5);
+texture.rotation = Math.PI;
+texture.needsUpdate = true;
   // const materialsProps = useControls({
   //   // Core transmission properties
   //   transmission: { value: 1, min: 0, max: 1 },
@@ -159,7 +162,6 @@ function WaveBackground() {
         <mesh geometry={backgroundModel.nodes.Plane002.geometry}>
           {/* <MeshTransmissionMaterial {...materialsProps}/> */}
           <meshStandardMaterial map={texture} side={THREE.DoubleSide}/>
-
         </mesh>
       </group>
     </group>
@@ -169,7 +171,7 @@ const EnigmaModel = () => {
   const model = useGLTF('/assets/models/enigmaLogo.glb')
   const { nodes } = model
   const [toggleBrust, setToggleBrust] = useState(true)
-const groupRef = useRef(null);
+  const groupRef = useRef(null);
   const ModelPart1 = useRef()
   const ModelPart2 = useRef()
   const ModelPart3 = useRef()
@@ -183,29 +185,29 @@ const groupRef = useRef(null);
     { ref: ModelPart4, x: -0.3, y: -0.3 }
   ]
 
-  const BurstON = () => {
-    if (!toggleBrust) return
-    modelParts.forEach(({ ref, x, y }) => {
-      gsap.to(ref.current.position, {
-        x: x,
-        y: y,
-        duration: 0.5,
-        ease: 'power2.out'
-      })
-    })
-  }
+  // const BurstON = () => {
+  //   if (!toggleBrust) return
+  //   modelParts.forEach(({ ref, x, y }) => {
+  //     gsap.to(ref.current.position, {
+  //       x: x,
+  //       y: y,
+  //       duration: 0.5,
+  //       ease: 'power2.out'
+  //     })
+  //   })
+  // }
 
-  const BurstOFF = () => {
-    if (!toggleBrust) return
-    modelParts.forEach(({ ref }) => {
-      gsap.to(ref.current.position, {
-        x: 0,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out'
-      })
-    })
-  }
+  // const BurstOFF = () => {
+  //   if (!toggleBrust) return
+  //   modelParts.forEach(({ ref }) => {
+  //     gsap.to(ref.current.position, {
+  //       x: 0,
+  //       y: 0,
+  //       duration: 0.5,
+  //       ease: 'power2.out'
+  //     })
+  //   })
+  // }
 
   // const materialsProps = useControls({
   //   thickness: { value: 3.51, min: 0, max: 10, step: 0.05 },
@@ -221,30 +223,29 @@ const groupRef = useRef(null);
   //   backside: { value: false }
   // })
 
-  const materialPropsCopy = {
-    thickness:3.51,
-    backsideThickness:0.90,
-    roughness:0.5,
-    reflectivity:0.1,
-    antisotrophy:0.81,
-    chromaticAberration:0.12,
-    distortion:0.14,
+  const materialsProps= {
+    thickness:8.11,
+    backsideThickness:1.71,
+    roughness:0.2,
+    reflectivity:0.04,
+    antisotrophy:0.00,
+    chromaticAberration:1.00,
+    distortion:0.0,
     temporalDistortion:0.0,
-    anisotropicBlur:1.52,
-    color:"#ffffff",
+    anisotropicBlur:5.00,
+    color:"#fcf7f7",
     backSide:false,
-
 }
   useEffect(() => {
     const handleMouseMove = (e) => {
       const x = (e.clientX / window.innerWidth) * 2 - 1
       const y = -(e.clientY / window.innerHeight) * 2 + 1
       mouse.current = { x, y }
-      if (e.clientX > window.innerWidth / 2) {
-        BurstON()
-      } else {
-        BurstOFF()
-      }
+      // if (e.clientX > window.innerWidth / 2) {
+      //   BurstON()
+      // } else {
+      //   BurstOFF()
+      // }
     }
 
     window.addEventListener('mousemove', handleMouseMove)
@@ -252,47 +253,48 @@ const groupRef = useRef(null);
   }, [])
 
   useFrame(() => {
-    if (!groupRef.current) return
-
-    const targetX = mouse.current.x * 0.3 
-    const targetY = mouse.current.y * 0.3
-    groupRef.current.rotation.y = THREE.MathUtils.lerp(
-      groupRef.current.rotation.y,
-      targetX,
-      0.1
-    )
-    groupRef.current.rotation.x = THREE.MathUtils.lerp(
-      groupRef.current.rotation.x,
-      -targetY,
-      0.1
-    )
-  })
+      if (!groupRef.current) return;
+  
+      const targetX = mouse.current.x * 0.3;
+      const targetY = mouse.current.y * 0.3;
+  
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(
+        groupRef.current.rotation.y,
+        targetX,
+        0.1
+      );
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(
+        groupRef.current.rotation.x,
+        -targetY,
+        0.1
+      );
+    });
   return (
     <group
       position={[6, 0, 5]}
-      scale={1.5}
+      scale={1.2}
       rotation={[Math.PI / 15, -Math.PI / 25, 0]}
       ref={groupRef}
      
     >
       <group ref={ModelPart1}>
         <mesh geometry={nodes.Low_Poly.geometry}>
-          <MeshTransmissionMaterial {...materialPropsCopy} />
+          <MeshTransmissionMaterial {...materialsProps} />
         </mesh>
       </group>
       <group ref={ModelPart2}>
         <mesh geometry={nodes.Low_Poly001.geometry}>
-          <MeshTransmissionMaterial {...materialPropsCopy} />
+          <MeshTransmissionMaterial {...materialsProps} />
         </mesh>
       </group>
       <group ref={ModelPart3}>
         <mesh geometry={nodes.Low_Poly002.geometry}>
-          <MeshTransmissionMaterial {...materialPropsCopy} />
+          <MeshTransmissionMaterial {...materialsProps} />
         </mesh>
       </group>
       <group ref={ModelPart4}>
         <mesh geometry={nodes.Low_Poly003.geometry}>
-          <MeshTransmissionMaterial {...materialPropsCopy} />
+          <MeshTransmissionMaterial {...materialsProps} />
         </mesh>
       </group>
     </group>
@@ -300,30 +302,48 @@ const groupRef = useRef(null);
 }
 
 const Hero = () => {
-    const [lightPosition, setLightPosition] = useState({
-        x: 10,
-        y: 10,
-      });
-    
-      const mouseMove = (e) => {
-        const targetX = (e.clientX / window.innerWidth) * 20 - 10;
-        setLightPosition((prevPos) => ({
-          x: prevPos.x + (targetX - prevPos.x) * 0.5, 
-          y: 0,
-          z: 5,
-          duration: 1, 
-          ease: "power2.out",
-        }));
-      };
-      useEffect(() => {
-        window.addEventListener("mousemove", mouseMove);
-        return () => {
-          window.removeEventListener("mousemove", mouseMove);
+     const lightTargetRef = useRef(new THREE.Vector3(10, 10, 10));
+        const containerRef = useRef(null);
+      
+        const handleMouseMove = (e) => {
+          if (!containerRef.current) return;
+      
+          const bounds = containerRef.current.getBoundingClientRect();
+      
+          if (
+            e.clientX >= bounds.left &&
+            e.clientX <= bounds.right &&
+            e.clientY >= bounds.top &&
+            e.clientY <= bounds.bottom
+          ) {
+            const x = ((e.clientX - bounds.left) / bounds.width) * 20 - 10;
+            const y = -((e.clientY - bounds.top) / bounds.height) * 20 + 10;
+      
+            lightTargetRef.current.set(x, y, 10);
+          }
         };
-      }, []);
+      
+        useEffect(() => {
+          window.addEventListener("mousemove", handleMouseMove);
+          return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+          };
+        }, []);
+      
+        const LightFollower = ({ target }) => {
+          const lightRef = useRef();
+          useFrame(() => {
+            if (!lightRef.current || !target.current) return;
+            lightRef.current.position.lerp(target.current, 0.1);
+          });
+      
+          return <directionalLight ref={lightRef} intensity={3} />;
+        };
+    
+     
   return (
    <>
-   <div className="h-screen w-screen">
+   <div  ref={containerRef} className="h-screen w-screen">
     <Canvas
     className="h-full w-full"
         camera={{ fov: 20, position: [0, 0, 40] }}
@@ -337,11 +357,7 @@ const Hero = () => {
         }}
       >
         <ambientLight intensity={0.8} />
-
-        <directionalLight
-          position={[lightPosition.x, lightPosition.y, 10]}
-          intensity={3}
-        />
+        <LightFollower target={lightTargetRef} />
         {/* <Environment preset="city" /> */}
         {/* <OrbitControls /> */}
         <Suspense>

@@ -1,10 +1,11 @@
 "use client"
 import React from 'react'
 import Hero from "../Hero"
+import Hero2 from './Hero2'
 
 const HeroComp = () => {
   return (
-    <section className="w-screen h-screen px-[4vw] py-[10%] relative " id="hero">
+    <section className="w-screen h-screen px-[4vw] py-[10%] relative " >
         <div className='z-[5] relative h-full'>
         <div className='flex items-end justify-end h-full' >
             <div className='w-full'>
@@ -21,7 +22,7 @@ const HeroComp = () => {
         </div>
         </div>
         <div className='absolute top-0 left-0 z-[1]'>
-        <Hero/>
+        <Hero2/>
         </div>
     </section>
   )
