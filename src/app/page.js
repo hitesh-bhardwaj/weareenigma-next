@@ -11,11 +11,14 @@ import Solutions from "@/components/homepage/Solutions";
 import Testimonials from "@/components/homepage/Testimonials";
 import Work from "@/components/homepage/Work";
 import React from "react";
+import Header from "@/components/Header"
+import Blogs from "@/components/homepage/Blogs";
 
 
 const page = () => {
   return (
     <>
+      <Header/>
       <HeroComp/>
       <About/>
       <Work/>
@@ -25,6 +28,7 @@ const page = () => {
       <Industries/>
       <Achievements/>
       <Clients/>
+      <Blogs/>
       <FAQs content={faqContent} />
       <Footer/>
       {/* <Hero2/> */}

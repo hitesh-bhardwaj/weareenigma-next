@@ -4,17 +4,16 @@
   --background: #fefefe;
   --font-body: "Standerd", sans-serif;
   --font-display: "TomatoGrotesk", sans-serif;
-  --primary: #FF6B00;
-  --secondary: #0E0E0E;
-  --black-1:#060709;
+  --primary: #ff6b00;
+  --secondary: #0e0e0e;
+  --black-1: #060709;
 }
-@theme inline{
-  --color-black-1:var(--black-1);
-  --color-primary:var(--primary);
-  --color-secondary:var(--secondary);
-  --font-display:var(--font-display);
-  --font-body:var(--font-body);
-
+@theme inline {
+  --color-black-1: var(--black-1);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
 }
 body {
   /* color: #111111; */
@@ -27,27 +26,27 @@ body {
   overflow-x: hidden;
   background-color: #fefefe;
 }
-h1{
+h1 {
   font-family: var(--font-display);
   letter-spacing: 1px;
   font-size: 8vw;
   line-height: 1.05;
 }
-h2{
+h2 {
   font-family: var(--font-display);
   letter-spacing: 1px;
   font-size: 8vw;
   line-height: 1.18;
 }
-h3{
+h3 {
   font-family: var(--font-display);
   letter-spacing: 1px;
   font-size: 3.4vw;
   line-height: 1.18;
 }
-.white-stroke-text{
-    -webkit-text-stroke: 3px white;
-     color:transparent;
+.white-stroke-text {
+  -webkit-text-stroke: 3px white;
+  color: transparent;
 }
 
 .link-line {
@@ -75,8 +74,8 @@ li .link-line::after {
   transform: scaleX(1);
 }
 
-.bg-gradient{
-  background: linear-gradient(to right, #FF5E01, #FF8101);
+.bg-gradient {
+  background: linear-gradient(to right, #ff5e01, #ff8101);
 }
 .line {
   animation: moveUpDown 1s linear infinite;
@@ -92,4 +91,39 @@ li .link-line::after {
   100% {
     transform: translateY(0);
   }
+}
+
+.swiper-slide {
+  width: 23vw !important;
+  height: 20vw !important;
+  transition: all 0.5s ease !important;
+}
+.swiper-slide-active {
+  width: 40vw !important;
+  height: 36vw !important;
+  transition: all 0.5s ease !important;
+}
+.swiper-slide p {
+  font-size: 1vw;
+  transition: all 0.5s ease !important;
+}
+.swiper-slide-active p {
+  font-size: 1.6vw;
+  transition: all 0.5s ease !important;
+}
+.swiper-slide .image-container {
+  border-radius: 2vw !important;
+}
+.swiper-slide-active .image-container {
+  border-radius: 2.7vw !important;
+}
+.swiper-slide .arrow-link {
+  opacity: 0 !important;
+  pointer-events: none;
+  transition: all 0.3s ease !important;
+}
+.swiper-slide-active .arrow-link {
+  opacity: 1 !important;
+  pointer-events:all;
+  transition: all 0.3s ease !important;
 }

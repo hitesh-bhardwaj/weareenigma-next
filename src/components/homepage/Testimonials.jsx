@@ -13,7 +13,6 @@ const Testimonials = () => {
         </div>
         <div className='absolute bottom-0'>
         <TestimonialSection/>
-
         </div>
     </section>
   )

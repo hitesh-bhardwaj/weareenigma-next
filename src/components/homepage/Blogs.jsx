@@ -6,23 +6,35 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import Image from "next/image";
 import {LinkButton} from "../Buttons/index"
+import Link from "next/link";
 
 const BlogCard = ({ img, text, date, key }) => {
   return (
     <>
       <div
         key={key}
-        className="w-full rounded-[1.2vw] flex items-center"
+        className="w-full h-full flex items-center"
       >
-        <div className="flex flex-col items-start justify-between gap-[1vw] w-full">
-          <div className="w-full h-[17vw] relative rounded-[2vw] overflow-hidden ">
-            <Image src={img} fill alt="awards-1" className="object-cover" />
+        <div className="flex flex-col items-start justify-between gap-[1vw] w-full h-full">
+          <div className="w-full h-[60%] relative  overflow-hidden image-container ">
+          <div className="w-full h-full absolute top-0 left-0 px-[1.5vw] pt-[1.5vw] flex justify-between z-[2]">
+            <div className="w-fit h-fit px-[1.5vw] py-[0.7vw] bg-black-1 rounded-full flex justify-center items-center z-[2] text-white leading-[1] text-[0.8vw]">
+              Digital Marketing
+
+            </div>
+            <Link href={"/"} className="w-[3vw] h-[3vw] p-[1vw] bg-black-1 rounded-full z-[2] arrow-link">
+              <Image src={"/assets/icons/long-arrow.svg"} alt="arrow-diagonal" className="w-full h-full object-contain" width={50} height={50}/>
+
+            </Link>
+
           </div>
-          <div className="w-[90%] flex flex-col pl-[1vw] gap-[2vw]">
+            <Image src={img} fill alt="awards-1" className="object-cover w-full h-full object-top" />
+          </div>
+          <div className="w-[95%] flex flex-col pl-[1vw] gap-[1vw] h-[40%]">
             <p className="text-black-1 text-[1.4vw] font-light">
               {text}
             </p>
-            <p className="text-[1vw] opacity-75">{date}</p>
+            <p className="!text-[0.9vw] opacity-75">{date}</p>
             {/* <p className="content-white mobile:!text-[3.5vw] mobile:w-[90%] mobile:leading-[1.2]">{category}</p> */}
           </div>
         </div>
@@ -32,19 +44,19 @@ const BlogCard = ({ img, text, date, key }) => {
 };
 const Blogs = () => {
   const swiperRef = useRef(null);
-  const [activeButton, setActiveButton] = useState("");
+  const [activeIndex, setActiveIndex] = useState(1);
 
   const handleNext = () => {
     if (swiperRef.current) {
       swiperRef.current.slideNext();
-      setActiveButton("next");
+     
     }
   };
 
   const handlePrev = () => {
     if (swiperRef.current) {
       swiperRef.current.slidePrev();
-      setActiveButton("prev");
+ 
     }
   };
   return (
@@ -64,7 +76,10 @@ const Blogs = () => {
         <div className="w-[100vw] h-full flex items-center justify-center fadeup  ">
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
-            // loop={true}
+            loop
+            speed={500}
+            initialSlide={0} // <== force slide 1 to be active initially
+            // centeredSlides={true} 
             spaceBetween={30}
             slidesPerView={1.2}
             breakpoints={{
@@ -82,11 +97,11 @@ const Blogs = () => {
                 spaceBetween: 30,
               },
               1280: {
-                slidesPerView: 2.7,
-                spaceBetween: 35,
+                slidesPerView: 4,
+                spaceBetween: 30,
               },
               1536: {
-                slidesPerView: 2.7,
+                slidesPerView: 3,
                 spaceBetween: 35,
               },
             }}
@@ -106,7 +121,7 @@ const Blogs = () => {
             ))}
           </Swiper>
         </div>
-        <div className="w-fit flex gap-[1vw] absolute bottom-[10%] right-[5%] items-center">
+        <div className="w-fit flex gap-[1vw] absolute bottom-[10%] right-[5%] items-center z-[5]">
           <div  className="rotate-180 w-[1.5vw] h-[1.5vw] flex justify-center items-center" onClick={handlePrev}>
             <svg
               width="25"
@@ -161,6 +176,16 @@ const content = [
   },
   {
     img: "/assets/images/homepage/blogs/blog-img-3.png",
+    text: "Beginners Guide To SEO: 30 Websites To Help You Getting Started On Your Link Building Journey.",
+    date: "16 June’2025",
+  },
+  {
+    img: "/assets/images/homepage/blogs/blog-img-1.png",
+    text: "Beginners Guide To SEO: 30 Websites To Help You Getting Started On Your Link Building Journey.",
+    date: "16 June’2025",
+  },
+  {
+    img: "/assets/images/homepage/blogs/blog-img-2.png",
     text: "Beginners Guide To SEO: 30 Websites To Help You Getting Started On Your Link Building Journey.",
     date: "16 June’2025",
   },

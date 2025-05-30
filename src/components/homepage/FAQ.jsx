@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import WaveShader from '../WaveShader'
 
 export default function FAQs({ allowMultiple = false , content}) {
   // keep track of which indexes are open
@@ -22,7 +23,7 @@ export default function FAQs({ allowMultiple = false , content}) {
   }
 
   return (
-    <section className="px-[4vw] py-[6vw] w-full max-sm:px-[7vw] bg-[#fefefe] relative max-sm:pb-[10%] max-sm:min-h-screen max-md:min-h-screen">
+    <section className="px-[4vw] py-[6vw] pb-[20vw] w-full max-sm:px-[7vw] bg-[#fefefe] relative max-sm:pb-[10%] max-sm:min-h-screen max-md:min-h-screen">
       <div className="flex flex-col items-center gap-[6vw] max-sm:gap-[10vw] max-md:justify-center max-sm:items-start">
        
           <h1 className="w-[68%] text-center">
@@ -41,6 +42,15 @@ export default function FAQs({ allowMultiple = false , content}) {
           ))}
         </div>
       </div>
+       <div className="absolute bottom-0 left-0 h-screen w-screen z-[2]">
+              <WaveShader
+                topColor={[1.0, 1.0, 1.0]}
+                middleColor={[1.0, 0.4, 0.0]}
+                bottomColor={[1.0, 0.3, 0.0]}
+                reverse={false}
+                amplitude={0.1}
+              />
+            </div>
     </section>
   )
 }
