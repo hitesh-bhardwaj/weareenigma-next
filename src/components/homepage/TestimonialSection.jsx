@@ -60,7 +60,8 @@ const TestimonialSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex(prev => (prev + 1) % data.length)
-    }, 4000)
+    }, 4000) 
+
     return () => clearInterval(interval)
   }, [])
 
