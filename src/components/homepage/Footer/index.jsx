@@ -278,7 +278,7 @@ const Footer = () => {
                                             <Image src={"/assets/icons/instagram.svg"} height={25} width={25} alt='instagram' />
                                         </div>
                                         <div>
-                                            <Image src={"/assets/icons/linkedin.svg"} height={25} width={25} alt='linkedin' />
+                                            <Image src={"/assets/icons/linkedin-icon.svg"} height={25} width={25} alt='linkedin' />
                                         </div>
                                         <div>
                                             <Image src={"/assets/icons/facebook.svg"} height={25} width={25} alt='facebook' />
