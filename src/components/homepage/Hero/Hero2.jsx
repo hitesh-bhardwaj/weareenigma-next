@@ -13,52 +13,13 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
+import CustomCanvas from "@/components/CustomCanvas";
+import FractalWithWave from "../FractalWithWave";
+import ModelComp from "@/components/ModelComp";
+import { ScrollScene, UseCanvas } from "@14islands/r3f-scroll-rig";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function EnigmaModelWeb({}) {
-  const bgref = useRef(null);
-  const backgroundModel = useGLTF("/assets/models/fractalGlassModel.glb");
-  const texture = useTexture("/assets/models/hero-bg.png");
-  const webModelRef = useRef(null);
-
-  texture.center.set(0.5, 0.5);
-  texture.rotation = Math.PI;
-  texture.needsUpdate = true;
-
-  useEffect(() => {
-    const ctx = gsap.context(()=>{
-      if (!webModelRef.current) return;
-  
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#hero-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
-  
-      tl.to(webModelRef.current.position, {
-        y: 100, // Move upward
-        ease: "none",
-      });
-
-    })
-    return()=>ctx.revert()
-  }, []);
-
-  return (
-    <group position={[0, 0, 0]} ref={webModelRef}>
-      <group ref={bgref} scale={1} position={[0, 0, 0]} rotation={[0, 0, 0]}>
-        <mesh geometry={backgroundModel.nodes.Plane002.geometry}>
-          {/* <MeshTransmissionMaterial {...materialsProps}/> */}
-          <meshStandardMaterial map={texture} side={THREE.DoubleSide} />
-        </mesh>
-      </group>
-    </group>
-  );
-}
 
 const EnigmaModel = () => {
   const [y,setY] = useState(0);
@@ -174,7 +135,7 @@ const EnigmaModel = () => {
   }, []);
 
   const videoTexture = useVideoTexture(
-    "https://cdn.pixabay.com/video/2023/10/20/185787-876545918_large.mp4"
+    "/assets/videos/showreel.mp4"
   );
 
   return (
@@ -215,7 +176,7 @@ const EnigmaModel = () => {
         rotation={[0, -Math.PI / 2, 0]}
       >
         <mesh rotation={[0, 0, 0]}>
-          <planeGeometry args={[5, 3]} />
+          <planeGeometry args={[6, 3]} />
           <meshBasicMaterial map={videoTexture} toneMapped={false} />
         </mesh>
       </group>
@@ -226,6 +187,7 @@ const EnigmaModel = () => {
 const Hero2 = () => {
   const lightTargetRef = useRef(new THREE.Vector3(10, 10, 10));
   const containerRef = useRef(null);
+  const element = useRef(null);
 
   const handleMouseMove = (e) => {
     if (!containerRef.current) return;
@@ -264,26 +226,28 @@ const Hero2 = () => {
 
   return (
     <>
-      <div ref={containerRef} className="h-[400vh] w-screen" id="hero-section">
-        {/* Add some content below to enable scrolling */}
-        <Canvas
-          className="h-screen w-screen !sticky top-0"
-          camera={{ fov: 20, position: [0, 0, 40] }}
-          style={{
-            background: "#000000",
-            height: "100vh",
-            width: "100vw",
-          }}
-        >
-          <ambientLight intensity={0.8} />
+      <div ref={element} className="h-screen w-screen absolute top-0 left-0"></div>
+    <UseCanvas>
+        <ScrollScene track={element}>
+        {(props) => (
+          <>
           <LightFollower target={lightTargetRef} />
-          <Suspense>
-            <EnigmaModelWeb />
-            <EnigmaModel />
-          </Suspense>
-          <Environment preset='city'/>
-        </Canvas>
-      </div>
+          <FractalWithWave img={"/assets/models/hero-bg.png"}/>
+          <ModelComp  position={[6, 0, 5]} rotation={[Math.PI / 35, Math.PI / 15, 0]} scale={1.2} materialsProps={{ thickness: 1.8,
+    backsideThickness: 0.0,
+    reflectivity: 0.54,
+    roughness: 0.2,
+    antisotropy: 0.4,
+    chromaticAberration: 0.1,
+    distortion: 0.3,
+    temporalDistortion: 0.1,
+    anisotropicBlur: 1.0,
+    color: "#ffffff",
+    backSide: false,}}/>
+      </>
+        )}
+        </ScrollScene>
+        </UseCanvas>       
     </>
   );
 };

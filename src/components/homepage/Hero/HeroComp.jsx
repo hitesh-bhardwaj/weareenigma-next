@@ -5,7 +5,7 @@ import Hero2 from "./Hero2";
 
 const HeroComp = () => {
   return (
-    <section className="w-screen h-[400vh] px-[4vw] relative ">
+    <section className="w-screen h-[100vh] px-[4vw] relative ">
       <div className="z-[5] relative h-screen  py-[10%]">
         <div className="flex items-end justify-end h-full">
           <div className="w-full">
@@ -26,7 +26,7 @@ const HeroComp = () => {
       </div>
       <div className="absolute top-0 left-0 z-[1]">
         {/* <Hero/> */}
-        <Hero2 />
+        <Hero2 img={"/assets/models/hero-bg.png"}/>
       </div>
     </section>
   );

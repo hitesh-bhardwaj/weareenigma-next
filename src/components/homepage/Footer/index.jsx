@@ -18,6 +18,9 @@ import * as THREE from "three";
 import { Canvas, extend, useFrame } from "@react-three/fiber";
 import Link from 'next/link';
 import Image from 'next/image';
+import CustomCanvas from '@/components/CustomCanvas';
+import FractalWithWave from '../FractalWithWave';
+import { ScrollScene, UseCanvas } from '@14islands/r3f-scroll-rig';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -231,14 +234,23 @@ const FooterBg = () => {
   
 
 const Footer = () => {
+    const el = useRef(null);
     return (
         <>
             <footer className='w-screen h-full relative'>
                 <FooterCTA />
                 <div className='w-screen h-full'>
-                    <div className='w-screen h-screen absolute'>
-                        <FooterBg />
-                    </div>
+                  
+                        {/* <FooterBg /> */}
+                        <div ref={el} className="h-screen w-screen absolute top-0 left-0"></div>
+    <UseCanvas>
+        <ScrollScene track={el}>
+        {(props) => (
+          <FractalWithWave img={"/assets/models/hero-bg.png"} />
+        )}
+        </ScrollScene>
+      </UseCanvas>
+                   
                     <div className='z-[10] relative h-full py-[4vw] px-[4vw]'>
                         <div className='flex flex-col items-start justify-bewteen gap-[28vw]'>
                             <div className='flex items-center justify-between w-full h-full text-white'>

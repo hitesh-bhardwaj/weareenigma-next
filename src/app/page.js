@@ -1,3 +1,4 @@
+"use client"
 import About from "@/components/homepage/About";
 import Achievements from "@/components/homepage/Achievements";
 import Clients from "@/components/homepage/Clients";
@@ -13,13 +14,15 @@ import Work from "@/components/homepage/Work";
 import React from "react";
 import Header from "@/components/Header"
 import Blogs from "@/components/homepage/Blogs";
+import FractalWithWave from "@/components/homepage/FractalWithWave";
+import { Canvas } from "@react-three/fiber";
+import ModelComp from "@/components/ModelComp";
 
 const page = () => {
   return (
     <>
-      <Header/>
-      <HeroComp/>
-      {/* <Hero2/> */}
+       <Header/>
+      {/* <HeroComp />  */}
       <About/>
       <Work/>
       <SectionBreak/>
@@ -30,8 +33,7 @@ const page = () => {
       <Clients/>
       <Blogs/>
       <FAQs content={faqContent} />
-      <Footer/>
-      {/* <Hero2/> */}
+      {/* <Footer img={"/assets/models/hero-bg.png"}/> */}
     </>
   );
 };
