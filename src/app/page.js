@@ -14,7 +14,6 @@ import React from "react";
 import Header from "@/components/Header"
 import Blogs from "@/components/homepage/Blogs";
 
-
 const page = () => {
   return (
     <>
