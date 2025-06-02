@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Moving Gradient Shader (Transparent with Upper Waves)</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #fff; /* Changed background to see transparency */ }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="module">
+        // Global variables for Three.js components
+        let scene, camera, renderer, material, mesh;
+        let startTime = Date.now();
+
+        // Shader code
+        const vertexShader = `
+            varying vec2 vUv;
+            void main() {
+                vUv = uv;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `;
+
+        const fragmentShader = `
+            varying vec2 vUv;
+            uniform float u_time;
+            uniform vec3 u_colorOrange;
+            uniform vec2 u_resolution; // Canvas dimensions
+
+            // Function to create a smooth transition
+            float smoothstep_custom(float edge0, float edge1, float x) {
+                float t = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
+                return t * t * (3.0 - 2.0 * t);
+            }
+
+            void main() {
+                vec2 uv = vUv;
+
+                // --- Lower Wave Parameters & Calculation ---
+                float lowerWaveFreq = 2.8;
+                float lowerWaveAmp = 0.07;
+                float lowerWaveSpeed = 0.20;
+                float lowerWave = sin(uv.x * lowerWaveFreq - u_time * lowerWaveSpeed) * lowerWaveAmp;
+
+                // Vertical positioning for the lower part of the gradient
+                float lowerBoundaryBase = 0.25; 
+                float lowerBoundaryWavy = lowerBoundaryBase + lowerWave;
+                float lowerFadeSoftness = 0.25;
+
+                float intensityFromBottom = smoothstep_custom(
+                    lowerBoundaryWavy - lowerFadeSoftness / 2.0, 
+                    lowerBoundaryWavy + lowerFadeSoftness / 2.0, 
+                    uv.y
+                );
+
+                // --- Upper Wave Parameters & Calculation ---
+                float upperWaveFreq = 10.0;   // Slightly different frequency
+                float upperWaveAmp = 0.05;  // Slightly different amplitude
+                float upperWaveSpeed = -0.15; // Different speed and direction
+                float upperWave = sin(uv.x * upperWaveFreq + u_time * upperWaveSpeed) * upperWaveAmp; // Note: + u_time for opposite direction if speed is positive
+
+                // Vertical positioning for the upper part of the gradient (fade to transparent)
+                float topBoundaryBase = 0.75; // Average y-coordinate where the orange starts to fade out at the top
+                float topBoundaryWavy = topBoundaryBase + upperWave;
+                float topFadeSoftness = 0.30; // How soft/wide the fade is at the top
+
+                // Intensity from top now controls how much orange remains.
+                // It's 1.0 (full orange) below the wavy top boundary, and fades to 0.0 (transparent) above it.
+                float visibilityFromTop = 1.0 - smoothstep_custom(
+                    topBoundaryWavy - topFadeSoftness / 2.0, 
+                    topBoundaryWavy + topFadeSoftness / 2.0, 
+                    uv.y
+                );
+                
+                // Combine intensities to get the final alpha for the orange color
+                // The gradient is visible where it's "above" the bottom wave AND "below" the top wave.
+                float orangeAlpha = intensityFromBottom * visibilityFromTop;
+                orangeAlpha = clamp(orangeAlpha, 0.0, 1.0);
+
+                gl_FragColor = vec4(u_colorOrange, orangeAlpha);
+            }
+        `;
+
+        function init() {
+            // Scene
+            scene = new THREE.Scene();
+
+            // Camera
+            camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
+            camera.position.z = 1;
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ 
+                antialias: true,
+                alpha: true // Enable alpha for transparency in the canvas itself
+            });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // Uniforms for the shader
+            const uniforms = {
+                u_time: { value: 0.0 },
+                u_colorOrange: { value: new THREE.Color(0xFE5601) },
+                u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+            };
+
+            // Material using our custom shaders
+            material = new THREE.ShaderMaterial({
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+                uniforms: uniforms,
+                transparent: true // IMPORTANT: Enable transparency for the material
+            });
+
+            // Geometry
+            const geometry = new THREE.PlaneGeometry(2, 2);
+            mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            // Event listener for window resize
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function onWindowResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const elapsedTime = (Date.now() - startTime) / 500.0;
+            material.uniforms.u_time.value = elapsedTime;
+
+            renderer.render(scene, camera);
+        }
+
+        // Start
+        init();
+        animate();
+    </script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Moving Gradient Shader (Transparent)</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: black; /* Changed background to see transparency */ }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="module">
+        // Global variables for Three.js components
+        let scene, camera, renderer, material, mesh;
+        let startTime = Date.now();
+
+        // Shader code
+        const vertexShader = `
+            varying vec2 vUv;
+            void main() {
+                vUv = uv;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `;
+
+        const fragmentShader = `
+            varying vec2 vUv;
+            uniform float u_time;
+            uniform vec3 u_colorOrange;
+            // u_colorWhite is no longer strictly needed for color, but logic might still use white as a base concept
+            // uniform vec3 u_colorWhite; 
+            uniform vec2 u_resolution; // Canvas dimensions
+
+            // Function to create a smooth transition
+            float smoothstep_custom(float edge0, float edge1, float x) {
+                float t = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
+                return t * t * (3.0 - 2.0 * t);
+            }
+
+            void main() {
+                vec2 uv = vUv;
+
+                // Wave parameters
+                float waveFreq = 2.8;   // How many waves across the screen
+                float waveAmp = 0.07;   // How much the wave displaces vertically
+                float waveSpeed = 0.20;  // How fast the wave moves
+
+                // Calculate the wave displacement
+                float wave = sin(uv.x * waveFreq - u_time * waveSpeed) * waveAmp;
+
+                // Vertical positioning for the gradient
+                float lowerBoundaryBase = 0.25; 
+                float lowerBoundaryWavy = lowerBoundaryBase + wave;
+                float lowerFadeSoftness = 0.25;
+
+                float intensityFromBottom = smoothstep_custom(
+                    lowerBoundaryWavy - lowerFadeSoftness / 2.0, 
+                    lowerBoundaryWavy + lowerFadeSoftness / 2.0, 
+                    uv.y
+                );
+
+                // Upper fade (orange to transparent)
+                float topFadeStart = 0.65; 
+                float topFadeEnd = 0.90;   
+                // Intensity from top now controls how much orange remains, not how much white.
+                // So, 1.0 means full orange (before this fade), 0.0 means fully faded (transparent).
+                float visibilityFromTop = 1.0 - smoothstep_custom(topFadeStart, topFadeEnd, uv.y);
+                
+                // Combine intensities to get the final alpha for the orange color
+                float orangeAlpha = intensityFromBottom * visibilityFromTop;
+                orangeAlpha = clamp(orangeAlpha, 0.0, 1.0);
+
+                // The color is now just the orange color, and its alpha is determined by orangeAlpha.
+                // Areas that were previously white will now have orangeAlpha = 0.0, making them transparent.
+                gl_FragColor = vec4(u_colorOrange, orangeAlpha);
+            }
+        `;
+
+        function init() {
+            // Scene
+            scene = new THREE.Scene();
+
+            // Camera
+            camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
+            camera.position.z = 1;
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ 
+                antialias: true,
+                alpha: true // Enable alpha for transparency in the canvas itself
+            });
+            renderer.setPixelRatio(window.devicePixelRatio); // Good practice for sharp rendering
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            // Optional: Set a clear color with alpha 0 if you want the canvas background to be transparent
+            // renderer.setClearColor(0x000000, 0); 
+            document.body.appendChild(renderer.domElement);
+
+            // Uniforms for the shader
+            const uniforms = {
+                u_time: { value: 0.0 },
+                u_colorOrange: { value: new THREE.Color(0xFF6A00) },
+                // u_colorWhite: { value: new THREE.Color(0xFFFFFF) }, // Not used for color anymore
+                u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+            };
+
+            // Material using our custom shaders
+            material = new THREE.ShaderMaterial({
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+                uniforms: uniforms,
+                transparent: true // IMPORTANT: Enable transparency for the material
+            });
+
+            // Geometry
+            const geometry = new THREE.PlaneGeometry(2, 2);
+            mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            // Event listener for window resize
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function onWindowResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+            // For OrthographicCamera, aspect ratio update isn't needed in the same way as PerspectiveCamera
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const elapsedTime = (Date.now() - startTime) / 200.0;
+            material.uniforms.u_time.value = elapsedTime;
+
+            renderer.render(scene, camera);
+        }
+
+        // Start
+        init();
+        animate();
+    </script>
+</body>
+</html> -->
