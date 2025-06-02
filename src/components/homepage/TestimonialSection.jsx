@@ -75,7 +75,7 @@ const TestimonialSection = () => {
   }, [])
 
   return (
-    <section className='w-screen h-[90vh] px-[4vw] bg-gradient text-white relative overflow-hidden' id='testimonial-section'>
+    <section className='w-screen h-screen px-[4vw] bg-gradient text-white relative overflow-hidden opacity-0' id='testimonial-section'>
       <div className='w-full h-full flex justify-between'>
         <div className='w-full relative h-full overflow-hidden'>
           <AnimatePresence mode="wait">
