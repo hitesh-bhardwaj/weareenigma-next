@@ -1,0 +1,65 @@
+import React from 'react'
+import { PrimaryButton } from '../Buttons'
+
+const Solutions = () => {
+    return (
+        <>
+            <section className='w-screen h-screen px-[4vw]'>
+                <div className=' h-full w-full'>
+                    {data.map((item,index)=>(
+                    <div key={index} className={`flex items-center justify-between h-full w-full ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                        <div className='h-[37vw] w-[35vw] bg-[#161616] rounded-[1.5vw]'>
+                        </div>
+                        <div className="flex flex-col gap-[2vw] w-[50%] text-black">
+                            <h3 className='uppercase !text-[5.2vw]'>
+                                {item.title}
+                            </h3>
+                            <div className='space-y-[2vw]'>
+                                <p className="w-[90%]">
+                                    {item.para1}
+                                </p>
+                                <p className="w-[90%]">
+                                   {item.para2}
+                                </p>
+                            </div>
+                            <PrimaryButton text={"Know More "} href={item.link} className="border-black" />
+                        </div>
+
+                    </div>
+                      ))}
+
+                </div>
+
+            </section>
+        </>
+    )
+}
+
+export default Solutions
+
+const data =[
+    {
+        title:"DESIGN",
+        para1:"Strategic planning based on insight is the starting point of everything we do. Combining strategic thinking, wide marketing experience, insights, best practices, and sound judgment, we craft effective strategies that turn insights into measurable results.",
+        para2:"Driving growth and success for your brand needs a brilliant plan (roadmap) that is rooted in deep insights and aimed at delivering tangible results. Our strategy consulting services includes: Digital Advisory and Consulting, Integrated Digital Marketing Plan (D.M.P.), User Experience Development, Customer Experience Strategy, Consumer Research, Insights & Target Market Analysis, Digital Capabilities Development, Persona Design & Customer Segmentation, Digital Marketing and Website Performance Audit.",
+        link:""
+    },
+    {
+        title:"DEVELOPMENT",
+        para1:"Strategic planning based on insight is the starting point of everything we do. Combining strategic thinking, wide marketing experience, insights, best practices, and sound judgment, we craft effective strategies that turn insights into measurable results.",
+        para2:"Driving growth and success for your brand needs a brilliant plan (roadmap) that is rooted in deep insights and aimed at delivering tangible results. Our strategy consulting services includes: Digital Advisory and Consulting, Integrated Digital Marketing Plan (D.M.P.), User Experience Development, Customer Experience Strategy, Consumer Research, Insights & Target Market Analysis, Digital Capabilities Development, Persona Design & Customer Segmentation, Digital Marketing and Website Performance Audit.",
+        link:""
+    },
+    {
+        title:"MARKETING",
+        para1:"Strategic planning based on insight is the starting point of everything we do. Combining strategic thinking, wide marketing experience, insights, best practices, and sound judgment, we craft effective strategies that turn insights into measurable results.",
+        para2:"Driving growth and success for your brand needs a brilliant plan (roadmap) that is rooted in deep insights and aimed at delivering tangible results. Our strategy consulting services includes: Digital Advisory and Consulting, Integrated Digital Marketing Plan (D.M.P.), User Experience Development, Customer Experience Strategy, Consumer Research, Insights & Target Market Analysis, Digital Capabilities Development, Persona Design & Customer Segmentation, Digital Marketing and Website Performance Audit.",
+        link:""
+    },
+    {
+        title:"STRATEGY",
+        para1:"Strategic planning based on insight is the starting point of everything we do. Combining strategic thinking, wide marketing experience, insights, best practices, and sound judgment, we craft effective strategies that turn insights into measurable results.",
+        para2:"Driving growth and success for your brand needs a brilliant plan (roadmap) that is rooted in deep insights and aimed at delivering tangible results. Our strategy consulting services includes: Digital Advisory and Consulting, Integrated Digital Marketing Plan (D.M.P.), User Experience Development, Customer Experience Strategy, Consumer Research, Insights & Target Market Analysis, Digital Capabilities Development, Persona Design & Customer Segmentation, Digital Marketing and Website Performance Audit.",
+        link:""
+    },
+]

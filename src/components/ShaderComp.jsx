@@ -1,3 +1,4 @@
+"use client"
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { extend } from '@react-three/fiber';
@@ -181,7 +182,7 @@ const MovingGradientShader = ({
   );
 };
 
-const App = () => {
+const ShaderComp = () => {
   return (
     <div style={{ width: '100vw', height: '100vh', backgroundColor: '#000' }}>
       <Canvas
@@ -208,4 +209,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default ShaderComp;
