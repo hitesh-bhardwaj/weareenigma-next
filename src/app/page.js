@@ -17,23 +17,25 @@ import Blogs from "@/components/homepage/Blogs";
 import FractalWithWave from "@/components/homepage/FractalWithWave";
 import { Canvas } from "@react-three/fiber";
 import ModelComp from "@/components/ModelComp";
+import ShaderComp from "@/components/ShaderComp";
 
 const page = () => {
   return (
     <>
-       <Header/>
+       {/* <Header/> */}
       {/* <HeroComp />  */}
-      <About/>
+      {/* <About/>
       <Work/>
       <SectionBreak/>
-      <Testimonials/>
+      <Testimonials/> */}
       <Solutions/>
-      <Industries/>
-      <Achievements/>
-      <Clients/>
+      {/* <Industries/> */}
+      {/* <Achievements/> */}
+      {/* <Clients/>
       <Blogs/>
-      <FAQs content={faqContent} />
+      <FAQs content={faqContent} /> */}
       {/* <Footer img={"/assets/models/hero-bg.png"}/> */}
+      {/* <ShaderComp/> */}
     </>
   );
 };
