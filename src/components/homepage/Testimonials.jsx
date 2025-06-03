@@ -67,7 +67,7 @@ const Testimonials = () => {
     return () => ctx.revert();
   }, []);
   return (
-    <section className="w-screen h-[400vh] relative " id="testimonials">
+    <section className="w-screen h-[400vh] relative  " id="testimonials">
       <div className="w-full h-screen flex items-center gap-[4vw] sticky top-0 px-[4vw]">
         {/* <div className="w-[4vw] h-[4vw] absolute top-[33%] left-[5%] bg-gradient rounded-full mt-[3vw] upper-circle z-[3]">
          

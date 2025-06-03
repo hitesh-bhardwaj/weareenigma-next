@@ -14,7 +14,7 @@ const Work = () => {
         scrollTrigger: {
           trigger: "#work",
           start: "top top",
-          end: "80% bottom",
+          end: "93% bottom",
           scrub: true,
           // markers: true,
         },

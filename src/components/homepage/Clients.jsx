@@ -94,14 +94,17 @@ const Clients = () => {
           background-position: 50% 50%;
         }
       `}</style>
-      <section className='w-screen h-full relative overflow-hidden' id='clients'>
+      <section className='w-screen h-[200vh] relative ' id='clients'>
+        <div className='w-screen h-[10vw] bg-gradient-to-t z-[5] from-white via-60% to-transparent bottom-0 absolute left-0'/>
 
-        <div className="client-grid">
+     
+
+        <div className="client-grid w-screen translate-y-[10%]">
           <div className="grid-wrap">
             {images.map((image, index) => (
-              <div key={index} className="grid__item">
+              <div key={index} className="grid__item ">
                 <div
-                  className="grid__item-inner"
+                  className="grid__item-inner scale-[0.5] rounded-[1.5vw]"
                   style={{ backgroundImage: `url(${image})` }}
                 />
               </div>
@@ -109,8 +112,8 @@ const Clients = () => {
           </div>
 
         </div>
-        <div className='w-full h-screen flex justify-center absolute top-1/2 items-start'>
-          <h2 className='w-[70%] text-center'>
+        <div className='w-full h-screen flex justify-center absolute top-[20%] items-start'>
+          <h2 className='w-[70%] text-center sticky top-[30%]'>
             Brands We've Elevated
           </h2>
         </div>

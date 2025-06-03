@@ -127,3 +127,8 @@ li .link-line::after {
   pointer-events:all;
   transition: all 0.3s ease !important;
 }
+
+.para-line {
+  display: block;
+  overflow: hidden;
+}
