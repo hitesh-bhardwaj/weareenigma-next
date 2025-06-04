@@ -1,5 +1,7 @@
 import React from 'react'
 import { PrimaryButton } from '../Buttons'
+import Cards from './Cards'
+import Lanyard from './CardsCopy'
 
 const Solutions = () => {
     return (
@@ -8,7 +10,9 @@ const Solutions = () => {
                 <div className=' h-full w-full'>
                     {data.map((item,index)=>(
                     <div key={index} className={`flex items-center justify-between h-full w-full ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                        <div className='h-[37vw] w-[35vw] bg-[#161616] rounded-[1.5vw]'>
+                        <div className='h-[37vw] w-[35vw] bg-gradient-to-b from-black-1 to-[#2B2B2B] rounded-[1.5vw] relative z-[10] overflow-hidden'>
+                            {/* <Cards/> */}
+                            <Lanyard/>
                         </div>
                         <div className="flex flex-col gap-[2vw] w-[50%] text-black">
                             <h3 className='uppercase !text-[5.2vw]'>
