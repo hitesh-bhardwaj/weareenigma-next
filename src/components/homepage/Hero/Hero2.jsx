@@ -22,7 +22,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 const EnigmaModel = () => {
-  const [y,setY] = useState(0);
+  const [y, setY] = useState(0);
   const model = useGLTF("/assets/models/enigmaLogo.glb");
   const { nodes } = model;
   // const [toggleBrust, setToggleBrust] = useState(true);
@@ -78,9 +78,9 @@ const EnigmaModel = () => {
   });
 
   useEffect(() => {
-    const ctx = gsap.context(()=>{
+    const ctx = gsap.context(() => {
       if (!upperGroup.current) return;
-  
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: "#hero-section",
@@ -94,18 +94,18 @@ const EnigmaModel = () => {
         x: 0,
         y: 0,
         z: 0,
-        delay:-0.5,
+        delay: -0.5,
         ease: "power2.inOut",
         // duration: 1,
       })
-      .to(upperGroup.current.rotation,{
-        y:2*`${Math.PI}`,
-        delay:-0.5,
-        onStart:()=>{
-          setY(`${Math.PI}`)
-        }
-      })
-  
+        .to(upperGroup.current.rotation, {
+          y: 2 * `${Math.PI}`,
+          delay: -0.5,
+          onStart: () => {
+            setY(`${Math.PI}`)
+          }
+        })
+
         .to(upperGroup.current.position, {
           z: 40,
           y: 0.5,
@@ -121,7 +121,7 @@ const EnigmaModel = () => {
           z: 30,
           delay: -0.5,
         });
-  
+
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => {
           if (trigger.trigger === "#hero-section") {
@@ -131,7 +131,7 @@ const EnigmaModel = () => {
       };
 
     })
-    return()=>ctx.revert()
+    return () => ctx.revert()
   }, []);
 
   const videoTexture = useVideoTexture(
@@ -140,36 +140,36 @@ const EnigmaModel = () => {
 
   return (
     <>
-    <group ref={upperGroup}  position={[6, 0, 5]}
+      <group ref={upperGroup} position={[6, 0, 5]}
         scale={1.2} rotation={[0, 0, 0]}>
-      <group
-        position={[0,0,0]}
-        rotation={[-3, 0, 0]}
-        ref={groupRef}
-      >
-        <group ref={ModelPart1}>
-          <mesh geometry={nodes.Low_Poly.geometry}>
-            <MeshTransmissionMaterial {...materialsProps} />
-          </mesh>
+        <group
+          position={[0, 0, 0]}
+          rotation={[-3, 0, 0]}
+          ref={groupRef}
+        >
+          <group ref={ModelPart1}>
+            <mesh geometry={nodes.Low_Poly.geometry}>
+              <MeshTransmissionMaterial {...materialsProps} />
+            </mesh>
+          </group>
+          <group ref={ModelPart2}>
+            <mesh geometry={nodes.Low_Poly001.geometry}>
+              <MeshTransmissionMaterial {...materialsProps} />
+            </mesh>
+          </group>
+          <group ref={ModelPart3}>
+            <mesh geometry={nodes.Low_Poly002.geometry}>
+              <MeshTransmissionMaterial {...materialsProps} />
+            </mesh>
+          </group>
+          <group ref={ModelPart4}>
+            <mesh geometry={nodes.Low_Poly003.geometry}>
+              <MeshTransmissionMaterial {...materialsProps} />
+            </mesh>
+          </group>
         </group>
-        <group ref={ModelPart2}>
-          <mesh geometry={nodes.Low_Poly001.geometry}>
-            <MeshTransmissionMaterial {...materialsProps} />
-          </mesh>
-        </group>
-        <group ref={ModelPart3}>
-          <mesh geometry={nodes.Low_Poly002.geometry}>
-            <MeshTransmissionMaterial {...materialsProps} />
-          </mesh>
-        </group>
-        <group ref={ModelPart4}>
-          <mesh geometry={nodes.Low_Poly003.geometry}>
-            <MeshTransmissionMaterial {...materialsProps} />
-          </mesh>
-        </group>
-      </group>
 
-    </group>
+      </group>
       <group
         ref={planeRef}
         position={[0, 0, 0]}
@@ -227,27 +227,29 @@ const Hero2 = () => {
   return (
     <>
       <div ref={element} className="h-screen w-screen absolute top-0 left-0"></div>
-    <UseCanvas>
+      <UseCanvas>
         <ScrollScene track={element}>
-        {(props) => (
-          <>
-          <LightFollower target={lightTargetRef} />
-          <FractalWithWave img={"/assets/models/hero-bg.png"}/>
-          <ModelComp  position={[6, 0, 5]} rotation={[Math.PI / 35, Math.PI / 15, 0]} scale={1.2} materialsProps={{ thickness: 1.8,
-    backsideThickness: 0.0,
-    reflectivity: 0.54,
-    roughness: 0.2,
-    antisotropy: 0.4,
-    chromaticAberration: 0.1,
-    distortion: 0.3,
-    temporalDistortion: 0.1,
-    anisotropicBlur: 1.0,
-    color: "#ffffff",
-    backSide: false,}}/>
-      </>
-        )}
+          {(props) => (
+            <>
+              <LightFollower target={lightTargetRef} />
+              <FractalWithWave img={"/assets/models/hero-bg.png"} />
+              <ModelComp position={[6, 0, 5]} rotation={[Math.PI / 35, Math.PI / 15, 0]} scale={1.2} materialsProps={{
+                thickness: 1.8,
+                backsideThickness: 0.0,
+                reflectivity: 0.54,
+                roughness: 0.2,
+                antisotropy: 0.4,
+                chromaticAberration: 0.1,
+                distortion: 0.3,
+                temporalDistortion: 0.1,
+                anisotropicBlur: 1.0,
+                color: "#ffffff",
+                backSide: false,
+              }} />
+            </>
+          )}
         </ScrollScene>
-        </UseCanvas>       
+      </UseCanvas>
     </>
   );
 };

@@ -340,7 +340,6 @@ const Hero = () => {
           return <directionalLight ref={lightRef} intensity={3} />;
         };
     
-     
   return (
    <>
    <div  ref={containerRef} className="h-screen w-screen">

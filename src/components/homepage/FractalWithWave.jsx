@@ -63,7 +63,7 @@ function Background({ img }) {
   );
 }
 
-const FractalWithWave = ({ img }) => {
+const FractalWithWave = ({ img }) => { 
   const lightTargetRef = useRef(new THREE.Vector3(10, 10, 10));
   const containerRef = useRef(null);
   const trackRef = useRef(null);

@@ -3,9 +3,9 @@ import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
 import localFont from "next/font/local";
-import LenisSmoothScroll from "@/components/LenisSmoothScroll";
+// import LenisSmoothScroll from "@/components/LenisSmoothScroll";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Layout from "@/components/Layout";
+// import Layout from "@/components/Layout";
 
 // Fonts
 const standerd = localFont({
@@ -29,7 +29,7 @@ const grotesk = localFont({
   variable: "--font-display",
   display: "swap",
   fallback: ["system-ui, sans-serif"],
-}); 
+});
 
 export const metadata = {
   title: "Enigma",
@@ -39,11 +39,12 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <>
-      <LenisSmoothScroll />
+      {/* <LenisSmoothScroll /> */}
       <html lang="en">
         <body className={`${standerd.variable} ${grotesk.variable} bg-white text-black antialiased`}>
-          <Layout children={children}/>
-          {/* {children} */}
+          {/* <Layout> */}
+          {children}
+          {/* </Layout> */}
           {(await draftMode()).isEnabled && (
             <>
               <VisualEditing />
