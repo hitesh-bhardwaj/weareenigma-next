@@ -42,7 +42,7 @@ const TextComponent = () => {
   }, []);
 
   return (
-    <div className="w-screen h-[200vh] flex justify-center items-center">
+    <div className="w-screen h-[200vh] flex justify-center items-center bg-white">
       <p className="animated-paragraph w-[40%] leading-[1.6]">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione minima
         totam ducimus. Esse et eligendi vitae numquam earum nesciunt, quidem autem
