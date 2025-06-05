@@ -159,7 +159,7 @@ const Achievements = () => {
             start:'top top',
             end:"bottom bottom",
             scrub:true,
-            markers:true
+            // markers:true
         }
     })
     // tl.from(".")
