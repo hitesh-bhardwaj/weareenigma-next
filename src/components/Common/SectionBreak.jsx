@@ -1,10 +1,11 @@
 import React from 'react'
 import WaveShader from '../WaveShader'
+import ShaderComp from '../ShaderComp'
 
 const SectionBreak = ({text}) => {
   return (
-    <section className='w-screen h-full flex justify-center relative z-0 px-[4vw]'>
-       <div className="absolute top-0 left-0 h-[5vh] w-screen z-[2]">
+    <section className='w-screen h-[48vw] flex justify-center relative z-0 px-[4vw]'>
+       <div className="absolute top-0 left-0 z-[2]">
         <WaveShader
           topColor={[1.0, 1.0, 1.0]}
           middleColor={[1.0, 0.4, 0.0]}
@@ -12,8 +13,9 @@ const SectionBreak = ({text}) => {
           reverse={true}
           amplitude={0.1}
         />
+        {/* <ShaderComp/> */}
       </div>
-      <div className='relative z-[5] flex justify-center text-center w-[90%] mt-[5%] '>
+      <div className='relative z-[5] flex justify-center text-center w-[90%] mt-[5%] h-fit'>
         <h3 className='text-white !text-[4.5vw]'>{text}</h3>
 
       </div>

@@ -184,7 +184,7 @@ const MovingGradientShader = ({
 
 const ShaderComp = () => {
   return (
-    <div style={{ width: '100vw', height: '100vh', backgroundColor: '#000' }}>
+    <div style={{ width: '100vw', height: '100vh', backgroundColor: '#fff' }}>
       <Canvas
         orthographic
         camera={{ left: -1, right: 1, top: 1, bottom: -1, near: 0.1, far: 10, position: [0, 0, 1] }}

@@ -62,7 +62,7 @@ const Blogs = () => {
   return (
     <section
       id="blogs"
-      className="w-full h-screen relative z-[10] bg-[#fefefe]"
+      className="w-full h-screen relative z-[10] bg-[#fefefe] py-[5%]"
     >
       <div className="">
         <div className="flex flex-col px-[4vw]">
