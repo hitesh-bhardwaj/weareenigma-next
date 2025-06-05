@@ -162,7 +162,7 @@ const Achievements = () => {
             markers:true
         }
     })
-    tl.from(".")
+    // tl.from(".")
    })
    return()=>ctx.revert()
   },[])
