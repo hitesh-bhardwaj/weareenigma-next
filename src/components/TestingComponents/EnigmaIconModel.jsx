@@ -132,7 +132,7 @@ function IconModel({ scale, scrollState }) {
     }, []);
 
     return (
-        <group ref={iconGroupRef} castShadow receiveShadow position={[500, 0, 0]} rotation={[0, -0.4, 0]} scale={scale.xy.min() * 0.08} dispose={null}>
+        <group ref={iconGroupRef} castShadow receiveShadow position={[400, 0, 0]} rotation={[0, -0.4, 0]} scale={scale.xy.min() * 0.1} dispose={null}>
             <group ref={iconRef}>
                 <mesh geometry={nodes.Low_Poly.geometry}>
                     <MeshTransmissionMaterial {...materialsProps} />
