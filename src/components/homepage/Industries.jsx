@@ -11,9 +11,6 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const IndustriesCopy = () => {
   useEffect(() => {
-
-
-  
     const ctx = gsap.context(() => {
         const el1 = document.querySelector(".industry-para-1");
         const el2 = document.querySelector(".industry-para-2");

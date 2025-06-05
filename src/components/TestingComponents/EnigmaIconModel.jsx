@@ -1,6 +1,6 @@
 "use client";
-import { MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { MeshTransmissionMaterial, useGLTF, useTexture } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import React from "react";
@@ -13,16 +13,21 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function EnigmaIconModel() {
     const meshRef = useRef(null);
-
+    
     return (
         <>
             <div ref={meshRef} className="w-screen h-screen sticky top-0" />
             <UseCanvas>
                 <StickyScrollScene track={meshRef}>
                     {(props) => (
+                        <>
                         <IconModel
                             {...props}
                         />
+                        <PlaneComponent/>
+                        
+                        </>
+                        
                     )}
                 </StickyScrollScene>
             </UseCanvas>
@@ -33,16 +38,18 @@ export function EnigmaIconModel() {
 function IconModel({ scale, scrollState }) {
     const [y, setY] = useState(0);
     const iconGroupRef = useRef(null);
+    const {camera} = useThree()
+    console.log(camera)
     const iconRef = useRef(null);
     const mouse = useRef({ x: 0, y: 0 });
     const model = useGLTF("/assets/models/enigmaLogo.glb");
     const { nodes } = model;
 
     const materialsProps = {
-        thickness: 1.2,
+        thickness: 1.8,
         backsideThickness: 0.0,
         reflectivity: 0.54,
-        roughness: 0.04,
+        roughness: 0.2,
         antisotropy: 0.4,
         chromaticAberration: 0.1,
         distortion: 0.3,
@@ -99,8 +106,8 @@ function IconModel({ scale, scrollState }) {
             });
             tl.to(iconGroupRef.current.position, {
                 x: 0,
-                y: 0,
-                z: 0,
+                y: 100,
+                // z: 0,
                 duration: 1,
             })
                 .to(iconGroupRef.current.rotation, {
@@ -132,7 +139,7 @@ function IconModel({ scale, scrollState }) {
     }, []);
 
     return (
-        <group ref={iconGroupRef} castShadow receiveShadow position={[400, 0, 0]} rotation={[0, -0.2, 0]} scale={scale.xy.min() * 0.1} dispose={null}>
+        <group ref={iconGroupRef} castShadow receiveShadow position={[370, 0, 100]} rotation={[0, -0.2, 0]} scale={75} dispose={null}>
             <group ref={iconRef}>
                 <mesh geometry={nodes.Low_Poly.geometry}>
                     <MeshTransmissionMaterial {...materialsProps} />
@@ -151,3 +158,48 @@ function IconModel({ scale, scrollState }) {
     );
 }
 
+function PlaneComponent({ scale, scrollState }) {
+    const mesh = useRef(null);
+    const texture = useTexture("/assets/textures/showreel-poster.jpg");
+    useEffect(()=>{
+     const ctx = gsap.context(()=>{
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#hero-section",
+                start: "30% top",
+                end: "bottom bottom",
+                // markers: true,
+                scrub: true,
+            },
+            defaults: {
+                ease: "none",
+            }
+        })
+        tl.to(mesh.current.position,{
+            z:0,
+            // y:-800
+        })
+        .fromTo(mesh.current.scale,{
+            x:10,
+            y:10
+        },{
+            x:75,
+            y:75,
+            delay:-0.5,
+        })
+        tl.to(mesh.current.rotation,{
+            y:0,
+            delay:-0.5
+        })
+
+     })
+     return()=>ctx.revert()
+    },[])
+
+    return (
+        <mesh ref={mesh} scale={10} position={[0,0 , -500]} rotation={[0,-Math.PI/2,0]}>
+            <planeGeometry args={[16, 9]} />
+            <meshStandardMaterial map={texture} side={useThree.DoubleSide} />
+        </mesh>
+    );
+}

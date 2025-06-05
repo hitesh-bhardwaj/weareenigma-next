@@ -13,6 +13,7 @@ export const Hero = (() => {
                 <div className='h-[300vh] relative flex'>
                     <Suspense>
                         <EnigmaIconModel />
+                        {/* <VideoPlane/> */}
                     </Suspense>
                 </div>
                 <div className="absolute top-0 left-0">
@@ -20,11 +21,7 @@ export const Hero = (() => {
                         <FractalGlassModelWrapper img={"/assets/models/hero-bg.png"}/>
                     </Suspense>
                 </div>
-                <div className="absolute top-[100vh] left-0 h-screen w-screen">
-                    <Suspense>
-                        <VideoPlane />
-                    </Suspense>
-                </div>
+               
             </section>
         </>
     )
