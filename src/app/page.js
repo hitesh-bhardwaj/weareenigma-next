@@ -15,6 +15,7 @@ import Blogs from "@/components/homepage/Blogs";
 import { Hero } from "@/components/TestingComponents/Hero";
 import Layout from "@/components/Layout";
 import { fadeUpAnim, lineAnim } from "@/components/gsapAnimations";
+import IndustriesCopy from "@/components/homepage/IndustriesCopy";
 
 const page = () => {
   fadeUpAnim();
@@ -29,7 +30,8 @@ const page = () => {
       <SectionBreak/>
       <Testimonials/>
       <Solutions/>
-      <Industries/>
+      {/* <Industries/> */}
+      <IndustriesCopy/>
       <Achievements/>
       <Clients/>
       <Blogs/>

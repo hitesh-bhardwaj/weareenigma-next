@@ -6,33 +6,31 @@ import gsap from "gsap";
 import WaveShader from "@/components/WaveShader";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/SplitText";
+import Copy from "../Copy";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const IndustriesCopy = () => {
   useEffect(() => {
-
-
-  
     const ctx = gsap.context(() => {
-        const el1 = document.querySelector(".industry-para-1");
-        const el2 = document.querySelector(".industry-para-2");
-        const el3 = document.querySelector(".industry-para-3");
-        const split1 = new SplitText(el1, {
-            type: "lines",
-            linesClass: "para-line"
-          });
-        const split2 = new SplitText(el2, {
-            type: "lines",
-            linesClass: "para-line"
-          });
-        const split3 = new SplitText(el3, {
-            type: "lines",
-            linesClass: "para-line"
-          });
-          gsap.set(split1.lines, { overflow: "hidden", display: "block" });
-          gsap.set(split2.lines, { overflow: "hidden", display: "block" });
-          gsap.set(split3.lines, { overflow: "hidden", display: "block" });
+      const el1 = document.querySelector(".industry-para-1");
+      const el2 = document.querySelector(".industry-para-2");
+      const el3 = document.querySelector(".industry-para-3");
+      const split1 = new SplitText(el1, {
+        type: "lines",
+        linesClass: "para-line",
+      });
+      const split2 = new SplitText(el2, {
+        type: "lines",
+        linesClass: "para-line",
+      });
+      const split3 = new SplitText(el3, {
+        type: "lines",
+        linesClass: "para-line",
+      });
+      gsap.set(split1.lines, { overflow: "hidden", display: "block" });
+      gsap.set(split2.lines, { overflow: "hidden", display: "block" });
+      gsap.set(split3.lines, { overflow: "hidden", display: "block" });
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: "#industry",
@@ -41,140 +39,178 @@ const IndustriesCopy = () => {
           scrub: true,
         //   markers: true,
         },
-        defaults:{
-          ease:"none"
-        }
+        defaults: {
+          ease: "none",
+        },
+      });
+      gsap.set(".industry-heading",{
+        rotate:20,
+        yPercent:50
+
       })
-      gsap.set(".industry-image-1 , .industry-image-2 , .industry-image-3",{
-        rotateX:-50,
+      gsap.set(".industry-image-1 , .industry-image-2 , .industry-image-3", {
+        rotateX: -50,
         // rotateZ:-10,
-        rotateY:90,
-        yPercent:-40,
-        scaleX:0.5,
-        scaleY:0.5,
-      })
-     gsap.fromTo(".industry-container",{
-        xPercent:50,
-     },{
-        xPercent:-150,
-        ease:"none",
-        scrollTrigger: {
+        rotateY: 90,
+        yPercent: -40,
+        scaleX: 0.5,
+        scaleY: 0.5,
+      });
+      gsap.fromTo(
+        ".industry-container",
+        {
+          xPercent: 100,
+        },
+        {
+          xPercent: -220,
+          ease: "none",
+          scrollTrigger: {
             trigger: "#industry",
-            start: "top top",
-            end: "bottom bottom",
+            start: "top 30%",
+            end: "85% 30%",
             scrub: true,
             // markers: true,
           },
+        }
+      );
 
-     })
-      
-      tl.to(".industry-heading-1", {
-        rotate: 0,
-        // delay: -0.5,
-      })
-      .to(".industry-image-1",{
-        rotateX:0,
-        rotateZ:0,
-        yPercent:0,
-        rotateY:0,
-        scaleX:1,
-        scaleY:1,
-        delay:-0.5
-      })
-      .from(split1.lines, {
-        yPercent: 100,
-        opacity: 0,
-        delay:-0.3,
-        stagger: 0.1,
-        ease: "power2.out",
-      })
-      .fromTo(".industry-1-container",{
-        yPercent:60,
-      },{
-        delay:-1.2,
-        duration:2,
-        yPercent:-50,
-      })
-      
+      tl.to(
+        ".industry-heading",
+        {
+          rotate: 0,
+          duration:0.6,
+        //   yPercent:-20
+        }
+      )
+      tl.to(
+        ".industry-heading",
+       
+        {
+        //   rotate: 0,
+          duration:1.7,
+          delay:-0.5,
+          yPercent:-80
+        }
+      )
+    
+        .to(".industry-heading-1", {
+          rotate: 0,
+          delay: -0.8,
+        })
+        .to(".industry-image-1", {
+          rotateX: 0,
+          rotateZ: 0,
+          yPercent: 0,
+          rotateY: 0,
+          scaleX: 1,
+          scaleY: 1,
+          delay: -0.8,
+        })
+        .from(split1.lines, {
+          yPercent: 100,
+          opacity: 0,
+          delay: -0.7,
+          stagger: 0.1,
+          ease: "power2.out",
+        })
+        .fromTo(
+          ".industry-1-container",
+          {
+            yPercent: 40,
+          },
+          {
+            delay: -1.2,
+            duration: 2,
+            yPercent: -50,
+          }
+        );
+
       tl.to(".industry-heading-2", {
         rotate: 0,
-        delay: -1.2,
+        delay: -1.1,
       })
-      .to(".industry-image-2",{
-        rotateX:0,
-        rotateZ:0,
-        yPercent:0,
-        rotateY:0,
-        scaleX:1,
-        scaleY:1,
-        delay:-1.2
-      })
-      .from(split2.lines, {
-        yPercent: 100,
-        opacity: 0,
-        delay:-1,
-        stagger: 0.1,
-        ease: "power2.out",
-      })
-      .fromTo(".industry-2-container",{
-        yPercent:80,
-      },{
-        // xPercent:-220,
-        delay:-1.3,
-        duration:2,
-        yPercent:-70,
-      })
-         
+        .to(".industry-image-2", {
+          rotateX: 0,
+          rotateZ: 0,
+          yPercent: 0,
+          rotateY: 0,
+          scaleX: 1,
+          scaleY: 1,
+          delay: -1.1,
+        })
+        .from(split2.lines, {
+          yPercent: 100,
+          opacity: 0,
+          delay: -0.8,
+          stagger: 0.1,
+          ease: "power2.out",
+        })
+        .fromTo(
+          ".industry-2-container",
+          {
+            yPercent: 40,
+          },
+          {
+            // xPercent:-220,
+            delay: -1.4,
+            duration: 2,
+            yPercent: -50,
+          }
+        );
+
       tl.to(".industry-heading-3", {
         rotate: 0,
         delay: -1.1,
       })
-      .to(".industry-image-3",{
-        rotateX:0,
-        rotateZ:0,
-        yPercent:0,
-        rotateY:0,
-        scaleX:1,
-        scaleY:1,
-        delay:-1.1
-      })
-      .from(split3.lines, {
-        yPercent: 100,
-        opacity: 0,
-        delay:-1,
-        stagger: 0.1,
-        ease: "power2.out",
-      })
-      .fromTo(".industry-3-container",{
-        yPercent:80,
-      },{
-        // xPercent:-220,
-        delay:-1.2,
-        duration:1,
-        yPercent:-20,
-      })
+        .to(".industry-image-3", {
+          rotateX: 0,
+          rotateZ: 0,
+          yPercent: 0,
+          rotateY: 0,
+          scaleX: 1,
+          scaleY: 1,
+          delay: -1.1,
+        })
+        .from(split3.lines, {
+          yPercent: 100,
+          opacity: 0,
+          delay: -1,
+          stagger: 0.1,
+          ease: "power2.out",
+        })
+        .fromTo(
+          ".industry-3-container",
+          {
+            yPercent: 80,
+          },
+          {
+            // xPercent:-220,
+            delay: -1.4,
+            duration: 1,
+            yPercent: 0,
+          }
+        );
     });
     return () => ctx.revert();
   }, []);
   return (
     <section
-      className="w-screen h-[500vh] relative bg-black-1 py-[8%] pt-[25%]"
+      className="w-screen h-[600vh] relative bg-black-1 py-[8%] pt-[25%]"
       id="industry"
     >
-      <div className="w-full z-[6] relative">
-        <div className="flex flex-col items-center justify-between gap-[12vw]  w-full">
-          <div className="flex items-center justify-center text-center w-full">
-            <h2 className="text-[#C7C7C7] w-[70%]">Industries We Work with</h2>
-          </div>
-        </div>
-      </div>
       <div className="w-screen h-screen sticky top-0 pt-[5%] z-[20] industry-container ">
-        <div className="w-fit h-fit absolute right-[-5%] bottom-[30%] industry-1-container">
+        <h2 className="text-[#C7C7C7] w-[70%] industry-heading absolute top-[30%] text-center">
+          Industries We Work with
+        </h2>
+        <div className="w-fit h-fit absolute translate-x-[170%] bottom-[30%] industry-1-container">
           <p className="text-[8vw] text-white leading-[1.05] font-display pb-[3vw] industry-heading-1 rotate-[20deg]">
             Fintech
           </p>
           <div className="flex items-start justify-between w-[55vw]">
-            <div className=" w-[25vw] h-[15vw] " style={{perspective:"30rem"}}>
+            <div
+              className=" w-[25vw] h-[15vw] "
+              style={{ perspective: "30rem" }}
+            >
               <Image
                 src={"/assets/images/homepage/industries/fintech.png"}
                 height={330}
@@ -192,12 +228,15 @@ const IndustriesCopy = () => {
             </p>
           </div>
         </div>
-        <div className="w-fit h-fit absolute right-[-5%] translate-x-[120%] bottom-[30%] industry-2-container">
+        <div className="w-fit h-fit absolute right-[-5%] translate-x-[220%] bottom-[30%] industry-2-container">
           <p className="text-[8vw] text-white leading-[1.05] font-display pb-[3vw] industry-heading-2 rotate-[15deg]">
             Fintech
           </p>
           <div className="flex items-start justify-between w-[55vw]">
-            <div className=" w-[25vw] h-[15vw]" style={{perspective:"30rem"}}>
+            <div
+              className=" w-[25vw] h-[15vw]"
+              style={{ perspective: "30rem" }}
+            >
               <Image
                 src={"/assets/images/homepage/industries/fintech.png"}
                 height={330}
@@ -215,12 +254,15 @@ const IndustriesCopy = () => {
             </p>
           </div>
         </div>
-        <div className="w-fit h-fit absolute right-[-5%] translate-x-[240%] bottom-[30%] industry-3-container">
-          <p className="text-[8vw] text-white leading-[1.05] font-display pb-[3vw] industry-heading-3 rotate-[15deg]">
+        <div className="w-fit h-fit absolute right-[-5%] translate-x-[360%] bottom-[30%] industry-3-container">
+          <p className="text-[8vw] text-white leading-[1.05] font-display pb-[3vw] industry-heading-3 rotate-[20deg]">
             Fintech
           </p>
           <div className="flex items-start justify-between w-[55vw]">
-            <div className=" w-[25vw] h-[15vw]" style={{perspective:"30rem"}}>
+            <div
+              className=" w-[25vw] h-[15vw]"
+              style={{ perspective: "30rem" }}
+            >
               <Image
                 src={"/assets/images/homepage/industries/fintech.png"}
                 height={330}
