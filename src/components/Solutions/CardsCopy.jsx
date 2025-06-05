@@ -25,16 +25,16 @@ export default function Lanyard({ position = [0, -5, 30], gravity = [0, -80, 0],
         gl={{ alpha: transparent }}
         onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
       >
-        <ambientLight intensity={1} />
+        <ambientLight intensity={5} />
         <Physics gravity={gravity} timeStep={1 / 60}>
           <Band />
         </Physics>
-        <Environment blur={0.75} preset="city">
-          <Lightformer intensity={1} color="white" position={[0, -1, 5]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
-          <Lightformer intensity={2} color="white" position={[-1, -1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
-          {/* <Lightformer intensity={2} color="white" position={[1, 1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} /> */}
-          <Lightformer intensity={5} color="white" position={[-10, 0, 14]} rotation={[0, Math.PI / 2, Math.PI / 3]} scale={[100, 10, 1]} />
-        </Environment>
+        <directionalLight position={[2,3,1]} intensity={3}/>
+        <directionalLight position={[-2,3,1]} intensity={4}/>
+        <Environment preset='city'/>
+
+
+      
         {/* <OrbitControls/> */}
       </Canvas>
     </div>
@@ -95,8 +95,8 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
     lastScroll.current = currentScroll;
 
     if (Math.abs(deltaScroll) > 1) {
-      const impulse = deltaScroll > 0 ? 0.7 : -2;
-      card.current.applyImpulse({ x: impulse * 0.05, y: impulse * 0.05, z: impulse*0.02 }, true);
+      const impulse = deltaScroll > 0 ? 0.6 : -3;
+      card.current.applyImpulse({ x: impulse * 0.05, y: impulse * 0.1, z: impulse*0.02 }, true);
     }
 
     // Rope smoothing
@@ -130,10 +130,10 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
           <group scale={3.6} position={[0, 0, -0.05]} >
             <mesh geometry={nodes.card.geometry} rotation={[0, 0, 0]} position={[0, -0.723, 0]}>
-              <meshPhysicalMaterial map={texture} side={THREE.DoubleSide} clearcoat={1} clearcoatRoughness={0.15} roughness={0.9} metalness={0.8} />
+              <meshPhysicalMaterial map={texture} side={THREE.DoubleSide} clearcoat={1} clearcoatRoughness={0.1} roughness={0.9} metalness={0.9} />
             </mesh>
             <mesh geometry={nodes.card001.geometry} rotation={[0, 0, 0]} position={[0, -0.722, 0.01]}>
-              <meshPhysicalMaterial map={texture} side={THREE.FrontSide} clearcoat={1} clearcoatRoughness={0.15} roughness={0.9} metalness={0.8} />
+              <meshPhysicalMaterial map={texture} side={THREE.FrontSide} clearcoat={1} clearcoatRoughness={0.1} roughness={0.9} metalness={0.9} />
             </mesh>
             <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} rotation={[0, 0, 0]} position={[0, -0.72, 0]} />
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} material-roughness={0.3} rotation={[0, 0, 0]} position={[0, -0.72, 0]} />
@@ -142,7 +142,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
       </group>
 
       <mesh ref={band} position={[0,2.2, 0]}>
-        <meshLineGeometry />
+        <meshLineGeometry map={texture2} />
         <meshLineMaterial
           color="white"
           depthTest={false}

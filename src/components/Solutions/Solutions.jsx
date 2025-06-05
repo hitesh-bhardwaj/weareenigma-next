@@ -6,7 +6,7 @@ import Lanyard from './CardsCopy'
 const Solutions = () => {
     return (
         <>
-            <section className='w-screen h-full px-[4vw] pb-[10%] z-[10] relative mt-[-10%]'>
+            <section className='w-screen h-full px-[4vw] pb-[10%] z-[10] relative mt-[-10%] bg-[#fefefe]'>
                 <div className=' h-full w-full space-y-[5vw]'>
                     {data.map((item,index)=>(
                     <div key={index} className={`flex items-center justify-between h-full w-full ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>

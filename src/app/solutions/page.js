@@ -9,16 +9,17 @@ import Cards from '@/components/Solutions/Cards'
 import Lanyard from '@/components/Solutions/CardsCopy'
 import Solutions from '@/components/Solutions/Solutions'
 import React from 'react'
+import Layout from '@/components/Layout'
 
 const page = () => {
   return (
    <>
+   <Layout>
    <About/>
    <SectionBreak text={"We craft emotionally intelligent user experiences that are adored globally!"}/>
    <Solutions/>
-   {/* <Cards/> */}
-   {/* <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]}/> */}
-   {/* <Approach/> */}
+   </Layout>
+  
    </>
   )
 }

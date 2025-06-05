@@ -39,10 +39,10 @@ function IconModel({ scale, scrollState }) {
     const { nodes } = model;
 
     const materialsProps = {
-        thickness: 1.8,
+        thickness: 1.2,
         backsideThickness: 0.0,
         reflectivity: 0.54,
-        roughness: 0.2,
+        roughness: 0.04,
         antisotropy: 0.4,
         chromaticAberration: 0.1,
         distortion: 0.3,
@@ -132,7 +132,7 @@ function IconModel({ scale, scrollState }) {
     }, []);
 
     return (
-        <group ref={iconGroupRef} castShadow receiveShadow position={[400, 0, 0]} rotation={[0, -0.4, 0]} scale={scale.xy.min() * 0.1} dispose={null}>
+        <group ref={iconGroupRef} castShadow receiveShadow position={[400, 0, 0]} rotation={[0, -0.2, 0]} scale={scale.xy.min() * 0.1} dispose={null}>
             <group ref={iconRef}>
                 <mesh geometry={nodes.Low_Poly.geometry}>
                     <MeshTransmissionMaterial {...materialsProps} />
