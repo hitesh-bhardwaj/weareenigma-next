@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from "next/image";
 
-const index = () => {
+const Header = () => {
   return (
     <section className='w-screen fixed top-0 left-0 z-[200] ' id='header'>
         <div className='w-full h-fit flex justify-between px-[4vw] pt-[2vw]'>
@@ -32,4 +32,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Header

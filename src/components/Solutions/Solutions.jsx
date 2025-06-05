@@ -2,6 +2,7 @@ import React from 'react'
 import { PrimaryButton } from '../Buttons'
 import Cards from './Cards'
 import Lanyard from './CardsCopy'
+import Copy from '../Copy'
 
 const Solutions = () => {
     return (
@@ -15,16 +16,22 @@ const Solutions = () => {
                             <Lanyard/>
                         </div>
                         <div className="flex flex-col gap-[2vw] w-[50%] text-black">
+                            <Copy>
                             <h3 className='uppercase !text-[5.2vw]'>
                                 {item.title}
                             </h3>
+                            </Copy>
                             <div className='space-y-[2vw]'>
+                                <Copy>
                                 <p className="w-[90%]">
                                     {item.para1}
                                 </p>
+                                </Copy>
+                                <Copy>
                                 <p className="w-[90%]">
                                    {item.para2}
                                 </p>
+                                </Copy>
                             </div>
                             <PrimaryButton text={"Know More "} href={item.link} className="border-black" />
                         </div>

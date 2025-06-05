@@ -10,7 +10,7 @@ const FooterCTA = () => {
         <div className='w-full h-full px-[4vw] py-[4vw] flex items-center justify-center'>
             <div className='w-[60%] text-white flex flex-col items-center gap-[4vw]'>
               <Copy>
-            <p className='text-[8vw] leading-[1.05] font-display text-center'>Let's bring your
+            <p className='text-[8vw] leading-[1.2] font-display text-center'>Let's bring your
             ideas to life!</p>
             </Copy>
              <button className="w-fit flex">

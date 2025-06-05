@@ -1,6 +1,7 @@
 import React from 'react'
 import WaveShader from '../WaveShader'
 import ShaderComp from '../ShaderComp'
+import Copy from '../Copy'
 
 const SectionBreak = ({text}) => {
   return (
@@ -16,7 +17,9 @@ const SectionBreak = ({text}) => {
         {/* <ShaderComp/> */}
       </div>
       <div className='relative z-[5] flex justify-center text-center w-[90%] mt-[5%] h-fit'>
+        <Copy>
         <h3 className='text-white !text-[4.5vw]'>{text}</h3>
+        </Copy>
 
       </div>
     </section>

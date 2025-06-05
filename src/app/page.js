@@ -3,7 +3,6 @@ import About from "@/components/homepage/About";
 import Achievements from "@/components/homepage/Achievements";
 import Clients from "@/components/homepage/Clients";
 import FAQs from "@/components/Common/FAQ";
-import Footer from "@/components/homepage/Footer";
 import Industries from "@/components/homepage/Industries";
 import SectionBreak from "@/components/homepage/SectionBreak";
 import Solutions from "@/components/homepage/Solutions";
@@ -16,6 +15,7 @@ import { Hero } from "@/components/TestingComponents/Hero";
 import Layout from "@/components/Layout";
 import { fadeUpAnim, lineAnim } from "@/components/gsapAnimations";
 import IndustriesCopy from "@/components/homepage/IndustriesCopy";
+import { Footer } from "@/components/homepage/Footer";
 
 const page = () => {
   fadeUpAnim();
@@ -36,7 +36,7 @@ const page = () => {
       <Clients/>
       <Blogs/>
       <FAQs content={faqContent} /> 
-      <Footer img={"/assets/models/hero-bg.png"}/>
+      <Footer/>
       </Layout>
     </>
   );

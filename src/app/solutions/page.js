@@ -1,3 +1,4 @@
+"use client"
 import FooterCTA from '@/components/Common/FooterCTA'
 import SectionBreak from '@/components/Common/SectionBreak'
 import FAQs from '@/components/Common/FAQ'
@@ -10,14 +11,21 @@ import Lanyard from '@/components/Solutions/CardsCopy'
 import Solutions from '@/components/Solutions/Solutions'
 import React from 'react'
 import Layout from '@/components/Layout'
+import { Hero } from '@/components/Solutions/Hero'
+import Header from '@/components/Header'
 
 const page = () => {
   return (
    <>
    <Layout>
+   <Header/>
+    <Hero/>
    <About/>
    <SectionBreak text={"We craft emotionally intelligent user experiences that are adored globally!"}/>
    <Solutions/>
+   <Approach/>
+   <FAQs content={faqContent}/>
+   <FooterCTA/>
    </Layout>
   
    </>
