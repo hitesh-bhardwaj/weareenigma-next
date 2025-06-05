@@ -4,9 +4,12 @@ import React, { useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import WaveShader from "../WaveShader";
+import Copy from "../Copy";
+import { fadeUpAnim } from "../gsapAnimations";
 gsap.registerPlugin(ScrollTrigger);
 
 const Work = () => {
+  fadeUpAnim();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -97,15 +100,17 @@ const Work = () => {
     >
       <div className="w-full h-[120vh] flex flex-wrap justify-between gap-[1.5vw] gap-y-[5vw] sticky top-[5%] !z-[4]">
         <div className="w-[45vw] h-[90vh] rounded-[2.5vw] bg-primary p-[2vw] flex flex-col justify-between work-1-content">
+          <Copy>
           <p className="text-[8vw] w-[75%] font-display leading-[1]">
             Garden City Mall
           </p>
-          <div className="flex justify-between text-white">
-            <span>2023</span>
+          </Copy>
+          <div className="flex justify-between text-white ">
+            <span className="fadeupanim">2023</span>
             <div className="flex gap-[2.5vw]">
-              <span>Web Design</span>
-              <span>Branding</span>
-              <span>Marketing</span>
+              <span className="fadeupanim">Web Design</span>
+              <span className="fadeupanim">Branding</span>
+              <span className="fadeupanim">Marketing</span>
             </div>
           </div>
         </div>
@@ -133,9 +138,11 @@ const Work = () => {
           </div>
         </div>
         <div className="w-[45vw] h-[90vh] rounded-[2.5vw] overflow-hidden bg-primary p-[2vw] flex flex-col justify-between work-2-mockup translate-x-[104%] z-[3]">
+          <Copy>
           <p className="text-[8vw] w-[75%] font-display leading-[1]">
             Garden City Mall
           </p>
+          </Copy>
           <div className="flex justify-between text-white">
             <span>2023</span>
             <div className="flex gap-[2.5vw]">

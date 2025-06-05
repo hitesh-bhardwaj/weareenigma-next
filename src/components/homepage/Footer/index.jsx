@@ -238,9 +238,12 @@ const Footer = () => {
     return (
         <>
             <footer className='w-screen h-full relative'>
+                <div className='h-full w-full'>
+                
                 <FooterCTA />
+                
+                </div>
                 <div className='w-screen h-full'>
-                  
                         {/* <FooterBg /> */}
                         <div ref={el} className="h-screen w-screen absolute top-0 left-0"></div>
     <UseCanvas>

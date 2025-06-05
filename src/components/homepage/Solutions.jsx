@@ -2,6 +2,8 @@ import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import WaveShader from "../WaveShader";
+import Copy from "../Copy";
+import { lineAnim } from "../gsapAnimations";
 
 const data = [
   {
@@ -73,14 +75,18 @@ const SolutionCard = ({ title, number, para, list, opacity, translateY }) => {
     className="w-full flex flex-col absolute top-0 left-0 px-[4vw] h-full z-[3]"
   >
       <motion.h2 className="w-full flex justify-between" >
+        <Copy>
         <span className="capitalize">{title}</span>
+        </Copy>
         <span>{number}</span>
       </motion.h2>
 
       <motion.span className="w-full h-[1px] bg-black mt-[7vw] mb-[2vw]" />
 
       <div className="flex flex-col gap-[5vw]">
+        <Copy>
         <motion.p className="w-[70%] text-[1.5vw]">{para}</motion.p>
+        </Copy>
 
         <div className="w-full flex justify-between items-end">
           <motion.div className="w-[70%] flex flex-wrap uppercase h-fit text-[0.9vw] gap-x-[4vw] gap-y-[1.5vw]">
@@ -89,8 +95,10 @@ const SolutionCard = ({ title, number, para, list, opacity, translateY }) => {
                 key={index}
                 className="flex w-[25%] flex-col gap-[0.5vw] h-fit"
               >
+                <Copy>
                 <p>{content}</p>
-                <span className="w-full h-[1px] bg-black" />
+                </Copy>
+                <span className="w-full h-[1px] bg-black " />
               </div>
             ))}
           </motion.div>

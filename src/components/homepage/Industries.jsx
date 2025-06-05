@@ -6,6 +6,7 @@ import gsap from "gsap";
 import WaveShader from "@/components/WaveShader";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/SplitText";
+import Copy from "../Copy";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -161,7 +162,9 @@ const IndustriesCopy = () => {
       <div className="w-full z-[6] relative">
         <div className="flex flex-col items-center justify-between gap-[12vw]  w-full">
           <div className="flex items-center justify-center text-center w-full">
+            <Copy>
             <h2 className="text-[#C7C7C7] w-[70%]">Industries We Work with</h2>
+            </Copy>
           </div>
         </div>
       </div>

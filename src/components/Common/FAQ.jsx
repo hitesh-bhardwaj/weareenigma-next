@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import WaveShader from '../WaveShader'
+import Copy from '../Copy'
 
 export default function FAQs({ allowMultiple = false , content}) {
   // keep track of which indexes are open
@@ -21,14 +22,16 @@ export default function FAQs({ allowMultiple = false , content}) {
       )
     }
   }
+  
 
   return (
     <section className="px-[4vw] py-[6vw] pb-[20vw] w-full max-sm:px-[7vw] bg-[#fefefe] relative max-sm:pb-[10%] max-sm:min-h-screen max-md:min-h-screen">
       <div className="flex flex-col items-center gap-[6vw] max-sm:gap-[10vw] max-md:justify-center max-sm:items-start">
-       
+       <Copy>
           <h1 className="w-[68%] text-center">
           In Case You Were Wondering
           </h1>
+          </Copy>
        
         <div className="w-4/5 space-y-[2vw] max-sm:w-full max-sm:space-y-[5vw] max-md:w-[90%] max-md:py-[3vw] max-md:space-y-[3vw]">
           {content.map((f, i) => (
@@ -38,6 +41,7 @@ export default function FAQs({ allowMultiple = false , content}) {
               answer={f.answer}
               isOpen={openIndexes.includes(i)}
               onToggle={() => toggleIndex(i)}
+
             />
           ))}
         </div>

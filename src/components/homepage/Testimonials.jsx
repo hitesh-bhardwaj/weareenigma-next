@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import TestimonialSection from "./TestimonialSection";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import Copy from "../Copy";
 gsap.registerPlugin(ScrollTrigger);
 const Testimonials = () => {
   useEffect(() => {
@@ -78,9 +79,11 @@ const Testimonials = () => {
           style={{ clipPath: "circle(2%)" }}
         >
           <div className="w-screen h-screen flex flex-nowrap absolute items-center ml-[55vw] pt-[16vh] z-[10]">
+            <Copy>
             <h2 className="text-white w-[70%] z-[4] pointer-events-none translate-y-[30%] testimonial-heading">
               Stories that stick, results that show.
             </h2>
+            </Copy>
           </div>
         </div>
         <div className="w-[3vw] h-[3vw] absolute top-[39.3%] left-[5.5%] rounded-full bg-white lower-circle z-[4]" />

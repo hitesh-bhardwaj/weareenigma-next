@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React, { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
+import Copy from '../Copy';
 
 const Achievements = () => {
     const awardsRef = useRef(null);
@@ -137,28 +138,36 @@ const Achievements = () => {
         <section className='h-full w-screen bg-gradient-to-r from-[#FF5600] to-[#FF8800]'>
             <div className='w-full h-full pl-[4vw] py-[5vw] grid grid-cols-6 gap-y-[2vw]'>
                 <div ref={awardsContainerRef} className='col-start-1 col-span-4 transition-all duration-500 ease relative cursor-none min-h-[12vw]'>
+                    <Copy>
                     <p className='text-white text-[10vw] font-display leading-[1.05] font-medium pointer-events-none'>10+ Awards</p>
+                    </Copy>
                     <div ref={awardsRef} className='opacity-0 scale-80 absolute top-0 left-0 pointer-events-none z-10'>
                         <Image src="/assets/images/homepage/award.png" height={297} width={199} alt='award'/>
                     </div>
                 </div>
                 
                 <div ref={projectsContainerRef} className='col-start-3 row-start-2 col-span-4 transition-all duration-500 ease relative cursor-none min-h-[12vw]'>
+                    <Copy>
                     <p className='text-[#0E0E0E] text-[10vw] font-display leading-[1.05] font-medium pointer-events-none'>25+ Projects</p>
+                    </Copy>
                     <div ref={projectsRef} className='opacity-0 scale-80 absolute top-0 left-0 pointer-events-none z-10'>
                         <Image src="/assets/images/homepage/project.png" height={297} width={199} alt='project'/>
                     </div>
                 </div>
                 
                 <div ref={clientsContainerRef} className='col-start-1 row-start-3 col-span-4 transition-all duration-500 ease relative cursor-none min-h-[12vw]'>
+                    <Copy>
                     <p className='text-white text-[10vw] font-display leading-[1.05] font-medium pointer-events-none'>45+ Clients</p>
+                    </Copy>
                     <div ref={clientsRef} className='opacity-0 scale-80 absolute top-0 left-0 pointer-events-none z-10'>
                         <Image src="/assets/images/homepage/project.png" height={297} width={199} alt='clients'/>
                     </div>
                 </div>
                 
                 <div ref={yearsContainerRef} className='col-start-3 row-start-4 col-span-4 transition-all duration-500 ease relative cursor-none min-h-[12vw] w-fit'>
+                    <Copy>
                     <p className='text-[#0E0E0E] text-[10vw] font-display leading-[1.05] font-medium pointer-events-none'>2+ Years</p>
+                    </Copy>
                     <div ref={yearsRef} className='opacity-0 scale-80 absolute top-0 left-0 pointer-events-none z-10'>
                         <Image src="/assets/images/homepage/project.png" height={297} width={199} alt='years'/>
                     </div>

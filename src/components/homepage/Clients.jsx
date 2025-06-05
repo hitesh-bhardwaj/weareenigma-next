@@ -3,6 +3,7 @@ import React from 'react'
 import { useEffect } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger"
+import Copy from '../Copy';
 gsap.registerPlugin(ScrollTrigger)
 
 const Clients = () => {
@@ -113,9 +114,11 @@ const Clients = () => {
 
         </div>
         <div className='w-full h-screen flex justify-center absolute top-[20%] items-start'>
+          <Copy>
           <h2 className='w-[70%] text-center sticky top-[30%]'>
             Brands We've Elevated
           </h2>
+          </Copy>
         </div>
       </section>
     </>

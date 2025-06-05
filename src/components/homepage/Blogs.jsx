@@ -7,42 +7,49 @@ import "swiper/css/free-mode";
 import Image from "next/image";
 import {LinkButton} from "../Buttons/index"
 import Link from "next/link";
+import Copy from "../Copy";
+import { lineAnim } from "../gsapAnimations";
 
 const BlogCard = ({ img, text, date, key }) => {
   return (
     <>
-      <div
+      <Link href={"/"}
         key={key}
         className="w-full h-full flex items-center"
       >
         <div className="flex flex-col items-start justify-between gap-[1vw] w-full h-full">
-          <div className="w-full h-[60%] relative  overflow-hidden image-container ">
+          <div className="w-full h-[60%] relative  overflow-hidden image-container group">
           <div className="w-full h-full absolute top-0 left-0 px-[1.5vw] pt-[1.5vw] flex justify-between z-[2]">
             <div className="w-fit h-fit px-[1.5vw] py-[0.7vw] bg-black-1 rounded-full flex justify-center items-center z-[2] text-white leading-[1] text-[0.8vw]">
               Digital Marketing
 
             </div>
-            <Link href={"/"} className="w-[3vw] h-[3vw] p-[1vw] bg-black-1 rounded-full z-[2] arrow-link">
+            <div  className="w-[3vw] h-[3vw] p-[1vw] bg-black-1 rounded-full z-[2] arrow-div">
               <Image src={"/assets/icons/long-arrow.svg"} alt="arrow-diagonal" className="w-full h-full object-contain" width={50} height={50}/>
 
-            </Link>
+            </div>
 
           </div>
-            <Image src={img} fill alt="awards-1" className="object-cover w-full h-full object-top" />
+            <Image src={img} fill alt="awards-1" className="object-cover w-full h-full object-top group-hover:scale-[1.1] transition-all duration-500 ease" />
           </div>
           <div className="w-[95%] flex flex-col pl-[1vw] gap-[1vw] h-[40%]">
+            <Copy>
             <p className="text-black-1 text-[1.4vw] font-light">
               {text}
             </p>
+            </Copy>
+            <Copy>
             <p className="!text-[0.9vw] opacity-75">{date}</p>
+            </Copy>
             {/* <p className="content-white mobile:!text-[3.5vw] mobile:w-[90%] mobile:leading-[1.2]">{category}</p> */}
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 };
 const Blogs = () => {
+  lineAnim();
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(1);
 
@@ -67,11 +74,13 @@ const Blogs = () => {
       <div className="">
         <div className="flex flex-col px-[4vw]">
             <div className="w-full flex justify-between items-end">
+              <Copy>
           <h2 className="">Ideas in Motion</h2>
+          </Copy>
           <LinkButton href={"/"} text={"View All"}/>
 
             </div>
-          <span className="w-full h-[1px] bg-black my-[4vw]"/>
+          <span className="w-full h-[1px] bg-black my-[4vw] lineanim"/>
         </div>
         <div className="w-[100vw] h-full flex items-center justify-center fadeup  ">
           <Swiper
@@ -121,8 +130,8 @@ const Blogs = () => {
             ))}
           </Swiper>
         </div>
-        <div className="w-fit flex gap-[1vw] absolute bottom-[10%] right-[5%] items-center z-[5]">
-          <div  className="rotate-180 w-[1.5vw] h-[1.5vw] flex justify-center items-center" onClick={handlePrev}>
+        <div className="w-fit flex gap-[1vw] absolute bottom-[-5%] right-[5%] items-center z-[5]">
+          <div  className="rotate-180 w-[1.5vw] h-[1.5vw] flex justify-center items-center cursor-pointer" onClick={handlePrev}>
             <svg
               width="25"
               height="25"
@@ -139,7 +148,7 @@ const Blogs = () => {
               />
             </svg>
           </div>
-          <div className="w-[1.5vw] h-[1.5vw] flex justify-center items-center" onClick={handleNext}>
+          <div className="w-[1.5vw] h-[1.5vw] flex justify-center items-center cursor-pointer" onClick={handleNext}>
             <svg
               width="25"
               height="25"

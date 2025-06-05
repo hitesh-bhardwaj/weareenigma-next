@@ -77,7 +77,7 @@ li .link-line::after {
 .bg-gradient {
   background: linear-gradient(to right, #ff5e01, #ff8101);
 }
-.line {
+.testimonial-line {
   animation: moveUpDown 1s linear infinite;
 }
 
@@ -98,7 +98,7 @@ li .link-line::after {
   height: 20vw !important;
   transition: all 0.5s ease !important;
 }
-.swiper-slide-active {
+.swiper-slide:hover {
   width: 40vw !important;
   height: 36vw !important;
   transition: all 0.5s ease !important;
@@ -107,22 +107,22 @@ li .link-line::after {
   font-size: 1vw;
   transition: all 0.5s ease !important;
 }
-.swiper-slide-active p {
+.swiper-slide:hover p {
   font-size: 1.6vw;
   transition: all 0.5s ease !important;
 }
 .swiper-slide .image-container {
   border-radius: 2vw !important;
 }
-.swiper-slide-active .image-container {
+/* .swiper-slide:hover .image-container {
   border-radius: 2.7vw !important;
-}
+} */
 .swiper-slide .arrow-link {
   opacity: 0 !important;
   pointer-events: none;
   transition: all 0.3s ease !important;
 }
-.swiper-slide-active .arrow-link {
+.swiper-slide:hover .arrow-link {
   opacity: 1 !important;
   pointer-events:all;
   transition: all 0.3s ease !important;

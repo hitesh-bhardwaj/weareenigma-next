@@ -1,5 +1,6 @@
 import React from 'react'
 import WaveShader from '../WaveShader'
+import Copy from '../Copy'
 
 const SectionBreak = () => {
   return (
@@ -14,7 +15,9 @@ const SectionBreak = () => {
         />
       </div>
       <div className='relative z-[5] flex justify-center text-center w-[80%] mt-[-5%]'>
+        <Copy>
         <h3 className='text-white !text-[4.5vw]'>Enigma is a collective of Creators, Discoverers, Dreamers & Doers.</h3>
+        </Copy>
 
       </div>
     </section>

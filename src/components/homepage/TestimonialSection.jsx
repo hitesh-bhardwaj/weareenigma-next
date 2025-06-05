@@ -98,7 +98,7 @@ const TestimonialSection = () => {
             {lines.map((line, i) => (
               <div
                 key={i}
-                className="line bg-white w-[1px]"
+                className="testimonial-line bg-white w-[1px]"
                 style={{
                   height: `${line.height}vh`,
                   animationDelay: `${line.delay}s`

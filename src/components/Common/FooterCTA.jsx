@@ -1,6 +1,7 @@
 "use client"
 import React, { useRef } from 'react'
 import Image from 'next/image'
+import Copy from '../Copy'
 
 const FooterCTA = () => {
   return (
@@ -8,8 +9,10 @@ const FooterCTA = () => {
     <section className='w-screen h-[45vw] bg-black-1 '>
         <div className='w-full h-full px-[4vw] py-[4vw] flex items-center justify-center'>
             <div className='w-[60%] text-white flex flex-col items-center gap-[4vw]'>
+              <Copy>
             <p className='text-[8vw] leading-[1.05] font-display text-center'>Let's bring your
             ideas to life!</p>
+            </Copy>
              <button className="w-fit flex">
                         <div className="w-fit h-full px-[3.5vw] py-[0.7vw] rounded-full border border-primary font-medium font-display bg-primary">
                             Say Hi
