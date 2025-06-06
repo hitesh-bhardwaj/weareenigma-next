@@ -9,7 +9,7 @@ const FooterCTACopy = () => {
 
     return (
         <>
-                <div className='w-full text-white flex flex-col items-start gap-[4vw] pl-[4vw] pt-[4vw]'>
+                <div className='w-full text-white flex flex-col items-start gap-[4vw] pl-[4vw] pt-[10vw] relative z-[11]'>
                     <Copy>
                         <p className='text-[8vw] leading-[1.05] font-display'>Let's bring your
                             ideas to life!</p>

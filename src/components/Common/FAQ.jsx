@@ -33,7 +33,7 @@ export default function FAQs({ allowMultiple = false , content}) {
           </h1>
           </Copy>
        
-        <div className="w-4/5 space-y-[2vw] max-sm:w-full max-sm:space-y-[5vw] max-md:w-[90%] max-md:py-[3vw] max-md:space-y-[3vw]">
+        <div className="w-4/5 space-y-[2vw] max-sm:w-full max-sm:space-y-[5vw] max-md:w-[90%] max-md:py-[3vw] max-md:space-y-[3vw] relative z-[10]">
           {content.map((f, i) => (
             <Accordion
               key={i}
@@ -46,15 +46,7 @@ export default function FAQs({ allowMultiple = false , content}) {
           ))}
         </div>
       </div>
-       <div className="absolute bottom-0 left-0 h-screen w-screen z-[2]">
-              <WaveShader
-                topColor={[1.0, 1.0, 1.0]}
-                middleColor={[1.0, 0.4, 0.0]}
-                bottomColor={[1.0, 0.3, 0.0]}
-                reverse={false}
-                amplitude={0.1}
-              />
-            </div>
+      
     </section>
   )
 }

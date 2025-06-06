@@ -95,7 +95,7 @@ function IconModel({ scale }) {
                 x:0,
                 y:0,
                 duration:0.7,
-                delay:0.5,
+                delay:0.7,
 
              })
             const tl = gsap.timeline({

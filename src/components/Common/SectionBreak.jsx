@@ -4,7 +4,7 @@ import SectionBreakCopy from './SectionBreakCopy'
 
 const SectionBreak = () => {
   return (
-    <section className=' px-[4vw] h-screen w-full overflow-hidden relative'>
+    <section className=' px-[4vw] h-[80vh] bg-gradient-to-b from-transparent from-40%  to-[#fefefe]  to-60% w-full overflow-hidden relative'>
       <div className='flex justify-center items-center h-[40vw] w-full z-[20] '>
       <SectionBreakCopy text={"Enigma is a collective of Creators, Discoverers, Dreamers & Doers."}/>
       </div>

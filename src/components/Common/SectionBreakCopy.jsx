@@ -29,7 +29,7 @@ const SectionBreakCopy = ({ text }) => {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 70%',
+          start: 'top 90%',
           scrub: 1,
         },
       }

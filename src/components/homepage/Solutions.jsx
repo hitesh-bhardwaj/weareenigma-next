@@ -1,9 +1,18 @@
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, useAnimation, useInView } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useAnimation,
+  useInView,
+} from "framer-motion";
 import WaveShader from "../WaveShader";
 import Copy from "../Copy";
 import { lineAnim } from "../gsapAnimations";
+import { PrimaryButton } from "../Buttons";
+import Link from "next/link";
 
 const data = [
   {
@@ -19,7 +28,7 @@ const data = [
       "user interface design",
       "user interface design",
       "user interface design",
-    ]
+    ],
   },
   {
     title: "Design",
@@ -34,7 +43,7 @@ const data = [
       "user interface design",
       "user interface design",
       "user interface design",
-    ]
+    ],
   },
   {
     title: "Marketing",
@@ -49,7 +58,7 @@ const data = [
       "user interface design",
       "user interface design",
       "user interface design",
-    ]
+    ],
   },
   {
     title: "Strategy",
@@ -64,7 +73,7 @@ const data = [
       "user interface design",
       "user interface design",
       "user interface design",
-    ]
+    ],
   },
 ];
 
@@ -86,12 +95,15 @@ const SolutionCard = ({ title, number, para, list, opacity }) => {
     hidden: { scaleX: 0, originX: 0 },
     visible: { scaleX: 1, transition: { duration: 0.6, ease: "easeOut" } },
   };
-  
+
   const textVariant = {
     hidden: { y: 10, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
   };
-  
 
   return (
     <motion.div
@@ -161,18 +173,25 @@ const SolutionCard = ({ title, number, para, list, opacity }) => {
             initial="hidden"
             animate={controls}
           >
-            <div className="w-fit h-full px-[3.5vw] py-[0.7vw] text-white rounded-full border border-white font-medium font-display">
-              Know More
-            </div>
-            <div className="w-[3.4vw] h-[3.4vw] p-[1.1vw] rounded-full border border-white">
-              <Image
-                src={"/assets/icons/arrow-diagonal.svg"}
-                alt="arrow-diagonal"
-                width={50}
-                height={50}
-                className="w-full h-full object-contain"
-              />
-            </div>
+            <Link
+              href={"#"}
+              className="w-fit flex group hover:scale-[0.97] duration-500 ease-out relative z-[20]"
+            >
+              <div className="w-fit relative h-full px-[3.5vw] overflow-hidden py-[0.7vw] rounded-full border border-black-1 font-medium  font-display">
+                <span className="z-[1] relative">know more</span>
+                <span className="w-full h-full absolute bottom-0 left-0 bg-primary origin-bottom scale-y-0 group-hover:scale-y-100 duration-300 ease-out" />
+              </div>
+              <div className="w-[3.5vw] h-[3.5vw] p-[1.1vw] relative rounded-full border border-black-1 overflow-hidden">
+                <span className="w-full h-full absolute bottom-0 left-0 bg-primary origin-bottom scale-y-0 group-hover:scale-y-100 duration-300 ease-out" />
+                <Image
+                  src={"/assets/icons/arrow-diagonal.svg"}
+                  alt="arrow-diagonal"
+                  width={50}
+                  height={50}
+                  className="w-full h-full object-contain group-hover:rotate-45 duration-300 invert"
+                />
+              </div>
+            </Link>
           </motion.button>
         </div>
       </div>
@@ -187,8 +206,6 @@ const Solutions = () => {
     target: containerRef,
     offset: ["start start", "end end"],
   });
-  
-  
 
   const totalSections = data.length;
 
@@ -197,27 +214,25 @@ const Solutions = () => {
     const start = index * sectionHeight;
     const mid = start + sectionHeight / 2;
     const end = (index + 1) * sectionHeight;
-  
+
     const isFirst = index === 0;
     const isLast = index === data.length - 1;
-  
+
     const opacity = isFirst
       ? useTransform(scrollYProgress, [start, end], [1, 0])
       : isLast
-      ? useTransform(scrollYProgress, [start, end], [0, 1])
-      : useTransform(scrollYProgress, [start, mid, end], [0, 1, 0]);
+        ? useTransform(scrollYProgress, [start, end], [0, 1])
+        : useTransform(scrollYProgress, [start, mid, end], [0, 1, 0]);
 
-    return { opacity};
+    return { opacity };
   });
-  
-  
 
   return (
     <section
       ref={containerRef}
       className="w-screen h-[400vh] pt-[5%] relative bg-[#fefefe] solutions-container"
     >
-      <div className="w-screen h-screen sticky top-[15%] ">
+      <div className="w-screen h-screen sticky top-[15%] z-[20] ">
         {data.map((card, i) => (
           <SolutionCard
             key={i}
@@ -228,20 +243,9 @@ const Solutions = () => {
             opacity={cardTransforms[i].opacity}
           />
         ))}
-
-        <div className="absolute bottom-0 left-0 h-screen w-screen z-[2]">
-          <WaveShader
-            topColor={[1.0, 1.0, 1.0]}
-            middleColor={[1.0, 0.4, 0.0]}
-            bottomColor={[1.0, 0.3, 0.0]}
-            reverse={false}
-            amplitude={0.1}
-          />
-        </div>
       </div>
     </section>
   );
 };
-
 
 export default Solutions;

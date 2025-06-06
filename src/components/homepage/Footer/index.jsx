@@ -20,9 +20,9 @@ export const Footer = (() => {
                     </div>
                 </div>
 
-                <div className="h-full w-full relative">
+                <div className="h-full w-full relative z-[11]">
                     <FooterCopy />
-                    <div className="absolute top-0 left-0 h-screen w-screen">
+                    <div className="absolute top-0 left-0 h-screen w-screen ">
                         <Suspense>
                             <FooterFractalGlassModelWrapper img={"/assets/images/homepage/footer-bg.png"} />
                         </Suspense>

@@ -303,15 +303,7 @@ const IndustriesCopy = () => {
         <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2] industry-line origin-top" />
         <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2] industry-line origin-top" />
       </div>
-      <div className="absolute top-0 left-0 h-[10vh] w-screen z-[2]">
-        <WaveShader
-          topColor={[0.0235, 0.0275, 0.0353]}
-          middleColor={[1.0, 0.37, 0.0]}
-          bottomColor={[1.0, 0.3, 0.0]}
-          reverse={true}
-          amplitude={0.1}
-        />
-      </div>
+      
     </section>
   );
 };

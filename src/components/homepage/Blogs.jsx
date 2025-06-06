@@ -100,7 +100,7 @@ const Blogs = () => {
   return (
     <section
       id="blogs"
-      className="w-full h-full relative z-[10] bg-[#fefefe] pb-[3%] "
+      className="w-full h-screen relative z-[10] bg-[#fefefe] pb-[3%] "
     >
       <style jsx>{styles}</style>
       <div className="">
@@ -161,7 +161,8 @@ const Blogs = () => {
             ))}
           </Swiper>
         </div>
-        <div className="w-fit flex gap-[1vw] absolute top-[38%] right-[5%] items-center z-[5]">
+      </div>
+        <div className="w-fit flex gap-[1vw] absolute top-[28%] right-[5%] items-center z-[5]">
           <div className="rotate-180 w-[1.5vw] h-[1.5vw] flex justify-center items-center cursor-pointer hover:scale-110 transition-all duration-200 ease-in-out" onClick={handlePrev}>
             <svg
               width="25"
@@ -197,7 +198,6 @@ const Blogs = () => {
             </svg>
           </div>
         </div>
-      </div>
     </section>
   );
 };

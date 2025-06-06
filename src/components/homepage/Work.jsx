@@ -13,6 +13,15 @@ const Work = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      gsap.from(".work-container",{
+        scale:0.9,
+        scrollTrigger:{
+          trigger:"#work",
+          start:"top 80%",
+          end:"10% 80%",
+          scrub:true,
+        }
+      })
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: "#work",
@@ -98,7 +107,7 @@ const Work = () => {
       className="w-screen h-[550vh] px-[4vw] py-[7vw] bg-black-1 relative z-0 dark"
       id="work"
     >
-      <div className="w-full h-[120vh] flex flex-wrap justify-between gap-[1.5vw] gap-y-[5vw] sticky top-[5%] !z-[4]">
+      <div className="w-full h-[100vh] flex flex-wrap justify-between gap-[1.5vw] gap-y-[5vw] sticky top-[5%] !z-[4] work-container">
         <div className="w-[45vw] h-[90vh] rounded-[2.5vw] bg-primary p-[2vw] flex flex-col justify-between work-1-content">
           <Copy>
           <p className="text-[8vw] w-[75%] font-display leading-[1]">
@@ -167,15 +176,7 @@ const Work = () => {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 h-screen w-screen z-[2]">
-        <WaveShader
-          topColor={[0.0235, 0.0275, 0.0353]}
-          middleColor={[1.0, 0.37, 0.0]}
-          bottomColor={[1.0, 0.3, 0.0]}
-          reverse={false}
-          amplitude={0.1}
-        />
-      </div>
+      
     </section>
   );
 };

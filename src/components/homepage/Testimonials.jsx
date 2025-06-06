@@ -1,9 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
-import TestimonialSection from "./TestimonialSection";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
-import Copy from "../Copy";
 import TestimonialSectionCopy from "./TestimonialSectionCopy";
 gsap.registerPlugin(ScrollTrigger);
 const Testimonials = () => {

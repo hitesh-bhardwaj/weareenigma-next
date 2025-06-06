@@ -16,7 +16,8 @@ import { fadeUpAnim, lineAnim } from "@/components/gsapAnimations";
 import IndustriesCopy from "@/components/homepage/IndustriesCopy";
 import { Footer } from "@/components/homepage/Footer";
 import SectionBreak from "@/components/Common/SectionBreak";
-
+import SolutionsCopy from "@/components/homepage/SolutionsCopy";
+import Image from "next/image";
 
 const page = () => {
   fadeUpAnim();
@@ -24,21 +25,43 @@ const page = () => {
 
   return (
     <>
-    <Layout>
-      <Header/>
-      <Hero/>
-      <About/>
-      {/* <Work/> */}
-      <SectionBreak/>
-      <Testimonials/>
-      <Solutions/>
-      {/* <Industries/> */}
-      <IndustriesCopy/>
-      <Achievements/>
-      <Clients/>
-      <Blogs/>
-      <FAQs content={faqContent} /> 
-      <Footer/>
+      <Layout>
+        <Header />
+        <Hero />
+        <About />
+        <Work />
+        <SectionBreak />
+        <Testimonials />
+        {/* <SolutionsCopy/> */}
+        <div className="relative">
+          <Solutions />
+          <div className="w-screen h-auto">
+            <Image
+              src={"/assets/images/gradient.webp"}
+              alt="gradient"
+              width={1920}
+              height={1080}
+              className="w-screen h-[50vw] absolute top-[35%] z-[10]"
+            />
+          </div>
+          <IndustriesCopy />
+        </div>
+        <Achievements />
+        <Clients />
+        <Blogs />
+        <div className="relative">
+          <FAQs content={faqContent} />
+          <div className="w-screen h-auto">
+            <Image
+              src={"/assets/images/gradient.webp"}
+              alt="gradient"
+              width={1920}
+              height={1080}
+              className="w-screen h-[50vw] absolute top-[34%] z-[0]"
+            />
+          </div>
+          <Footer />
+        </div>
       </Layout>
     </>
   );
