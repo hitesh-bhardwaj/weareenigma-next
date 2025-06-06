@@ -9,53 +9,46 @@ gsap.registerPlugin(ScrollTrigger)
 const Clients = () => {
 
   useEffect(() => {
-    const grid = document.querySelector(".client-grid")
-    const gridWrap = grid.querySelector(".grid-wrap")
-    const gridItems = grid.querySelectorAll(".grid__item")
-    const gridInner = [...gridItems].map((item) =>
-      item.querySelector(".grid__item-inner")
-    )
+    const ctx = gsap.context(() => {
+      const grid = document.querySelector('.client-grid');
+      const gridWrap = grid.querySelector('.grid-wrap');
+      const gridItems = grid.querySelectorAll('.grid__item');
 
-    // Set up ScrollTrigger timeline
-    const tl = gsap.timeline({
-      defaults: { ease: "none" },
-      scrollTrigger: {
-        trigger: gridWrap,
-        start: "top 50%",
-        end: "bottom top",
-        // markers:true,
-        scrub: true,
-      },
+      // Define GSAP timeline with ScrollTrigger
+      const timeline = gsap.timeline({
+        defaults: { ease: 'none' },
+        scrollTrigger: {
+          trigger: gridWrap,
+          start: 'top bottom+=120%',
+          end: 'bottom center',
+          scrub: true,
+        }
+      });
+
+      gsap.set(gridItems, {
+        transformOrigin: '10% 0%',
+        z: () => gsap.utils.random(-4000, -2000),
+        rotationX: () => gsap.utils.random(-25, -5),
+        filter: 'brightness(50%)',
+      })
+
+      // Set some CSS related style values
+      grid.style.setProperty('--grid-width', '105%');
+      grid.style.setProperty('--grid-columns', '8');
+      grid.style.setProperty('--perspective', '1500px');
+
+      timeline.to(gridItems, {
+        xPercent: () => gsap.utils.random(-150, 150),
+        yPercent: () => gsap.utils.random(-1000, -500),
+        rotationX: 0,
+        filter: 'brightness(150%)'
+      }, 0)
+        .to(gridWrap, {
+          yPercent: -350,
+          z: 6500
+        }, 0)
     })
-
-    // Type-3 CSS vars
-    grid.style.setProperty("--grid-width", "105%")
-    grid.style.setProperty("--grid-columns", "4")
-    grid.style.setProperty("--perspective", "1500px")
-    grid.style.setProperty("--grid-inner-scale", "1")
-
-    // Type-3 animation
-    tl.set(gridItems, {
-      transformOrigin: "50% 0%",
-      z: () => gsap.utils.random(-5000, -4000),
-      rotationX: () => gsap.utils.random(-65, -25),
-    })
-      .to(
-        gridItems,
-        {
-          xPercent: () => gsap.utils.random(-150, 150),
-          yPercent: () => gsap.utils.random(-300, 300),
-          rotationX: 0,
-        },
-        0
-      )
-      .to(
-        gridWrap,
-        {
-          z: 6500,
-        },
-        0
-      )
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -66,7 +59,7 @@ const Clients = () => {
           --grid-width: 105%;
           --grid-columns: 4;
           --grid-gap: 2vw;
-          --grid-inner-scale: 0.5;
+          --grid-inner-scale: 1;
           --grid-item-ratio: 44.0 / 27.0;
         }
         .client-grid {
@@ -75,7 +68,6 @@ const Clients = () => {
           padding: 2rem;
           width: 100%;
           perspective: var(--perspective);
-          height: 200vh;
         }
         .grid-wrap {
           width: var(--grid-width);
@@ -83,6 +75,7 @@ const Clients = () => {
           grid-template-columns: repeat(var(--grid-columns), 1fr);
           gap: var(--grid-gap);
           transform-style: preserve-3d;
+          margin-top: 400vh
         }
         .grid__item {
           aspect-ratio: var(--grid-item-ratio);
@@ -92,35 +85,33 @@ const Clients = () => {
         .grid__item-inner {
           width: calc(1 / var(--grid-inner-scale) * 100%);
           height: calc(1 / var(--grid-inner-scale) * 100%);
-          background-size: cover;
+          background-size: contain;
+          background-repeat: no-repeat;
           background-position: 50% 50%;
         }
       `}</style>
-      <section className='w-screen h-[300vh] mt-[-300vh] relative  bg-[#fefefe]' id='clients'>
-        <div className='w-screen h-[10vw] bg-gradient-to-t z-[5] from-white via-60% to-transparent bottom-0 absolute left-0'/>
-
-     
-
-        <div className="client-grid w-screen translate-y-[10%]">
+      <section className='w-screen h-[400vh] mt-[-300vh] relative  bg-[#fefefe]' id='clients'>
+        <div className='w-full flex h-screen sticky justify-center items-center top-0'>
+          <Copy>
+            <h2 className='w-[70%] text-center'>
+              Brands We've Elevated
+            </h2>
+          </Copy>
+        </div>
+        <div className="client-grid w-screen mt-[-100vh]">
           <div className="grid-wrap">
             {images.map((image, index) => (
               <div key={index} className="grid__item ">
                 <div
-                  className="grid__item-inner scale-[0.5] rounded-[1.5vw]"
+                  className="grid__item-inner rounded-[1.5vw]"
                   style={{ backgroundImage: `url(${image})` }}
                 />
               </div>
             ))}
           </div>
+        </div>
 
-        </div>
-        <div className='w-full h-[200vh] flex justify-center absolute top-[10%] items-start'>
-          <Copy>
-          <h2 className='w-[70%] text-center sticky top-[30%]'>
-            Brands We've Elevated
-          </h2>
-          </Copy>
-        </div>
+        <div className='w-screen h-[10vw] bg-gradient-to-t z-[5] from-white via-60% to-transparent bottom-0 absolute left-0' />
       </section>
     </>
   )
@@ -137,12 +128,12 @@ const images = [
   "/assets/images/homepage/clients/6.png",
   "/assets/images/homepage/clients/7.png",
   "/assets/images/homepage/clients/8.png",
-  "/assets/images/homepage/clients/1.png",
-  "/assets/images/homepage/clients/2.png",
-  "/assets/images/homepage/clients/3.png",
-  "/assets/images/homepage/clients/4.png",
-  "/assets/images/homepage/clients/5.png",
-  "/assets/images/homepage/clients/6.png",
-  "/assets/images/homepage/clients/7.png",
   "/assets/images/homepage/clients/8.png",
+  "/assets/images/homepage/clients/7.png",
+  "/assets/images/homepage/clients/6.png",
+  "/assets/images/homepage/clients/5.png",
+  "/assets/images/homepage/clients/4.png",
+  "/assets/images/homepage/clients/3.png",
+  "/assets/images/homepage/clients/2.png",
+  "/assets/images/homepage/clients/1.png",
 ]
