@@ -7,6 +7,7 @@
   --primary: #ff6b00;
   --secondary: #0e0e0e;
   --black-1: #060709;
+  --default-ease: cubic-bezier(0.19, 1, 0.22, 1);
 }
 @theme inline {
   --color-black-1: var(--black-1);
@@ -93,12 +94,12 @@ li .link-line::after {
   }
 }
 
-.swiper-slide {
+ .swiper-slide {
   width: 23vw !important;
   height: 20vw !important;
   transition: all 0.5s ease !important;
 }
-.swiper-slide:hover {
+/*.swiper-slide:hover {
   width: 40vw !important;
   height: 36vw !important;
   transition: all 0.5s ease !important;
@@ -124,12 +125,68 @@ li .link-line::after {
   opacity: 1 !important;
   pointer-events:all;
   transition: all 0.3s ease !important;
+} */
+
+.link-line {
+  width: fit-content;
+  position: relative;
+}
+.link-line::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0em;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform-origin: right;
+  transition: transform 0.735s cubic-bezier(0.62, 0.05, 0.01, 0.99);
+  transform: scaleX(0) rotate(0.001deg);
+}
+.link-line:hover::after {
+  transform-origin: left;
+  transform: scaleX(1) rotate(0.001deg);
+}
+
+.under-multi {
+  text-decoration: none;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0, 0)),
+    linear-gradient(#ffffff, #ffffff);
+  background-size:
+    100% 0px,
+    0% 1px;
+  background-position:
+    100% 100%,
+    0 100%;
+  background-repeat: no-repeat, no-repeat;
+  transition: all 1s ease-out;
+}
+
+.under-multi-parent:hover .under-multi {
+  background-size:
+    100% 0px,
+    100% 1px;
 }
 
 .para-line {
   display: block;
   overflow: hidden;
 }
+
+
+.buttonTextShadow {
+  text-shadow: 0 1.5em currentColor;
+}
+
+.buttonSplit .single-letter {
+  transition: transform 1s var(--default-ease);
+}
+
+.buttonSplit:hover .single-letter {
+  transform: translate(0px, -1.5em);
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0%);

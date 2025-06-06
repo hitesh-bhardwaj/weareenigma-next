@@ -3,6 +3,7 @@ import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { extend } from '@react-three/fiber';
 import * as THREE from 'three';
+import { ScrollScene, UseCanvas } from '@14islands/r3f-scroll-rig';
 
 extend({ ShaderMaterial: THREE.ShaderMaterial });
 
@@ -170,7 +171,7 @@ const MovingGradientShader = ({
 
   return (
     <mesh ref={meshRef}>
-      <planeGeometry args={[2, 2]} />
+      <planeGeometry args={[1470, 700]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
@@ -183,28 +184,29 @@ const MovingGradientShader = ({
 };
 
 const ShaderComp = () => {
+   const meshWrapper = useRef(null);
   return (
-    <div style={{ width: '100vw', height: '100vh', backgroundColor: '#fff' }}>
-      <Canvas
-        orthographic
-        camera={{ left: -1, right: 1, top: 1, bottom: -1, near: 0.1, far: 10, position: [0, 0, 1] }}
-        gl={{ alpha: true, antialias: true }}
-      >
-       
-        <MovingGradientShader 
-          lowerWaveFreq={2.8}
-          lowerWaveAmp={0.07}
-          lowerWaveSpeed={0.20}
-          lowerBoundaryBase={0.25}
-          lowerFadeSoftness={0.25}
-          upperWaveFreq={10.0}
-          upperWaveAmp={0.05}
-          upperWaveSpeed={-0.15}
-          topBoundaryBase={0.75}
-          topFadeSoftness={0.30}
-          color={0xff984f} 
-        />
-      </Canvas>
+    <div className='w-screen h-screen' ref={meshWrapper}>
+<UseCanvas>
+                <ScrollScene track={meshWrapper}>
+                    {(props) => (
+                        <MovingGradientShader 
+                        lowerWaveFreq={2.8}
+                        lowerWaveAmp={0.09}
+                        lowerWaveSpeed={0.40}
+                        lowerBoundaryBase={0.25}
+                        lowerFadeSoftness={0.15}
+                        upperWaveFreq={10.0}
+                        upperWaveAmp={0.05}
+                        upperWaveSpeed={-0.55}
+                        topBoundaryBase={0.75}
+                        topFadeSoftness={0.10}
+                        color={0xFFB366} 
+                        {...props}
+                      />
+                    )}
+                </ScrollScene>
+            </UseCanvas>
     </div>
   );
 };

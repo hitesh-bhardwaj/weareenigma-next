@@ -4,11 +4,10 @@ import Achievements from "@/components/homepage/Achievements";
 import Clients from "@/components/homepage/Clients";
 import FAQs from "@/components/Common/FAQ";
 import Industries from "@/components/homepage/Industries";
-import SectionBreak from "@/components/homepage/SectionBreak";
 import Solutions from "@/components/homepage/Solutions";
 import Testimonials from "@/components/homepage/Testimonials";
 import Work from "@/components/homepage/Work";
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "@/components/Header";
 import Blogs from "@/components/homepage/Blogs";
 import { Hero } from "@/components/TestingComponents/Hero";
@@ -16,18 +15,20 @@ import Layout from "@/components/Layout";
 import { fadeUpAnim, lineAnim } from "@/components/gsapAnimations";
 import IndustriesCopy from "@/components/homepage/IndustriesCopy";
 import { Footer } from "@/components/homepage/Footer";
+import SectionBreak from "@/components/Common/SectionBreak";
 
 
 const page = () => {
   fadeUpAnim();
   lineAnim();
+
   return (
     <>
     <Layout>
       <Header/>
       <Hero/>
       <About/>
-      <Work/>
+      {/* <Work/> */}
       <SectionBreak/>
       <Testimonials/>
       <Solutions/>

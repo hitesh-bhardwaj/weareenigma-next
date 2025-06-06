@@ -24,7 +24,7 @@ export const Footer = (() => {
                     <FooterCopy />
                     <div className="absolute top-0 left-0 h-screen w-screen">
                         <Suspense>
-                            <FooterFractalGlassModelWrapper img={"/assets/models/hero-bg.png"} />
+                            <FooterFractalGlassModelWrapper img={"/assets/images/homepage/footer-bg.png"} />
                         </Suspense>
                     </div>
                 </div>
