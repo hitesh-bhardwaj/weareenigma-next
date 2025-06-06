@@ -43,12 +43,12 @@ function IconModel({ scale }) {
     const model = useGLTF("/assets/models/enigmaLogo.glb");
     const { nodes } = model;
     const materialsProps = {
-        thickness: 1.5,
+        thickness: 1.8,
         resolution: 128,
         samples: 2,
-        backsideThickness: 0.0,
+        backsideThickness: 0.6,
         reflectivity: 0.54,
-        roughness: 0.2,
+        roughness: 0.3,
         antisotropy: 0.4,
         chromaticAberration: 0.1,
         distortion: 0.3,
@@ -88,9 +88,16 @@ function IconModel({ scale }) {
     });
 
     useEffect(() => {
+
         const ctx = gsap.context(() => {
             if (!iconGroupRef.current) return;
+             gsap.from(iconGroupRef.current.scale,{
+                x:0,
+                y:0,
+                duration:0.7,
+                delay:0.5,
 
+             })
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#hero-section",

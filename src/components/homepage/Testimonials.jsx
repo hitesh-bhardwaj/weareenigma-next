@@ -4,6 +4,7 @@ import TestimonialSection from "./TestimonialSection";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import Copy from "../Copy";
+import TestimonialSectionCopy from "./TestimonialSectionCopy";
 gsap.registerPlugin(ScrollTrigger);
 const Testimonials = () => {
   useEffect(() => {
@@ -79,11 +80,9 @@ const Testimonials = () => {
           style={{ clipPath: "circle(2%)" }}
         >
           <div className="w-screen h-screen flex flex-nowrap absolute items-center ml-[55vw] pt-[16vh] z-[10]">
-            <Copy>
             <h2 className="text-white w-[70%] z-[4] pointer-events-none translate-y-[30%] testimonial-heading">
               Stories that stick, results that show.
             </h2>
-            </Copy>
           </div>
         </div>
         <div className="w-[3vw] h-[3vw] absolute top-[39.3%] left-[5.5%] rounded-full bg-white lower-circle z-[4]" />
@@ -93,15 +92,10 @@ const Testimonials = () => {
           <h2 className="text-primary relative z-[1]">
             Stories that stick, results that show.
           </h2>
-
-          {/* White blend-layer text */}
-          <h2 className="text-white absolute top-0 left-0 w-full z-[4] mix-blend-darken pointer-events-none">
-            Stories that stick, results that show.
-          </h2>
         </div>
       </div>
       <div className="sticky top-0">
-        <TestimonialSection />
+        <TestimonialSectionCopy />
       </div>
     </section>
   );

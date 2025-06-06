@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import Copy from "../Copy";
 
 const Achievements = () => {
-    const [overflow ,setOverflow] = useState(false)
+  const [overflow, setOverflow] = useState(false);
   const awardsRef = useRef(null);
   const awardsContainerRef = useRef(null);
   const projectsRef = useRef(null);
@@ -13,7 +13,7 @@ const Achievements = () => {
   const clientsContainerRef = useRef(null);
   const yearsRef = useRef(null);
   const yearsContainerRef = useRef(null);
-  const createMouseTracker = (containerRef, imageRef, lerpFactor = 0.05) => {
+  const createMouseTracker = (containerRef, imageRef, lerpFactor = 0.9) => {
     let currentX = 0;
     let currentY = 0;
     let targetX = 0;
@@ -151,42 +151,46 @@ const Achievements = () => {
     };
   }, []);
 
-  useEffect(()=>{
-   const ctx = gsap.context(()=>{
-    const tl = gsap.timeline({
-        scrollTrigger:{
-            trigger:"#achievements",
-            start:'top top',
-            end:"bottom bottom",
-            scrub:true,
-            // markers:true,
-            
-        }
-
-    })
-    tl.to(".acheivements-container",{
-        yPercent:-105,
-        stagger:0.05,
-        delay:0.5,
-        duration:1,
-        onStart:()=>{
-            setOverflow(true)
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#achievements",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true,
+          // markers:true,
         },
-        onReverseComplete:()=>{
-            setOverflow(false)
-
-        }
-    })
-    
-   })
-   return()=>ctx.revert()
-  },[])
+      });
+      tl.to(".acheivements-container", {
+        yPercent: -103,
+        stagger: 0.05,
+        delay: 0.5,
+        duration: 1,
+        onStart: () => {
+          setOverflow(true);
+        },
+        onReverseComplete: () => {
+          setOverflow(false);
+        },
+      })
+      .to(".achievements-bg",{
+        opacity:0,
+        duration:0.3,
+        delay:-1.5
+      })
+    });
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="w-screen h-[200vh] relative z-[2] " id="achievements">
+    <section className="w-screen h-[300vh] relative z-[2] " id="achievements">
       <div className="w-full flex flex-col sticky top-[-5%]">
-        <div className={`w-screen h-fit  ${overflow?"overflow-hidden":""} `}>
-          <div className="w-full flex justify-start pl-[4vw] pt-[7%] bg-gradient acheivements-container">
+        <div className="w-screen h-screen bg-gradient absolute top-[4.5%] left-0 achievements-bg"/>
+        <div
+          className={`w-screen h-fit  ${overflow ? "overflow-hidden" : ""} `}
+        >
+          <div className="w-full flex justify-start pl-[4vw] pt-[7%]  bg-gradient acheivements-container">
             <div
               ref={awardsContainerRef}
               className="w-fit transition-all duration-500 ease relative cursor-none min-h-[10vw]"
@@ -211,8 +215,10 @@ const Achievements = () => {
             </div>
           </div>
         </div>
-        <div className={`w-screen h-fit  ${overflow?"overflow-hidden":""} `}>
-          <div className="w-full bg-gradient flex justify-end pr-[4vw] acheivements-container">
+        <div
+          className={`w-screen h-fit  ${overflow ? "overflow-hidden" : ""} `}
+        >
+          <div className="w-full bg-gradient flex justify-end pr-[4vw] pt-[1%] acheivements-container">
             <div
               ref={projectsContainerRef}
               className="w-fit transition-all duration-500 ease relative cursor-none min-h-[10vw]"
@@ -236,7 +242,9 @@ const Achievements = () => {
             </div>
           </div>
         </div>
-        <div className={`w-screen h-fit  ${overflow?"overflow-hidden":""} `}>
+        <div
+          className={`w-screen h-fit  ${overflow ? "overflow-hidden" : ""} `}
+        >
           <div className="w-full flex justify-start pl-[4vw] bg-gradient acheivements-container">
             <div
               ref={clientsContainerRef}
@@ -261,7 +269,9 @@ const Achievements = () => {
             </div>
           </div>
         </div>
-        <div className={`w-screen h-fit  ${overflow?"overflow-hidden":""} `}>
+        <div
+          className={`w-screen h-fit  ${overflow ? "overflow-hidden" : ""} `}
+        >
           <div className="w-full bg-gradient flex justify-end pr-[4vw] pt-[2%] pb-[7%] acheivements-container">
             <div
               ref={yearsContainerRef}

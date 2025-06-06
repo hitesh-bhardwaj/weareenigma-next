@@ -96,7 +96,7 @@ const Clients = () => {
           background-position: 50% 50%;
         }
       `}</style>
-      <section className='w-screen h-[300vh] mt-[-200vh] relative  bg-[#fefefe]' id='clients'>
+      <section className='w-screen h-[300vh] mt-[-300vh] relative  bg-[#fefefe]' id='clients'>
         <div className='w-screen h-[10vw] bg-gradient-to-t z-[5] from-white via-60% to-transparent bottom-0 absolute left-0'/>
 
      

@@ -78,7 +78,7 @@ const IndustriesCopy = () => {
         ".industry-heading",
         {
           rotate: 0,
-          duration:0.6,
+          duration:0.8,
         //   yPercent:-20
         }
       )
@@ -88,7 +88,7 @@ const IndustriesCopy = () => {
         {
         //   rotate: 0,
           duration:1.7,
-          delay:-0.5,
+          delay:-1,
           yPercent:-80
         }
       )
@@ -190,6 +190,17 @@ const IndustriesCopy = () => {
             yPercent: 0,
           }
         );
+
+        gsap.from(".industry-line",{
+            scaleY:0,
+            stagger:0.1,
+            duration:5,
+            scrollTrigger:{
+              trigger:"#industry",
+              start:'top 20%',
+              // markers:true
+            }
+        })
     });
     return () => ctx.revert();
   }, []);
@@ -208,7 +219,7 @@ const IndustriesCopy = () => {
           </p>
           <div className="flex items-start justify-between w-[55vw]">
             <div
-              className=" w-[25vw] h-[15vw] "
+              className=" w-[29vw] h-[18vw] "
               style={{ perspective: "30rem" }}
             >
               <Image
@@ -234,7 +245,7 @@ const IndustriesCopy = () => {
           </p>
           <div className="flex items-start justify-between w-[55vw]">
             <div
-              className=" w-[25vw] h-[15vw]"
+              className=" w-[29vw] h-[18vw]"
               style={{ perspective: "30rem" }}
             >
               <Image
@@ -260,7 +271,7 @@ const IndustriesCopy = () => {
           </p>
           <div className="flex items-start justify-between w-[55vw]">
             <div
-              className=" w-[25vw] h-[15vw]"
+              className=" w-[29vw] h-[18vw]"
               style={{ perspective: "30rem" }}
             >
               <Image
@@ -283,14 +294,14 @@ const IndustriesCopy = () => {
       </div>
 
       <div className="absolute top-0 left-0 w-full h-full z-[5] flex justify-between">
-        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2]" />
-        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2]" />
-        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2]" />
-        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2]" />
-        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2]" />
-        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2]" />
-        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2]" />
-        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2]" />
+        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2] industry-line origin-top" />
+        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2] industry-line origin-top" />
+        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2] industry-line origin-top" />
+        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2] industry-line origin-top" />
+        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2] industry-line origin-top" />
+        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2] industry-line origin-top" />
+        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2] industry-line origin-top" />
+        <span className="bg-[#CFCFCF63] h-full w-[1px] block opacity-[0.2] industry-line origin-top" />
       </div>
       <div className="absolute top-0 left-0 h-[10vh] w-screen z-[2]">
         <WaveShader

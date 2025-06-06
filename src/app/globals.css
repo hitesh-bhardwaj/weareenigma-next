@@ -154,3 +154,8 @@ li .link-line::after {
   }
 }
 
+
+.testimonial-split-line{
+  display: block;
+  overflow: hidden;
+}
