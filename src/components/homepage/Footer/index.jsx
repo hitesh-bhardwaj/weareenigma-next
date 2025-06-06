@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import FooterCopy from "./FooterCopy";
-import { FractalGlassModelWrapper } from "@/components/TestingComponents/FractalGlassModel";
 import FooterCTACopy from "./FooterCTACopy";
 import { EnigmaModel } from "./EnigmaModel";
+import { FooterFractalGlassModelWrapper } from "./FooterFractalGlassModel";
 
 export const Footer = (() => {
 
@@ -22,13 +22,12 @@ export const Footer = (() => {
 
                 <div className="h-full w-full relative">
                     <FooterCopy />
-                    <div className="absolute top-[20%] left-0 h-screen w-screen">
+                    <div className="absolute top-0 left-0 h-screen w-screen">
                         <Suspense>
-                            <FractalGlassModelWrapper img={"/assets/models/hero-bg.png"} />
+                            <FooterFractalGlassModelWrapper img={"/assets/models/hero-bg.png"} />
                         </Suspense>
                     </div>
                 </div>
-
             </section>
         </>
     )

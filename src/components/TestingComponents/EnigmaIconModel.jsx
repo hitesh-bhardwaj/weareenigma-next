@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function EnigmaIconModel() {
     const meshRef = useRef(null);
-    
+
     return (
         <>
             <div ref={meshRef} className="w-screen h-screen sticky top-0" />
@@ -21,14 +21,14 @@ export function EnigmaIconModel() {
                 <StickyScrollScene track={meshRef}>
                     {(props) => (
                         <>
-                        <IconModel
-                            {...props}
-                        />
-                        <PlaneComponent/>
-                        <ambientLight intensity={1}/>
-                        
+                            <IconModel
+                                {...props}
+                            />
+                            <PlaneComponent />
+                            <ambientLight intensity={1} />
+
                         </>
-                        
+
                     )}
                 </StickyScrollScene>
             </UseCanvas>
@@ -36,20 +36,16 @@ export function EnigmaIconModel() {
     )
 }
 
-function IconModel({ scale, scrollState }) {
-    const [y, setY] = useState(0);
+function IconModel({ scale }) {
     const iconGroupRef = useRef(null);
-    const {camera} = useThree()
-    // console.log(camera)
     const iconRef = useRef(null);
     const mouse = useRef({ x: 0, y: 0 });
     const model = useGLTF("/assets/models/enigmaLogo.glb");
     const { nodes } = model;
-    console.log(nodes)
     const materialsProps = {
         thickness: 1.5,
-        resolution:128,
-        sample:2,
+        resolution: 128,
+        samples: 2,
         backsideThickness: 0.0,
         reflectivity: 0.54,
         roughness: 0.2,
@@ -129,46 +125,18 @@ function IconModel({ scale, scrollState }) {
                     duration: 1,
                     delay: -1,
                 })
-            // .to(planeRef.current.rotation, {
-            //     y: `${Math.PI * 0.01}`,
-            //     delay: -0.4,
-            // })
-            // .to(planeRef.current.position, {
-            //     z: 30,
-            //     delay: -0.5,
-            // });
         })
         return () => ctx.revert();
     }, []);
 
     return (
         <group ref={iconGroupRef} castShadow receiveShadow position={[370, 0, 100]} rotation={[0, -0.2, 0]} scale={75} dispose={null}>
-            <group ref={iconRef}>
-                {/* <mesh geometry={nodes.Low_Poly.geometry}>
-                    <MeshTransmissionMaterial {...materialsProps} />
-                </mesh> */}
-                <mesh geometry={nodes.Low_Poly001.geometry}>
-                    <MeshTransmissionMaterial {...materialsProps} />
-                </mesh>
-                {/* <mesh geometry={nodes.Low_Poly002.geometry}>
-                    <MeshTransmissionMaterial {...materialsProps} />
-                </mesh>
-                <mesh geometry={nodes.Low_Poly003.geometry}>
-                    <MeshTransmissionMaterial {...materialsProps} />
-                </mesh> */}
-            </group>
+            <mesh ref={iconRef} geometry={nodes.Low_Poly001.geometry}>
+                <MeshTransmissionMaterial {...materialsProps} />
+            </mesh>
         </group>
     );
 }
-
-// import { useRef, useEffect, useMemo } from "react";
-// import * as THREE from "three";
-// import { useVideoTexture } from "@react-three/drei";
-// import { useThree } from "@react-three/fiber";
-// import gsap from "gsap";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// gsap.registerPlugin(ScrollTrigger);
 
 // Your custom geometry generator
 function RoundedRectangle(w, h, r, s) {
@@ -234,7 +202,7 @@ function RoundedRectangle(w, h, r, s) {
     return geometry;
 }
 
-function PlaneComponent({ scale, scrollState }) {
+function PlaneComponent() {
     const mesh = useRef(null);
     const texture = useVideoTexture("/assets/videos/showreel.mp4");
 
@@ -254,8 +222,8 @@ function PlaneComponent({ scale, scrollState }) {
             });
 
             tl.to(mesh.current.position, { z: 0 })
-              .fromTo(mesh.current.scale, { x: 10, y: 10 }, { x: 80, y: 80, delay: -0.5 })
-              .to(mesh.current.rotation, { y: 0, delay: -0.5 });
+                .fromTo(mesh.current.scale, { x: 10, y: 10 }, { x: 80, y: 80, delay: -0.5 })
+                .to(mesh.current.rotation, { y: 0, delay: -0.5 });
         });
         return () => ctx.revert();
     }, []);

@@ -1,7 +1,7 @@
 "use client";
 import { MeshTransmissionMaterial, useGLTF, useTexture } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
+import { useFrame } from "@react-three/fiber";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import React from "react";
 import gsap from "gsap";
@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function EnigmaModel() {
     const meshRef = useRef(null);
-    
+
     return (
         <>
             <div ref={meshRef} className="w-full h-full absolute top-0 left-0" />
@@ -19,10 +19,9 @@ export function EnigmaModel() {
                 <ScrollScene track={meshRef}>
                     {(props) => (
                         <>
-                        <IconModel
-                            {...props}/>
+                            <IconModel
+                                {...props} />
                         </>
-                        
                     )}
                 </ScrollScene>
             </UseCanvas>
@@ -30,27 +29,26 @@ export function EnigmaModel() {
     )
 }
 
-function IconModel({ scale, scrollState }) {
-    const [y, setY] = useState(0);
+function IconModel() {
     const iconGroupRef = useRef(null);
-    const {camera} = useThree()
-    console.log(camera)
     const iconRef = useRef(null);
     const mouse = useRef({ x: 0, y: 0 });
     const model = useGLTF("/assets/models/enigmaLogo.glb");
     const { nodes } = model;
 
     const materialsProps = {
-        thickness: 1.8,
+        thickness: 2,
+        resolution: 128,
+        samples: 2,
         backsideThickness: 0.0,
-        reflectivity: 0.54,
+        reflectivity: 1.0,
         roughness: 0.2,
-        antisotropy: 0.4,
-        chromaticAberration: 0.1,
-        distortion: 0.3,
-        temporalDistortion: 0.1,
+        antisotropy: 1.4,
+        chromaticAberration: 0.6,
+        distortion: 1.0,
+        temporalDistortion: 2.0,
         anisotropicBlur: 1.0,
-        color: "#ffffff",
+        color: "#000000",
         backSide: false,
     };
 
@@ -83,72 +81,11 @@ function IconModel({ scale, scrollState }) {
         );
     });
 
-    // useEffect(() => {
-    //     const ctx = gsap.context(() => {
-    //         if (!iconGroupRef.current) return;
-
-    //         const tl = gsap.timeline({
-    //             scrollTrigger: {
-    //                 trigger: "#hero-section",
-    //                 start: "top top",
-    //                 end: "bottom bottom",
-    //                 // markers: true,
-    //                 scrub: true,
-    //             },
-    //             defaults: {
-    //                 ease: "none",
-    //             }
-    //         });
-    //         tl.to(iconGroupRef.current.position, {
-    //             x: 0,
-    //             y: 100,
-    //             // z: 0,
-    //             duration: 1,
-    //         })
-    //             .to(iconGroupRef.current.rotation, {
-    //                 y: 2 * `${Math.PI}`,
-    //                 duration: 1,
-    //                 delay: -1,
-    //             })
-    //             .to(iconGroupRef.current.scale, {
-    //                 x: scale.xy.min() * 0.5,
-    //                 y: scale.xy.min() * 0.5,
-    //                 duration: 1,
-    //                 delay: -0.2,
-    //             })
-    //             .to(iconGroupRef.current.position, {
-    //                 z: 1000,
-    //                 duration: 1,
-    //                 delay: -1,
-    //             })
-    //         // .to(planeRef.current.rotation, {
-    //         //     y: `${Math.PI * 0.01}`,
-    //         //     delay: -0.4,
-    //         // })
-    //         // .to(planeRef.current.position, {
-    //         //     z: 30,
-    //         //     delay: -0.5,
-    //         // });
-    //     })
-    //     return () => ctx.revert();
-    // }, []);
-
     return (
-        <group ref={iconGroupRef}  castShadow receiveShadow position={[0, 5, 100]} rotation={[0, -0.2, 0]} scale={75} dispose={null}>
-            <group ref={iconRef}>
-                <mesh geometry={nodes.Low_Poly.geometry}>
-                    <MeshTransmissionMaterial {...materialsProps} />
-                </mesh>
-                <mesh geometry={nodes.Low_Poly001.geometry}>
-                    <MeshTransmissionMaterial {...materialsProps} />
-                </mesh>
-                <mesh geometry={nodes.Low_Poly002.geometry}>
-                    <MeshTransmissionMaterial {...materialsProps} />
-                </mesh>
-                <mesh geometry={nodes.Low_Poly003.geometry}>
-                    <MeshTransmissionMaterial {...materialsProps} />
-                </mesh>
-            </group>
+        <group ref={iconGroupRef} castShadow receiveShadow position={[-100, 0, 100]} rotation={[0, -0.2, 0]} scale={70} dispose={null}>
+            <mesh ref={iconRef} geometry={nodes.Low_Poly001.geometry}>
+                <MeshTransmissionMaterial {...materialsProps} />
+            </mesh>
         </group>
     );
 }
