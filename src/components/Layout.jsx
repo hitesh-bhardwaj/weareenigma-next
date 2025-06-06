@@ -7,7 +7,8 @@ const Layout = ({ children }) => {
   return (
     <>
       <GlobalCanvas
-        style={{ pointerEvents: 'none', height: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: 1 }}
+        style={{ pointerEvents: 'none', height: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: 1  }}
+        className="bg-black-1"
         gl={{ antialias: true }}
       >
         <ambientLight />

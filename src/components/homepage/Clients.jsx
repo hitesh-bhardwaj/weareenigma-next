@@ -21,8 +21,9 @@ const Clients = () => {
       defaults: { ease: "none" },
       scrollTrigger: {
         trigger: gridWrap,
-        start: "top bottom+=10%",
+        start: "top 50%",
         end: "bottom top",
+        // markers:true,
         scrub: true,
       },
     })
@@ -95,7 +96,7 @@ const Clients = () => {
           background-position: 50% 50%;
         }
       `}</style>
-      <section className='w-screen h-[200vh] relative  bg-[#fefefe]' id='clients'>
+      <section className='w-screen h-[300vh] mt-[-200vh] relative  bg-[#fefefe]' id='clients'>
         <div className='w-screen h-[10vw] bg-gradient-to-t z-[5] from-white via-60% to-transparent bottom-0 absolute left-0'/>
 
      
@@ -113,7 +114,7 @@ const Clients = () => {
           </div>
 
         </div>
-        <div className='w-full h-screen flex justify-center absolute top-[20%] items-start'>
+        <div className='w-full h-[200vh] flex justify-center absolute top-[10%] items-start'>
           <Copy>
           <h2 className='w-[70%] text-center sticky top-[30%]'>
             Brands We've Elevated

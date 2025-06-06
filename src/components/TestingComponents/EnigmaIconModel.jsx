@@ -1,7 +1,7 @@
 "use client";
-import { MeshTransmissionMaterial, useGLTF, useTexture } from "@react-three/drei";
+import { MeshTransmissionMaterial, useGLTF, useTexture, useVideoTexture } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import React from "react";
 import gsap from "gsap";
@@ -25,6 +25,7 @@ export function EnigmaIconModel() {
                             {...props}
                         />
                         <PlaneComponent/>
+                        <ambientLight intensity={1}/>
                         
                         </>
                         
@@ -39,14 +40,16 @@ function IconModel({ scale, scrollState }) {
     const [y, setY] = useState(0);
     const iconGroupRef = useRef(null);
     const {camera} = useThree()
-    console.log(camera)
+    // console.log(camera)
     const iconRef = useRef(null);
     const mouse = useRef({ x: 0, y: 0 });
     const model = useGLTF("/assets/models/enigmaLogo.glb");
     const { nodes } = model;
-
+    console.log(nodes)
     const materialsProps = {
-        thickness: 1.8,
+        thickness: 1.5,
+        resolution:128,
+        sample:2,
         backsideThickness: 0.0,
         reflectivity: 0.54,
         roughness: 0.2,
@@ -141,65 +144,128 @@ function IconModel({ scale, scrollState }) {
     return (
         <group ref={iconGroupRef} castShadow receiveShadow position={[370, 0, 100]} rotation={[0, -0.2, 0]} scale={75} dispose={null}>
             <group ref={iconRef}>
-                <mesh geometry={nodes.Low_Poly.geometry}>
+                {/* <mesh geometry={nodes.Low_Poly.geometry}>
                     <MeshTransmissionMaterial {...materialsProps} />
-                </mesh>
+                </mesh> */}
                 <mesh geometry={nodes.Low_Poly001.geometry}>
                     <MeshTransmissionMaterial {...materialsProps} />
                 </mesh>
-                <mesh geometry={nodes.Low_Poly002.geometry}>
+                {/* <mesh geometry={nodes.Low_Poly002.geometry}>
                     <MeshTransmissionMaterial {...materialsProps} />
                 </mesh>
                 <mesh geometry={nodes.Low_Poly003.geometry}>
                     <MeshTransmissionMaterial {...materialsProps} />
-                </mesh>
+                </mesh> */}
             </group>
         </group>
     );
 }
 
+// import { useRef, useEffect, useMemo } from "react";
+// import * as THREE from "three";
+// import { useVideoTexture } from "@react-three/drei";
+// import { useThree } from "@react-three/fiber";
+// import gsap from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// gsap.registerPlugin(ScrollTrigger);
+
+// Your custom geometry generator
+function RoundedRectangle(w, h, r, s) {
+    const wi = w / 2 - r;
+    const hi = h / 2 - r;
+    const w2 = w / 2;
+    const h2 = h / 2;
+    const ul = r / w;
+    const ur = (w - r) / w;
+    const vl = r / h;
+    const vh = (h - r) / h;
+
+    let positions = [
+        -wi, -h2, 0, wi, -h2, 0, wi, h2, 0,
+        -wi, -h2, 0, wi, h2, 0, -wi, h2, 0,
+        -w2, -hi, 0, -wi, -hi, 0, -wi, hi, 0,
+        -w2, -hi, 0, -wi, hi, 0, -w2, hi, 0,
+        wi, -hi, 0, w2, -hi, 0, w2, hi, 0,
+        wi, -hi, 0, w2, hi, 0, wi, hi, 0
+    ];
+
+    let uvs = [
+        ul, 0, ur, 0, ur, 1,
+        ul, 0, ur, 1, ul, 1,
+        0, vl, ul, vl, ul, vh,
+        0, vl, ul, vh, 0, vh,
+        ur, vl, 1, vl, 1, vh,
+        ur, vl, 1, vh, ur, vh
+    ];
+
+    let phia = 0;
+    for (let i = 0; i < s * 4; i++) {
+        const phib = Math.PI * 2 * (i + 1) / (4 * s);
+        const cosa = Math.cos(phia);
+        const sina = Math.sin(phia);
+        const cosb = Math.cos(phib);
+        const sinb = Math.sin(phib);
+
+        const xc = i < s || i >= 3 * s ? wi : -wi;
+        const yc = i < 2 * s ? hi : -hi;
+
+        positions.push(
+            xc, yc, 0,
+            xc + r * cosa, yc + r * sina, 0,
+            xc + r * cosb, yc + r * sinb, 0
+        );
+
+        const uc = i < s || i >= 3 * s ? ur : ul;
+        const vc = i < 2 * s ? vh : vl;
+
+        uvs.push(
+            uc, vc,
+            uc + ul * cosa, vc + vl * sina,
+            uc + ul * cosb, vc + vl * sinb
+        );
+
+        phia = phib;
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+    return geometry;
+}
+
 function PlaneComponent({ scale, scrollState }) {
     const mesh = useRef(null);
-    const texture = useTexture("/assets/textures/showreel-poster.jpg");
-    useEffect(()=>{
-     const ctx = gsap.context(()=>{
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#hero-section",
-                start: "30% top",
-                end: "bottom bottom",
-                // markers: true,
-                scrub: true,
-            },
-            defaults: {
-                ease: "none",
-            }
-        })
-        tl.to(mesh.current.position,{
-            z:0,
-            // y:-800
-        })
-        .fromTo(mesh.current.scale,{
-            x:10,
-            y:10
-        },{
-            x:75,
-            y:75,
-            delay:-0.5,
-        })
-        tl.to(mesh.current.rotation,{
-            y:0,
-            delay:-0.5
-        })
+    const texture = useVideoTexture("/assets/videos/showreel.mp4");
 
-     })
-     return()=>ctx.revert()
-    },[])
+    // UseMemo for performance
+    const roundedGeometry = useMemo(() => RoundedRectangle(16, 9, 0.2, 8), []);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#hero-section",
+                    start: "30% top",
+                    end: "90% bottom",
+                    scrub: true,
+                },
+                defaults: { ease: "none" }
+            });
+
+            tl.to(mesh.current.position, { z: 0 })
+              .fromTo(mesh.current.scale, { x: 10, y: 10 }, { x: 80, y: 80, delay: -0.5 })
+              .to(mesh.current.rotation, { y: 0, delay: -0.5 });
+        });
+        return () => ctx.revert();
+    }, []);
 
     return (
-        <mesh ref={mesh} scale={10} position={[0,0 , -500]} rotation={[0,-Math.PI/2,0]}>
-            <planeGeometry args={[16, 9]} />
-            <meshStandardMaterial map={texture} side={useThree.DoubleSide} />
+        <mesh ref={mesh} scale={10} position={[0, 0, -500]} rotation={[0, -Math.PI / 2, 0]}>
+            <primitive object={roundedGeometry} attach="geometry" />
+            <meshStandardMaterial map={texture} side={THREE.DoubleSide} />
         </mesh>
     );
 }
+
+export default PlaneComponent;

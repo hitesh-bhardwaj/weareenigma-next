@@ -159,25 +159,40 @@ const Achievements = () => {
             start:'top top',
             end:"bottom bottom",
             scrub:true,
-            // markers:true
+            // markers:true,
+            
+        }
+
+    })
+    tl.to(".acheivements-container",{
+        yPercent:-105,
+        stagger:0.05,
+        delay:0.5,
+        duration:1,
+        onStart:()=>{
+            setOverflow(true)
+        },
+        onReverseComplete:()=>{
+            setOverflow(false)
+
         }
     })
-    // tl.from(".")
+    
    })
    return()=>ctx.revert()
   },[])
 
   return (
-    <section className="w-screen h-screen" id="achievements">
-      <div className="w-full flex flex-col sticky top-0">
+    <section className="w-screen h-[200vh] relative z-[2] " id="achievements">
+      <div className="w-full flex flex-col sticky top-[-5%]">
         <div className={`w-screen h-fit  ${overflow?"overflow-hidden":""} `}>
-          <div className="w-full flex justify-start pl-[4vw] pt-[7%] bg-gradient">
+          <div className="w-full flex justify-start pl-[4vw] pt-[7%] bg-gradient acheivements-container">
             <div
               ref={awardsContainerRef}
               className="w-fit transition-all duration-500 ease relative cursor-none min-h-[10vw]"
             >
               <Copy>
-                <p className="text-white text-[9vw] font-display leading-[1.05] font-medium pointer-events-none">
+                <p className="text-white text-[19vh] font-display leading-[1.05] font-medium pointer-events-none">
                   10+ Awards
                 </p>
               </Copy>
@@ -190,19 +205,20 @@ const Achievements = () => {
                   height={297}
                   width={199}
                   alt="award"
+                  className="w-[15vw] h-[26vh] object-contain"
                 />
               </div>
             </div>
           </div>
         </div>
         <div className={`w-screen h-fit  ${overflow?"overflow-hidden":""} `}>
-          <div className="w-full bg-gradient flex justify-end pr-[4vw] pt-[2%]">
+          <div className="w-full bg-gradient flex justify-end pr-[4vw] acheivements-container">
             <div
               ref={projectsContainerRef}
               className="w-fit transition-all duration-500 ease relative cursor-none min-h-[10vw]"
             >
               <Copy>
-                <p className="text-[#0E0E0E] text-[9vw] font-display leading-[1.05] font-medium pointer-events-none">
+                <p className="text-[#0E0E0E] text-[19vh] font-display leading-[1.05] font-medium pointer-events-none">
                   25+ Projects
                 </p>
               </Copy>
@@ -221,13 +237,13 @@ const Achievements = () => {
           </div>
         </div>
         <div className={`w-screen h-fit  ${overflow?"overflow-hidden":""} `}>
-          <div className="w-full flex justify-start pl-[4vw] pt-[2%] bg-gradient">
+          <div className="w-full flex justify-start pl-[4vw] bg-gradient acheivements-container">
             <div
               ref={clientsContainerRef}
               className="w-fit transition-all duration-500 ease relative cursor-none min-h-[10vw]"
             >
               <Copy>
-                <p className="text-white text-[9vw] font-display leading-[1.05] font-medium pointer-events-none">
+                <p className="text-white text-[19vh] font-display leading-[1.05] font-medium pointer-events-none">
                   45+ Clients
                 </p>
               </Copy>
@@ -246,13 +262,13 @@ const Achievements = () => {
           </div>
         </div>
         <div className={`w-screen h-fit  ${overflow?"overflow-hidden":""} `}>
-          <div className="w-full bg-gradient flex justify-end pr-[4vw] pt-[2%] pb-[7%]">
+          <div className="w-full bg-gradient flex justify-end pr-[4vw] pt-[2%] pb-[7%] acheivements-container">
             <div
               ref={yearsContainerRef}
               className="w-fit pr-[20vw]  transition-all duration-500 ease relative cursor-none min-h-[10vw]"
             >
               <Copy>
-                <p className="text-[#0E0E0E] text-[9vw] font-display leading-[1.05] font-medium pointer-events-none">
+                <p className="text-[#0E0E0E] text-[19vh] font-display leading-[1.05] font-medium pointer-events-none">
                   2+ Years
                 </p>
               </Copy>

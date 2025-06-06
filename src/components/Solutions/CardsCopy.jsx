@@ -94,8 +94,8 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
     const deltaScroll = currentScroll - lastScroll.current;
     lastScroll.current = currentScroll;
 
-    if (Math.abs(deltaScroll) > 1) {
-      const impulse = deltaScroll > 0 ? 0.6 : -3;
+    if (Math.abs(deltaScroll) > 0) {
+      const impulse = deltaScroll > 0 ? 0.6 : -1;
       card.current.applyImpulse({ x: impulse * 0.05, y: impulse * 0.1, z: impulse*0.02 }, true);
     }
 

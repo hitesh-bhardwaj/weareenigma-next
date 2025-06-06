@@ -10,9 +10,26 @@ import Copy from "../Copy";
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
+  useEffect(()=>{
+    const ctx = gsap.context(()=>{
+       gsap.to(".video-container",{
+        top:"-25%",
+        left:"50%",
+        scale:1,
+        ease:"none",
+        scrollTrigger:{
+          trigger:"#about",
+          start:"top top",
+          end:"80% bottom",
+          scrub:true
+        }
+       })
+    })
+    return()=>ctx.revert()
+  },[])
 
   return (
-    <section className="w-screen h-screen px-[4vw] py-[10%] bg-black-1" id="about">
+    <section className="w-screen h-[300vh] px-[4vw] py-[10%] bg-black-1 relative" id="about">
       <div className="w-full flex justify-between text-white">
         <div className="flex flex-col justify-between">
 
@@ -23,19 +40,30 @@ const About = () => {
           <p className="text-[1.5vw] uppercase">OUR CAPABILITIES</p>
           </Copy>
         </div>
+        <div className="w-screen h-[300vh] absolute top-0 left-0 z-[10] flex pt-0">
+          <div className="w-full h-[80vh] sticky top-[30%]">
+
         <div
-        className="h-[11.5vw] w-[20.5vw] rounded-[1vw] overflow-hidden "
+        className="h-[45vw] w-[90vw] rounded-[3vw] overflow-hidden scale-[0.25] translate-x-[-50%] absolute top-[-15%] left-[15%] video-container"
       >
-        <Image
-          src={"/assets/images/solutions/video-poster.png"}
+        <video
+          src={"/assets/videos/showreel.mp4"}
           height={222}
           width={395}
-          className="h-full w-full object-cover"
+          // controls
+          muted
+          autoPlay
+          playsInline
+          loop
+          className="h-full w-full object-cover "
           alt="About poster"
         />
       </div>
+          </div>
+
         </div>
-        <div className="flex flex-col gap-[4vw] w-[57%]">
+        </div>
+        <div className="flex flex-col gap-[4vw] w-[57%] relative z-[20]">
           <Copy>
           <h3>
             From Concept to Conversion We're Changing the Face of Web.
