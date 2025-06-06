@@ -195,7 +195,7 @@ const IndustriesCopy = () => {
   }, []);
   return (
     <section
-      className="w-screen h-[600vh] relative bg-black-1 py-[8%] pt-[25%]"
+      className="w-screen h-[600vh] relative bg-black-1 py-[8%] pt-[25%] dark"
       id="industry"
     >
       <div className="w-screen h-screen sticky top-0 pt-[5%] z-[20] industry-container ">

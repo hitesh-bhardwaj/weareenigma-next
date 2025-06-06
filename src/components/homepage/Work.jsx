@@ -95,7 +95,7 @@ const Work = () => {
   }, []);
   return (
     <section
-      className="w-screen h-[550vh] px-[4vw] py-[7vw] bg-black-1 relative z-0"
+      className="w-screen h-[550vh] px-[4vw] py-[7vw] bg-black-1 relative z-0 dark"
       id="work"
     >
       <div className="w-full h-[120vh] flex flex-wrap justify-between gap-[1.5vw] gap-y-[5vw] sticky top-[5%] !z-[4]">

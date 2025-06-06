@@ -5,7 +5,7 @@ import Copy from "../Copy";
 
 const About = () => {
   return (
-    <section className="w-screen h-screen px-[4vw] py-[10%] bg-black-1 overflow-hidden" id="about">
+    <section className="w-screen h-screen px-[4vw] py-[10%] bg-black-1 overflow-hidden dark" id="about">
       <div className="w-full flex justify-between text-white">
         <div className="flex gap-[1vw] items-center h-fit">
             <span className="w-[5px] h-[5px] rounded-full bg-white"/>

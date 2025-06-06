@@ -8,8 +8,8 @@ export const Footer = (() => {
 
     return (
         <>
-            <section className='h-full w-full overflow-hidden relative' id='hero-section'>
-                <div className="flex h-[50vw] bg-black-1">
+            <section className='h-full w-full  overflow-hidden relative' id='hero-section'>
+                <div className="flex h-[50vw] dark">
                     <div className="w-[60%]">
                         <FooterCTACopy />
                     </div>

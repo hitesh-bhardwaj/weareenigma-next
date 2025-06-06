@@ -51,7 +51,6 @@ const BlogCard = ({ img, text, date, key }) => {
 const Blogs = () => {
   lineAnim();
   const swiperRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(1);
 
   const handleNext = () => {
     if (swiperRef.current) {

@@ -13,6 +13,7 @@ import React from 'react'
 import Layout from '@/components/Layout'
 import { Hero } from '@/components/Solutions/Hero'
 import Header from '@/components/Header'
+import { Footer } from '@/components/Common/Footer'
 
 const page = () => {
   return (
@@ -25,7 +26,7 @@ const page = () => {
    <Solutions/>
    <Approach/>
    <FAQs content={faqContent}/>
-   <FooterCTA/>
+   <Footer/>
    </Layout>
   
    </>

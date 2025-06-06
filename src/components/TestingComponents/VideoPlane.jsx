@@ -12,7 +12,7 @@ export function VideoPlane() {
 
     return (
         <>
-            <div ref={meshRef} className="flex flex-row sticky top-0 items-center justify-between w-screen h-screen aspect-video" />
+            <div ref={meshRef} className="flex flex-row sticky top-0 items-center justify-between w-screen h-screen aspect-video " />
             <UseCanvas>
                 <ScrollScene track={meshRef}>
                     {(props) => (

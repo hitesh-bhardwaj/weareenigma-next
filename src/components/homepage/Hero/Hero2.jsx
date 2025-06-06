@@ -221,7 +221,7 @@ const Hero2 = () => {
       lightRef.current.position.lerp(target.current, 0.1);
     });
 
-    return <directionalLight ref={lightRef} intensity={3} />;
+    return <directionalLight ref={lightRef} intensity={10} />;
   };
 
   return (

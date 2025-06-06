@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useAnimation, useInView } from "framer-motion";
 import WaveShader from "../WaveShader";
 import Copy from "../Copy";
 import { lineAnim } from "../gsapAnimations";
@@ -68,42 +68,99 @@ const data = [
   },
 ];
 
-const SolutionCard = ({ title, number, para, list, opacity, translateY }) => {
+const SolutionCard = ({ title, number, para, list, opacity }) => {
+  const controls = useAnimation();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = opacity.onChange((value) => {
+      if (value > 0.5 && !visible) {
+        setVisible(true);
+        controls.start("visible");
+      }
+    });
+    return unsubscribe;
+  }, [opacity, visible, controls]);
+
+  const lineVariant = {
+    hidden: { scaleX: 0, originX: 0 },
+    visible: { scaleX: 1, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+  
+  const textVariant = {
+    hidden: { y: 10, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+  
+
   return (
     <motion.div
-    style={{ opacity, y: translateY }}
-    className="w-full flex flex-col absolute top-0 left-0 px-[4vw] h-full z-[3]"
-  >
-      <motion.h2 className="w-full flex justify-between" >
+      style={{ opacity }}
+      className="w-full flex flex-col absolute top-0 left-0 px-[4vw] h-full z-[3]"
+    >
+      <motion.h2
+        className="w-full flex justify-between"
+        variants={textVariant}
+        initial="hidden"
+        animate={controls}
+      >
         <Copy>
-        <span className="capitalize">{title}</span>
+          <motion.span className="capitalize" variants={textVariant}>
+            {title}
+          </motion.span>
         </Copy>
-        <span>{number}</span>
+        <motion.span variants={textVariant}>{number}</motion.span>
       </motion.h2>
 
-      <motion.span className="w-full h-[1px] bg-black mt-[7vw] mb-[2vw]" />
+      <motion.span
+        className="w-full h-[1px] bg-black mt-[7vw] mb-[2vw]"
+        variants={lineVariant}
+        initial="hidden"
+        animate={controls}
+      />
 
       <div className="flex flex-col gap-[5vw]">
         <Copy>
-        <motion.p className="w-[70%] text-[1.5vw]">{para}</motion.p>
+          <motion.p
+            className="w-[70%] text-[1.5vw]"
+            variants={textVariant}
+            initial="hidden"
+            animate={controls}
+          >
+            {para}
+          </motion.p>
         </Copy>
 
         <div className="w-full flex justify-between items-end">
-          <motion.div className="w-[70%] flex flex-wrap uppercase h-fit text-[0.9vw] gap-x-[4vw] gap-y-[1.5vw]">
+          <motion.div
+            className="w-[70%] flex flex-wrap uppercase h-fit text-[0.9vw] gap-x-[4vw] gap-y-[1.5vw]"
+            variants={textVariant}
+            initial="hidden"
+            animate={controls}
+          >
             {list.map((content, index) => (
-              <div
+              <motion.div
                 key={index}
                 className="flex w-[25%] flex-col gap-[0.5vw] h-fit"
+                variants={textVariant}
               >
                 <Copy>
-                <p>{content}</p>
+                  <motion.p>{content}</motion.p>
                 </Copy>
-                <span className="w-full h-[1px] bg-black " />
-              </div>
+                <motion.span
+                  className="w-full h-[1px] bg-black"
+                  variants={lineVariant}
+                />
+              </motion.div>
             ))}
           </motion.div>
 
-          <motion.button className="w-fit flex">
+          <motion.button
+            className="w-fit flex"
+            variants={textVariant}
+            initial="hidden"
+            animate={controls}
+          >
             <div className="w-fit h-full px-[3.5vw] py-[0.7vw] text-white rounded-full border border-white font-medium font-display">
               Know More
             </div>
@@ -130,6 +187,8 @@ const Solutions = () => {
     target: containerRef,
     offset: ["start start", "end end"],
   });
+  
+  
 
   const totalSections = data.length;
 
@@ -147,14 +206,8 @@ const Solutions = () => {
       : isLast
       ? useTransform(scrollYProgress, [start, end], [0, 1])
       : useTransform(scrollYProgress, [start, mid, end], [0, 1, 0]);
-  
-    const translateY = isFirst
-      ? useTransform(scrollYProgress, [start,mid, end], [50,0, -50])
-      : isLast
-      ? useTransform(scrollYProgress, [start, end], [50, 0])
-      : useTransform(scrollYProgress, [start, mid, end], [50, 0, -50]);
-  
-    return { opacity, translateY };
+
+    return { opacity};
   });
   
   
@@ -164,7 +217,7 @@ const Solutions = () => {
       ref={containerRef}
       className="w-screen h-[400vh] pt-[5%] relative bg-[#fefefe] solutions-container"
     >
-      <div className="w-screen h-screen sticky top-[5%] ">
+      <div className="w-screen h-screen sticky top-[15%] ">
         {data.map((card, i) => (
           <SolutionCard
             key={i}
@@ -173,7 +226,6 @@ const Solutions = () => {
             number={card.number}
             list={card.list}
             opacity={cardTransforms[i].opacity}
-            translateY={cardTransforms[i].translateY}
           />
         ))}
 

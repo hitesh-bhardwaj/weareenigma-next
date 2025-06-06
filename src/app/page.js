@@ -17,6 +17,7 @@ import { fadeUpAnim, lineAnim } from "@/components/gsapAnimations";
 import IndustriesCopy from "@/components/homepage/IndustriesCopy";
 import { Footer } from "@/components/homepage/Footer";
 
+
 const page = () => {
   fadeUpAnim();
   lineAnim();
