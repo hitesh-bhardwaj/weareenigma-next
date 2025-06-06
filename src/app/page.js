@@ -23,21 +23,21 @@ const page = () => {
   lineAnim();
   return (
     <>
-    <Layout>
-      <Header/>
-      <Hero/>
-      <About/>
-      <Work/>
-      <SectionBreak/>
-      <Testimonials/>
-      <Solutions/>
-      {/* <Industries/> */}
-      <IndustriesCopy/>
-      <Achievements/>
-      <Clients/>
-      <Blogs/>
-      <FAQs content={faqContent} /> 
-      <Footer/>
+      <Layout>
+        <Header />
+        <Hero />
+        <About />
+        <Work />
+        <SectionBreak />
+        <Testimonials />
+        <Solutions />
+        {/* <Industries/> */}
+        <IndustriesCopy />
+        <Achievements />
+        <Clients />
+        <Blogs />
+        <FAQs content={faqContent} />
+        <Footer />
       </Layout>
     </>
   );
