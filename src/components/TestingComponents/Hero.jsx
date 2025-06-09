@@ -1,18 +1,18 @@
-import { Suspense } from "react";
+import { Suspense, useRef } from "react";
 import { EnigmaIconModel } from "./EnigmaIconModel";
 import { FractalGlassModelWrapper } from './FractalGlassModel';
 import { HeroCopy } from './HeroCopy';
 import { VideoPlane } from "./VideoPlane";
 
 export const Hero = (() => {
-
+    const containerRef = useRef();
     return (
         <>
-            <section className='h-full w-full overflow-hidden relative' id='hero-section'>
+            <section className='h-full w-full overflow-hidden relative' id='hero-section' ref={containerRef}>
                 <HeroCopy />
-                <div className='h-[300vh] relative flex'>
+                <div className='h-[400vh] relative flex'>
                     <Suspense>
-                        <EnigmaIconModel />
+                        <EnigmaIconModel  containerRef={containerRef}/>
                         {/* <VideoPlane/> */}
                     </Suspense>
                 </div>

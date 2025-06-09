@@ -110,7 +110,7 @@ function IconModel({ scale }) {
             });
             tl.to(iconGroupRef.current.position, {
                 x: 0,
-                y: 100,
+                y:0,
                 // z: 0,
                 duration: 1,
             })
@@ -123,10 +123,11 @@ function IconModel({ scale }) {
                     x: scale.xy.min() * 0.5,
                     y: scale.xy.min() * 0.5,
                     duration: 1,
-                    delay: -0.2,
+                    // delay: -0.2,
                 })
                 .to(iconGroupRef.current.position, {
                     z: 1000,
+                    y:200,
                     duration: 1,
                     delay: -1,
                 })
@@ -219,22 +220,28 @@ function PlaneComponent() {
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#hero-section",
-                    start: "30% top",
-                    end: "90% bottom",
+                    start: "35% top",
+                    end: "80% bottom",
                     scrub: true,
                 },
                 defaults: { ease: "none" }
             });
+            // gsap.set(mesh.current.position,{
+            //     z:-400
+            // })
+            // gsap.set(mesh.current.scale,{
+            //     x:0,
+            //     y:0
+            // })
 
-            tl.to(mesh.current.position, { z: 0 })
-                .fromTo(mesh.current.scale, { x: 10, y: 10 }, { x: 80, y: 80, delay: -0.5 })
+            tl.fromTo(mesh.current.scale, { x: 0, y: 0 }, { x: 100, y: 100, delay: -0.5 })
                 .to(mesh.current.rotation, { y: 0, delay: -0.5 });
         });
         return () => ctx.revert();
     }, []);
 
     return (
-        <mesh ref={mesh} scale={10} position={[0, 0, -500]} rotation={[0, -Math.PI / 2, 0]}>
+        <mesh ref={mesh} scale={0} position={[0, 0, -200]} rotation={[0, 0, 0]}>
             <primitive object={roundedGeometry} attach="geometry" />
             <meshStandardMaterial map={texture} side={THREE.DoubleSide} />
         </mesh>

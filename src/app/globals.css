@@ -186,6 +186,14 @@ li .link-line::after {
 .buttonSplit:hover .single-letter {
   transform: translate(0px, -1.5em);
 }
+.testimonial-line {
+  transition: height 0.5s ease;
+}
+
+.testimonial-line.boosted {
+  height: 40vh !important; /* boost height */
+  transition: height 0.5s ease;
+}
 
 @keyframes marquee {
   0% {

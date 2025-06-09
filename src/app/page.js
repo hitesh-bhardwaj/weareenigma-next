@@ -18,6 +18,7 @@ import { Footer } from "@/components/homepage/Footer";
 import SectionBreak from "@/components/Common/SectionBreak";
 import SolutionsCopy from "@/components/homepage/SolutionsCopy";
 import Image from "next/image";
+import IndustryCopy from "@/components/homepage/IndustryCopy";
 
 const page = () => {
   fadeUpAnim();
@@ -35,16 +36,9 @@ const page = () => {
         {/* <SolutionsCopy/> */}
         <div className="relative">
           <Solutions />
-          <div className="w-screen h-auto">
-            <Image
-              src={"/assets/images/gradient.webp"}
-              alt="gradient"
-              width={1920}
-              height={1080}
-              className="w-screen h-[50vw] absolute top-[35%] z-[10]"
-            />
-          </div>
-          <IndustriesCopy />
+        
+          {/* <IndustriesCopy /> */}
+          <IndustryCopy/>
         </div>
         <Achievements />
         <Clients />

@@ -26,7 +26,7 @@ const Work = () => {
         scrollTrigger: {
           trigger: "#work",
           start: "top top",
-          end: "93% bottom",
+          end: "95% bottom",
           scrub: true,
           // markers: true,
         },
@@ -59,7 +59,7 @@ const Work = () => {
           opacity: 0.3,
           ease: "none",
         })
-        .to(".work-2-mockup", {
+        .to(".work-2-content", {
           yPercent: -110,
           delay: -0.3,
           ease: "none",
@@ -78,7 +78,7 @@ const Work = () => {
           ease: "none",
           onStart: () => {
             gsap.to(".work-1-mockup-container", {
-              zIndex: 0,
+              zIndex: -1,
               duration: 0,
             });
           },
@@ -89,16 +89,79 @@ const Work = () => {
             });
           },
         })
-        .to(".work-2-mockup", {
+        .to(".work-2-content", {
           xPercent: -104,
           delay: -0.5,
           ease: "none",
+        })
+        .to(".work-1-mockup-container",{
+          opacity:0,
+          duration:0,
         })
         .to(".work-3-mockup-container", {
           yPercent: -110,
           ease: "none",
           delay: -0.5,
-        });
+        })
+        .to(".work-3-mockup-container", {
+          xPercent: -105,
+          ease: "none",
+          onStart: () => {
+            gsap.to(".work-3-mockup-container", {
+              zIndex: 0,
+              duration: 0,
+            });
+          },
+          onReverseComplete: () => {
+            gsap.to(".work-3-mockup-container", {
+              zIndex: 1,
+              duration: 0,
+            });
+          },
+        })
+          .to(".work-3-mockup", {
+            clipPath: "inset(100% 0% 0% 0%)",
+            delay: -0.5,
+            ease: "none",
+            
+          })
+          .to(".work-mockup-3-img",{
+            scale:1.4,
+            delay:-0.5
+          })
+          .from(".work-mockup-4-img",{
+            scale:1.4,
+            delay:-0.5
+          })
+          
+          .to(".work-2-content", {
+            scale:0.9,
+            delay:-0.5,
+            opacity: 0,
+            ease: "none",
+            onStart: () => {
+              gsap.to(".work-2-content", {
+                zIndex: 0,
+                duration: 0,
+              });
+            },
+            onReverseComplete: () => {
+              gsap.to(".work-2-content", {
+                zIndex: 4,
+                duration: 0,
+              });
+            },
+          })
+          .to(".work-4-content",{
+            yPercent:-120,
+            delay:-0.5,
+            onStart: () => {
+              gsap.to(".work-4-content", {
+                zIndex: -1,
+                duration: 0,
+              });
+            },
+          })
     });
     return () => ctx.revert();
   }, []);
@@ -115,11 +178,11 @@ const Work = () => {
           </p>
           </Copy>
           <div className="flex justify-between text-white ">
-            <span className="fadeupanim">2023</span>
+            <span className="">2023</span>
             <div className="flex gap-[2.5vw]">
-              <span className="fadeupanim">Web Design</span>
-              <span className="fadeupanim">Branding</span>
-              <span className="fadeupanim">Marketing</span>
+              <span className="">Web Design</span>
+              <span className="">Branding</span>
+              <span className="">Marketing</span>
             </div>
           </div>
         </div>
@@ -136,7 +199,7 @@ const Work = () => {
               height={500}
             />
           </div>
-          <div className="w-full h-[90vh] absolute rounded-[2.5vw] bg-[#FF2226] flex flex-col justify-between work-2-content">
+          <div className="w-full h-[90vh] absolute rounded-[2.5vw] bg-[#FF2226] flex flex-col justify-between ">
             <Image
               src={"/assets/images/homepage/work/work-mockup-1.png"}
               alt=""
@@ -146,7 +209,7 @@ const Work = () => {
             />
           </div>
         </div>
-        <div className="w-[45vw] h-[90vh] rounded-[2.5vw] overflow-hidden bg-primary p-[2vw] flex flex-col justify-between work-2-mockup translate-x-[104%] z-[3]">
+        <div className="w-[45vw] h-[90vh] rounded-[2.5vw] overflow-hidden bg-primary p-[2vw] flex flex-col justify-between work-2-content translate-x-[104%] z-[3]">
           <Copy>
           <p className="text-[8vw] w-[75%] font-display leading-[1]">
             Garden City Mall
@@ -173,6 +236,30 @@ const Work = () => {
               width={800}
               height={500}
             />
+          </div>
+          <div className="w-full h-[90vh] absolute top-0 left-0 rounded-[2.5vw] bg-[#19A760] flex flex-col justify-between">
+            <Image
+              src={"/assets/images/homepage/work/work-mockup-1.png"}
+              alt=""
+              className="w-full h-full object-contain work-mockup-4-img"
+              width={800}
+              height={500}
+            />
+          </div>
+        </div>
+        <div className="w-[45vw] h-[90vh] rounded-[2.5vw] overflow-hidden bg-primary p-[2vw] flex flex-col justify-between work-4-content translate-x-[104%] translate-y-[-100%] z-[1]">
+          <Copy>
+          <p className="text-[8vw] w-[75%] font-display leading-[1]">
+            Garden City Mall
+          </p>
+          </Copy>
+          <div className="flex justify-between text-white">
+            <span>2023</span>
+            <div className="flex gap-[2.5vw]">
+              <span>Web Design</span>
+              <span>Branding</span>
+              <span>Marketing</span>
+            </div>
           </div>
         </div>
       </div>

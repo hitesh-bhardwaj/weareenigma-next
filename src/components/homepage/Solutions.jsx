@@ -178,7 +178,7 @@ const SolutionCard = ({ title, number, para, list, opacity }) => {
               className="w-fit flex group hover:scale-[0.97] duration-500 ease-out relative z-[20]"
             >
               <div className="w-fit relative h-full px-[3.5vw] overflow-hidden py-[0.7vw] rounded-full border border-black-1 font-medium  font-display">
-                <span className="z-[1] relative">know more</span>
+                <span className="z-[1] relative">Know More</span>
                 <span className="w-full h-full absolute bottom-0 left-0 bg-primary origin-bottom scale-y-0 group-hover:scale-y-100 duration-300 ease-out" />
               </div>
               <div className="w-[3.5vw] h-[3.5vw] p-[1.1vw] relative rounded-full border border-black-1 overflow-hidden">
@@ -232,7 +232,7 @@ const Solutions = () => {
       ref={containerRef}
       className="w-screen h-[400vh] pt-[5%] relative bg-[#fefefe] solutions-container"
     >
-      <div className="w-screen h-screen sticky top-[15%] z-[20] ">
+      <div className="w-screen h-screen sticky top-[5%] z-[20] ">
         {data.map((card, i) => (
           <SolutionCard
             key={i}
@@ -243,6 +243,10 @@ const Solutions = () => {
             opacity={cardTransforms[i].opacity}
           />
         ))}
+      </div>
+      <div className="w-screen h-[60vh] z-[1] sticky top-[55%]">
+        <Image src={"/assets/images/gradient.webp"} width={1920} height={1080} alt="bg-gradient" className="w-[120vw] h-auto object-contain"/>
+
       </div>
     </section>
   );

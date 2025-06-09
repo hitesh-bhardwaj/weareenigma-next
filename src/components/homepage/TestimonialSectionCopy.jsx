@@ -34,7 +34,8 @@ const TestimonialSectionCopy = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const intervalRef = useRef(null);
   const imageRef = useRef(null);
-  const [lines, setLines] = useState([])
+  const containerRef = useRef(null);
+  // const [lines, setLines] = useState([])
   const paraContainerRef = useRef(null);
   const nameRef = useRef(null);
   const desigRef = useRef(null);
@@ -161,17 +162,43 @@ const TestimonialSectionCopy = () => {
     }, 6000);
   }, [activeIndex]);
 
-    useEffect(() => {
-      const lineCount = 150
-      const generatedLines = Array.from({ length: lineCount }).map((_, i) => ({
-        height: Math.floor(Math.random() * 20 + 15),
-        delay: (i % 10) * 0.1,
-      }))
-      setLines(generatedLines)
-    }, [])
+  const [lines, setLines] = useState([]);
+  // const containerRef = useRef(null);
+  const linesRef = useRef([]);
+  const NUM_LINES = 160;
+
+
+  useEffect(() => {
+    const generated = Array.from({ length: NUM_LINES }).map(() => ({
+      height: 14 + Math.random() * 20,
+      delay: Math.random() * 2
+    }));
+    setLines(generated);
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current || lines.length === 0) return;
+
+    const handleMouseMove = (e) => {
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const percent = x / rect.width;
+      const index = Math.floor(percent * NUM_LINES);
+
+      linesRef.current.forEach((el) => el?.classList.remove("boosted"));
+
+      for (let i = -4; i <= 5; i++) {
+        const line = linesRef.current[index + i];
+        if (line) line.classList.add("boosted");
+      }
+    };
+
+    containerRef.current.addEventListener("mousemove", handleMouseMove);
+    return () => containerRef.current.removeEventListener("mousemove", handleMouseMove);
+  }, [lines]);
 
   return (
-    <section className="w-screen h-screen px-[4vw] bg-gradient text-white relative overflow-hidden opacity-0" id="testimonial-section">
+    <section className="w-screen h-screen px-[4vw] bg-gradient text-white overflow-hidden opacity-0 absolute left-[43vw] bottom-0 z-[7]" id="testimonial-section">
       <div className="w-full h-full flex justify-between pl-[10vw] pt-[12%]">
         <div className="flex flex-col gap-[0.5vw]">
           <Image
@@ -220,18 +247,22 @@ const TestimonialSectionCopy = () => {
             ))}
           </div>
           <div className='w-screen absolute bottom-[-5vw] left-0 h-[30vh]'>
-          <div className="w-full absolute bottom-0 left-0 h-[30vh] flex justify-between items-end">
-            {lines.map((line, i) => (
-              <div
-                key={i}
-                className="testimonial-line bg-white w-[1px]"
-                style={{
-                  height: `${line.height}vh`,
-                  animationDelay: `${line.delay}s`
-                }}
-              />
-            ))}
-          </div>
+          <div
+      ref={containerRef}
+      className="w-full absolute bottom-0 left-0 h-[30vh] flex justify-between items-end pointer-events-auto"
+    >
+      {lines.map((line, i) => (
+        <div
+          key={i}
+          ref={(el) => (linesRef.current[i] = el)}
+          className="testimonial-line bg-white w-[1px]"
+          style={{
+            height: `${line.height}vh`,
+            animationDelay: `${line.delay}s`
+          }}
+        />
+      ))}
+    </div>
         </div>
     </section>
   );

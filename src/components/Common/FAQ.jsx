@@ -54,7 +54,7 @@ export default function FAQs({ allowMultiple = false , content}) {
 function Accordion({ question, answer, isOpen, onToggle }) {
   return (
     <div className="w-full group overflow-hidden relative z-[10] fadeupanim">
-      <div className="w-[90%] mr-auto bg-transparent  overflow-hidden border border-primary rounded-3xl px-[3vw] max-sm:w-full max-sm:pl-[6vw] max-sm:py-[2vw] max-sm:rounded-[4.2vw] max-md:rounded-[3vw]  max-md:py-[2vw] max-md:w-full">
+      <div className="w-[90%] mr-auto overflow-hidden border border-primary bg-[#fefefe] rounded-3xl px-[3vw] max-sm:w-full max-sm:pl-[6vw] max-sm:py-[2vw] max-sm:rounded-[4.2vw] max-md:rounded-[3vw]  max-md:py-[2vw] max-md:w-full">
         <button
           onClick={onToggle}
           aria-expanded={isOpen}
@@ -63,7 +63,7 @@ function Accordion({ question, answer, isOpen, onToggle }) {
           <h4 className="text-[1.35vw] font-medium text-left leading-[1.2] max-sm:text-[5.2vw] max-sm:w-[70%] max-md:text-[3vw] max-md:w-[80%]">
             {question}
           </h4>
-          <div className='w-[5.8vw] absolute top-0 right-[2.15%] rounded-[1.5vw] h-[5.8vw] overflow-hidden'>
+          <div className='w-[5.8vw] absolute top-0 right-[2.15%]'>
           <div
             className={`
               bg-primary absolute h-[5.7vw] right-[2.15%] duration-400 transition-all max-sm:bg-transparent max-sm:border max-sm:border-primary max-sm:justify-center max-sm:w-[12vw] max-sm:static max-sm:h-[11vw]

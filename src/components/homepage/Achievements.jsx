@@ -13,7 +13,7 @@ const Achievements = () => {
   const clientsContainerRef = useRef(null);
   const yearsRef = useRef(null);
   const yearsContainerRef = useRef(null);
-  const createMouseTracker = (containerRef, imageRef, lerpFactor = 0.9) => {
+  const createMouseTracker = (containerRef, imageRef, lerpFactor = 0.1) => {
     let currentX = 0;
     let currentY = 0;
     let targetX = 0;
@@ -69,7 +69,7 @@ const Achievements = () => {
       gsap.to(imageRef.current, {
         opacity: 1,
         scale: 1,
-        duration: 0.3,
+        duration: 0.5,
         ease: "power2.out",
       });
     };
@@ -77,8 +77,8 @@ const Achievements = () => {
     const mouseLeave = () => {
       gsap.to(imageRef.current, {
         opacity: 0,
-        scale: 0.8,
-        duration: 0.3,
+        scale: 0,
+        duration: 0.5,
         ease: "power2.out",
       });
 
@@ -202,7 +202,7 @@ const Achievements = () => {
               </Copy>
               <div
                 ref={awardsRef}
-                className="opacity-0 scale-80 absolute top-0 left-0 pointer-events-none z-10"
+                className="opacity-0 scale-80 absolute top-[10%] left-0 pointer-events-none z-10"
               >
                 <Image
                   src="/assets/images/homepage/award.png"
@@ -230,7 +230,7 @@ const Achievements = () => {
               </Copy>
               <div
                 ref={projectsRef}
-                className="opacity-0 scale-80 absolute top-0 left-0 pointer-events-none z-10"
+                className="opacity-0 scale-80 absolute top-[30%] left-0 pointer-events-none z-10"
               >
                 <Image
                   src="/assets/images/homepage/project.png"
@@ -257,7 +257,7 @@ const Achievements = () => {
               </Copy>
               <div
                 ref={clientsRef}
-                className="opacity-0 scale-80 absolute top-0 left-0 pointer-events-none z-10"
+                className="opacity-0 scale-80 absolute top-[30%] left-0 pointer-events-none z-10"
               >
                 <Image
                   src="/assets/images/homepage/project.png"
@@ -284,7 +284,7 @@ const Achievements = () => {
               </Copy>
               <div
                 ref={yearsRef}
-                className="opacity-0 scale-80 absolute top-0 left-0 pointer-events-none z-10"
+                className="opacity-0 scale-80 absolute top-[30%] left-0 pointer-events-none z-10"
               >
                 <Image
                   src="/assets/images/homepage/project.png"
