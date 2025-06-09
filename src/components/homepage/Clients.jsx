@@ -27,9 +27,9 @@ const Clients = () => {
 
       gsap.set(gridItems, {
         transformOrigin: '10% 0%',
-        z: () => gsap.utils.random(-4000, -2000),
-        rotationX: () => gsap.utils.random(-25, -5),
-        filter: 'brightness(50%)',
+        z: () => gsap.utils.random(-4000, -3000),
+        rotationX: () => gsap.utils.random(-15, -5),
+        filter: 'brightness(80%)',
       })
 
       // Set some CSS related style values
@@ -38,13 +38,13 @@ const Clients = () => {
       grid.style.setProperty('--perspective', '1500px');
 
       timeline.to(gridItems, {
-        xPercent: () => gsap.utils.random(-150, 150),
-        yPercent: () => gsap.utils.random(-1000, -500),
+        xPercent: () => gsap.utils.random(-250, 150),
+        yPercent: () => gsap.utils.random(0, -200),
         rotationX: 0,
         filter: 'brightness(150%)'
       }, 0)
         .to(gridWrap, {
-          yPercent: -350,
+          yPercent: -200,
           z: 6500
         }, 0)
     })
@@ -100,14 +100,15 @@ const Clients = () => {
         </div>
         <div className="client-grid w-screen mt-[-100vh]">
           <div className="grid-wrap">
-            {images.map((image, index) => (
-              <div key={index} className="grid__item ">
-                <div
-                  className="grid__item-inner rounded-[1.5vw]"
-                  style={{ backgroundImage: `url(${image})` }}
-                />
-              </div>
-            ))}
+            {(images.map((image, index) => (
+                <div key={index} className="grid__item">
+                  <div
+                    className="grid__item-inner rounded-[1.5vw]"
+                    style={{ backgroundImage: `url(${image})` }}
+                  />
+                </div>
+              ))
+            )}
           </div>
         </div>
 
@@ -128,12 +129,21 @@ const images = [
   "/assets/images/homepage/clients/6.png",
   "/assets/images/homepage/clients/7.png",
   "/assets/images/homepage/clients/8.png",
-  "/assets/images/homepage/clients/8.png",
   "/assets/images/homepage/clients/7.png",
   "/assets/images/homepage/clients/6.png",
-  "/assets/images/homepage/clients/5.png",
-  "/assets/images/homepage/clients/4.png",
-  "/assets/images/homepage/clients/3.png",
   "/assets/images/homepage/clients/2.png",
   "/assets/images/homepage/clients/1.png",
+  "/assets/images/homepage/clients/5.png",
+  "/assets/images/homepage/clients/8.png",
+  "/assets/images/homepage/clients/3.png",
+  "/assets/images/homepage/clients/6.png",
+  "/assets/images/homepage/clients/4.png",
+  "/assets/images/homepage/clients/1.png",
+  "/assets/images/homepage/clients/2.png",
+  "/assets/images/homepage/clients/3.png",
+  "/assets/images/homepage/clients/4.png",
+  "/assets/images/homepage/clients/5.png",
+  "/assets/images/homepage/clients/6.png",
+  "/assets/images/homepage/clients/7.png",
+  "/assets/images/homepage/clients/8.png",
 ]

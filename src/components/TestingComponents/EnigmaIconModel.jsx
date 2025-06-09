@@ -26,9 +26,7 @@ export function EnigmaIconModel() {
                             />
                             <PlaneComponent />
                             <ambientLight intensity={1} />
-
                         </>
-
                     )}
                 </StickyScrollScene>
             </UseCanvas>
