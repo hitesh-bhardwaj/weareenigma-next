@@ -3,37 +3,39 @@ import { PrimaryButton } from '../Buttons'
 import Cards from './Cards'
 import Lanyard from './CardsCopy'
 import Copy from '../Copy'
+import HangingCards from './HangingCards'
 
 const Solutions = () => {
     return (
         <>
-            <section className='w-screen h-full px-[4vw] pb-[10%] z-[10] relative mt-[-10%] bg-[#fefefe]'>
+            <section className='w-screen h-full px-[4vw] pb-[10%] relative mt-[-10%] pt-[20%] bg-[#fefefe]' id='solutions'>
                 <div className=' h-full w-full space-y-[5vw]'>
                     {data.map((item,index)=>(
                     <div key={index} className={`flex items-center justify-between h-full w-full ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                        <div className='h-[37vw] w-[35vw] bg-gradient-to-b from-black-1 to-[#2B2B2B] rounded-[1.5vw] relative z-[10] overflow-hidden'>
+                        <div className='h-[37vw] w-[40%] bg-gradient-to-b from-black-1 to-[#2B2B2B] rounded-[1.5vw] relative z-[10] overflow-hidden'>
                             {/* <Cards/> */}
-                            <Lanyard/>
+                            {/* <Lanyard/> */}
+                            <HangingCards/>
                         </div>
-                        <div className="flex flex-col gap-[2vw] w-[50%] text-black">
+                        <div className="flex flex-col gap-[2vw] w-[48%] text-black">
                             <Copy>
                             <h3 className='uppercase !text-[5.2vw]'>
                                 {item.title}
                             </h3>
                             </Copy>
-                            <div className='space-y-[2vw]'>
+                            <div className='space-y-[1.5vw]'>
                                 <Copy>
-                                <p className="w-[90%]">
+                                <p className="w-[90%] font-medium">
                                     {item.para1}
                                 </p>
                                 </Copy>
                                 <Copy>
-                                <p className="w-[90%]">
+                                <p className="w-[90%] font-medium">
                                    {item.para2}
                                 </p>
                                 </Copy>
                             </div>
-                            <PrimaryButton text={"Know More "} href={item.link} className="border-black" />
+                            <PrimaryButton text={"Know More "} href={item.link} className="!border-black" invert={true} />
                         </div>
 
                     </div>

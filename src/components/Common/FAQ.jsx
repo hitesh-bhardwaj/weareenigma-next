@@ -28,7 +28,7 @@ export default function FAQs({ allowMultiple = false , content}) {
     <section className="px-[4vw] py-[6vw] pb-[20vw] w-full max-sm:px-[7vw] bg-[#fefefe] relative max-sm:pb-[10%] max-sm:min-h-screen max-md:min-h-screen">
       <div className="flex flex-col items-center gap-[6vw] max-sm:gap-[10vw] max-md:justify-center max-sm:items-start">
        <Copy>
-          <h1 className="w-[68%] text-center">
+          <h1 className="w-[68%] text-center !leading-[1.15]">
           In Case You Were Wondering
           </h1>
           </Copy>

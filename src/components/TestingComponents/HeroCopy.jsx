@@ -8,7 +8,7 @@ export function HeroCopy() {
                     <Copy delay={1}>
                     <h1 className="capitalize font-medium flex flex-col !leading-[1.15]">
                         <span className="text-white">Digital</span>{" "}
-                        <span>Experience</span>{" "}
+                        <span className="">Experience</span>{" "}
                         <span className="white-stroke-text">Design agency</span>
                     </h1>
                     </Copy>

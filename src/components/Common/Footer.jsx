@@ -9,7 +9,7 @@ export const Footer = (() => {
     return (
         <>
             <section className='h-full w-full  overflow-hidden relative' id='hero-section'>
-                <div className="flex h-[50vw] bg-black-1">
+                <div className="flex h-screen bg-black-1">
                     <FooterCTA />
                     </div>
                 <FooterCopy />

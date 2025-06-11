@@ -13,9 +13,10 @@ const About = () => {
   useEffect(()=>{
     const ctx = gsap.context(()=>{
        gsap.to(".video-container",{
-        top:"-25%",
+        top:"12%",
         left:"50%",
         scale:1,
+        borderRadius:"2vw",
         ease:"none",
         scrollTrigger:{
           trigger:"#about",
@@ -41,10 +42,10 @@ const About = () => {
           </Copy>
         </div>
         <div className="w-screen h-[300vh] absolute top-0 left-0 z-[10] flex pt-0">
-          <div className="w-full h-[80vh] sticky top-[30%]">
+          <div className="w-full h-[100vh] sticky top-0">
 
         <div
-        className="h-[45vw] w-[90vw] rounded-[3vw] overflow-hidden scale-[0.25] translate-x-[-50%] absolute top-[-15%] left-[15%] video-container"
+        className="h-[45vw] w-[90vw] rounded-[3vw] overflow-hidden scale-[0.25] translate-x-[-50%] absolute top-[20%] left-[15%] video-container"
       >
         <video
           src={"/assets/videos/showreel.mp4"}

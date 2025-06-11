@@ -194,7 +194,7 @@ const TestimonialSectionCopy = () => {
     };
 
     containerRef.current.addEventListener("mousemove", handleMouseMove);
-    return () => containerRef.current.removeEventListener("mousemove", handleMouseMove);
+    // return () => containerRef.current.removeEventListener("mousemove", handleMouseMove);
   }, [lines]);
 
   return (

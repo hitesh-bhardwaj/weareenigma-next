@@ -41,12 +41,12 @@ function IconModel({ scale }) {
     const model = useGLTF("/assets/models/enigmaLogo.glb");
     const { nodes } = model;
     const materialsProps = {
-        thickness: 1.8,
+        thickness: 2.8,
         resolution: 128,
         samples: 2,
-        backsideThickness: 0.6,
-        reflectivity: 0.54,
-        roughness: 0.3,
+        // backsideThickness: 0.6,
+        reflectivity: 0.2,
+        roughness: 0.4,
         antisotropy: 0.4,
         chromaticAberration: 0.1,
         distortion: 0.3,
@@ -136,7 +136,7 @@ function IconModel({ scale }) {
     }, []);
 
     return (
-        <group ref={iconGroupRef} castShadow receiveShadow position={[370, 0, 100]} rotation={[0, -0.2, 0]} scale={75} dispose={null}>
+        <group ref={iconGroupRef} position={[370, 0, 100]} rotation={[0, -0.2, 0]} scale={75} dispose={null}>
             <mesh ref={iconRef} geometry={nodes.Low_Poly001.geometry}>
                 <MeshTransmissionMaterial {...materialsProps} />
             </mesh>
@@ -220,7 +220,7 @@ function PlaneComponent() {
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#hero-section",
-                    start: "35% top",
+                    start: "33% top",
                     end: "80% bottom",
                     scrub: true,
                 },

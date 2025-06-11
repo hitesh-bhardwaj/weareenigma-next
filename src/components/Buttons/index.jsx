@@ -38,22 +38,22 @@ export const LinkButton = ({ text, href, className = "", ...props }) => {
   );
 };
 
-export const PrimaryButton = ({text,href,...props}) => {
+export const PrimaryButton = ({text,href,className,invert,...props}) => {
   return (
     <>
       <Link href={href} className="w-fit flex group hover:scale-[0.97] duration-500 ease-out relative z-[10]">
-        <div className="w-fit relative h-full px-[3.5vw] overflow-hidden py-[0.7vw] rounded-full border border-white font-medium font-display">
+        <div className={`w-fit relative h-full px-[3.5vw] overflow-hidden py-[0.7vw] rounded-full border border-white font-medium font-display ${className}`}>
           <span className="z-[1] relative">{text}</span>
           <span className="w-full h-full absolute bottom-0 left-0 bg-primary origin-bottom scale-y-0 group-hover:scale-y-100 duration-300 ease-out"/>
         </div>
-        <div className="w-[3.5vw] h-[3.5vw] p-[1.1vw] relative rounded-full border border-white overflow-hidden">
+        <div className={`w-[3.5vw] h-[3.5vw] p-[1.1vw] relative rounded-full border border-white overflow-hidden ${className}`}>
         <span className="w-full h-full absolute bottom-0 left-0 bg-primary origin-bottom scale-y-0 group-hover:scale-y-100 duration-300 ease-out"/>
           <Image
             src={"/assets/icons/arrow-diagonal.svg"}
             alt="arrow-diagonal"
             width={50}
             height={50}
-            className="w-full h-full object-contain group-hover:rotate-45 duration-300"
+            className={`w-full h-full object-contain group-hover:rotate-45 duration-300 ${invert?"invert":""}`}
           />
         </div>
       </Link>

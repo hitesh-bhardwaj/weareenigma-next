@@ -14,6 +14,7 @@ import Layout from '@/components/Layout'
 import { Hero } from '@/components/Solutions/Hero'
 import Header from '@/components/Header'
 import { Footer } from '@/components/Common/Footer'
+import Image from 'next/image'
 
 const page = () => {
   return (
@@ -25,7 +26,18 @@ const page = () => {
    <SectionBreak text={"We craft emotionally intelligent user experiences that are adored globally!"}/>
    <Solutions/>
    <Approach/>
-   <FAQs content={faqContent}/>
+   <div className="relative">
+             <FAQs content={faqContent} />
+             <div className="w-screen h-auto">
+               <Image
+                 src={"/assets/images/gradient.webp"}
+                 alt="gradient"
+                 width={1920}
+                 height={1080}
+                 className="w-screen h-[50vw] absolute top-[70%] z-[2]"
+               />
+             </div>
+             </div>
    <Footer/>
    </Layout>
   

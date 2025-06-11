@@ -19,6 +19,7 @@ import SectionBreak from "@/components/Common/SectionBreak";
 import SolutionsCopy from "@/components/homepage/SolutionsCopy";
 import Image from "next/image";
 import IndustryCopy from "@/components/homepage/IndustryCopy";
+import { HeroOption } from "@/components/homepage/HeroOption";
 
 const page = () => {
   fadeUpAnim();
@@ -29,13 +30,14 @@ const page = () => {
       <Layout>
         <Header />
         <Hero />
+        {/* <HeroOption/> */}
         <About />
         <Work />
         <SectionBreak />
         <Testimonials />
-        {/* <SolutionsCopy/> */}
+        <SolutionsCopy/>
         <div className="relative">
-          <Solutions />
+          {/* <Solutions /> */}
         
           {/* <IndustriesCopy /> */}
           <IndustryCopy/>
