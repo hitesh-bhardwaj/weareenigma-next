@@ -1,20 +1,12 @@
 "use client";
 import {
-  Environment,
-  GradientTexture,
-  MeshDistortMaterial,
-  OrbitControls,
   useGLTF,
   useTexture,
-} from "@react-three/drei"
-import React, { Suspense, useEffect, useRef } from "react";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/dist/ScrollTrigger";
+} from "@react-three/drei";
+import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { ScrollScene, UseCanvas } from "@14islands/r3f-scroll-rig";
-
-gsap.registerPlugin(ScrollTrigger);
 
 function Background({ img }) {
   const bgref = useRef(null);
@@ -24,37 +16,16 @@ function Background({ img }) {
 
   useEffect(() => {
     if (texture) {
-      texture.center.set(0.5, 0.5);
+      texture.center.set(0.41, 0.41);
       texture.rotation = Math.PI;
       texture.needsUpdate = true;
     }
   }, [texture]);
 
-  // useEffect(() => {
-  //   const ctx = gsap.context(() => {
-  //     if (!webModelRef.current) return;
-
-  //     const tl = gsap.timeline({
-  //       scrollTrigger: {
-  //         trigger: "#hero-section",
-  //         start: "top top",
-  //         end: "bottom top",
-  //         scrub: 1,
-  //       },
-  //     });
-
-  //     tl.to(webModelRef.current.position, {
-  //       y: 100, 
-  //       ease: "none",
-  //     });
-
-  //   })
-  //   return () => ctx.revert()
-  // }, []);
 
   return (
     <group position={[0, 0, 0]} ref={webModelRef}>
-      <group ref={bgref} scale={1} position={[0, 0, 0]} rotation={[0, 0, 0]}>
+      <group ref={bgref} scale={70} position={[0, 0, -200]} rotation={[0, 0, 0]}>
         <mesh geometry={backgroundModel.nodes.Plane002.geometry}>
           <meshStandardMaterial map={texture} side={THREE.DoubleSide} />
         </mesh>
@@ -63,11 +34,9 @@ function Background({ img }) {
   );
 }
 
-const FractalWithWave = ({ img }) => { 
+const FractalWithWave = ({ img }) => {
   const lightTargetRef = useRef(new THREE.Vector3(10, 10, 10));
   const containerRef = useRef(null);
-  const trackRef = useRef(null);
-  const el = useRef()
 
   const handleMouseMove = (e) => {
     if (!containerRef.current) return;
@@ -101,22 +70,33 @@ const FractalWithWave = ({ img }) => {
       lightRef.current.position.lerp(target.current, 0.1);
     });
 
-    return <directionalLight ref={lightRef} intensity={3} />;
+    return <directionalLight ref={lightRef} intensity={1} position={[0,10,20]} />;
   };
 
   return (
     <>
     
-     
-        <group>
-          <ambientLight intensity={0.8} />
-          <LightFollower target={lightTargetRef} />
-          <Background img={img} />
-        </group>
-       
+      <group position={[0,100,0]}>
+        {/* <ambientLight intensity={0} /> */}
+        <LightFollower target={lightTargetRef} />
+        <Background img={img} />
+      </group>
     </>
   );
 };
 
-export default FractalWithWave;
-
+export default function FractalWaveSection({img}) {
+  const meshWrapper = useRef(null);
+  return (
+    <>
+      <div>
+        <div ref={meshWrapper} className="w-screen h-[120vh]" />
+        <UseCanvas>
+          <ScrollScene track={meshWrapper}>
+            {(props) => <FractalWithWave {...props} img={img} />}
+          </ScrollScene>
+        </UseCanvas>
+      </div>
+    </>
+  );
+}

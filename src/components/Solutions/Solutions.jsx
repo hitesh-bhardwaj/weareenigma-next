@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import { PrimaryButton } from '../Buttons'
 import Cards from './Cards'
 import Lanyard from './CardsCopy'
@@ -6,40 +7,66 @@ import Copy from '../Copy'
 import HangingCards from './HangingCards'
 
 const Solutions = () => {
+    const [dropStates, setDropStates] = useState([]);
+
+    useEffect(() => {
+        const elements = document.querySelectorAll('.card-content-container');
+        const newDropStates = new Array(elements.length).fill(false);
+        const observers = [];
+
+        elements.forEach((el, index) => {
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        newDropStates[index] = true;
+                        setDropStates([...newDropStates]);
+                        observer.disconnect(); // Drop only once
+                    }
+                },
+                { threshold: 0.2 }
+            );
+            observer.observe(el);
+            observers.push(observer);
+        });
+
+        return () => observers.forEach((observer) => observer.disconnect());
+    }, []);
     return (
         <>
             <section className='w-screen h-full px-[4vw] pb-[10%] relative mt-[-10%] pt-[20%] bg-[#fefefe]' id='solutions'>
-                <div className=' h-full w-full space-y-[5vw]'>
-                    {data.map((item,index)=>(
-                    <div key={index} className={`flex items-center justify-between h-full w-full ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                        <div className='h-[37vw] w-[40%] bg-gradient-to-b from-black-1 to-[#2B2B2B] rounded-[1.5vw] relative z-[10] overflow-hidden'>
-                            {/* <Cards/> */}
-                            {/* <Lanyard/> */}
-                            <HangingCards/>
-                        </div>
-                        <div className="flex flex-col gap-[2vw] w-[48%] text-black">
-                            <Copy>
-                            <h3 className='uppercase !text-[5.2vw]'>
-                                {item.title}
-                            </h3>
-                            </Copy>
-                            <div className='space-y-[1.5vw]'>
-                                <Copy>
-                                <p className="w-[90%] font-medium">
-                                    {item.para1}
-                                </p>
-                                </Copy>
-                                <Copy>
-                                <p className="w-[90%] font-medium">
-                                   {item.para2}
-                                </p>
-                                </Copy>
-                            </div>
-                            <PrimaryButton text={"Know More "} href={item.link} className="!border-black" invert={true} />
-                        </div>
+                <div className=' h-full w-full space-y-[30vh] pl-[4vw]'>
+                {data.map((item, index) => (
+    <div
+        key={index}
+        className={`flex items-center justify-between h-full w-full ${
+            index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+        } card-content-container`}
+    >
+        <div className="h-[37vw] w-[40%] bg-gradient-to-b from-black-1 to-[#2B2B2B] rounded-[1.5vw] relative z-[10] overflow-hidden">
+            <HangingCards drop={dropStates[index]} />
+        </div>
+        <div className="flex flex-col gap-[2vw] w-[48%] text-black">
+            <Copy>
+                <h3 className="uppercase !text-[5.2vw]">{item.title}</h3>
+            </Copy>
+            <div className="space-y-[1.5vw]">
+                <Copy>
+                    <p className="w-[90%] font-medium">{item.para1}</p>
+                </Copy>
+                <Copy>
+                    <p className="w-[90%] font-medium">{item.para2}</p>
+                </Copy>
+            </div>
+            <PrimaryButton
+                text={"Know More "}
+                href={item.link}
+                className="!border-black"
+                invert={true}
+            />
+        </div>
+    </div>
+))}
 
-                    </div>
-                      ))}
 
                 </div>
 

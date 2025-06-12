@@ -3,6 +3,8 @@ import { EnigmaIconModel } from "./EnigmaIconModel";
 import { FractalGlassModelWrapper } from './FractalGlassModel';
 import { HeroCopy } from './HeroCopy';
 import { VideoPlane } from "./VideoPlane";
+import Hero2 from "../homepage/Hero/Hero2";
+import FractalWaveSection from "../homepage/FractalWithWave";
 
 export const Hero = (() => {
     const containerRef = useRef();
@@ -19,6 +21,8 @@ export const Hero = (() => {
                 <div className="absolute top-0 left-0">
                     <Suspense>
                         <FractalGlassModelWrapper img={"/assets/models/hero-bg.png"}/>
+                        {/* <FractalWaveSection img={"/assets/models/hero-bg.png"} /> */}
+                        {/* <Hero2/> */}
                     </Suspense>
                 </div>
                

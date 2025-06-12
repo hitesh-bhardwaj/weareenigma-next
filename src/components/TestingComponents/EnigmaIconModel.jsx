@@ -41,16 +41,16 @@ function IconModel({ scale }) {
     const model = useGLTF("/assets/models/enigmaLogo.glb");
     const { nodes } = model;
     const materialsProps = {
-        thickness: 2.8,
+        thickness: 5.8,
         resolution: 128,
         samples: 2,
         // backsideThickness: 0.6,
-        reflectivity: 0.2,
+        reflectivity: 0.3,
         roughness: 0.4,
-        antisotropy: 0.4,
+        antisotropy: 0.0,
         chromaticAberration: 0.1,
-        distortion: 0.3,
-        temporalDistortion: 0.1,
+        distortion: 0.1,
+        temporalDistortion: 0.0,
         anisotropicBlur: 1.0,
         color: "#ffffff",
         backSide: false,

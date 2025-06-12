@@ -9,11 +9,11 @@ export const Footer = (() => {
     return (
         <>
             <section className='h-full w-full  overflow-hidden relative' id='hero-section'>
-                <div className="flex h-screen bg-black-1">
+                <div className="flex h-[50vw] bg-black-1 dark">
                     <FooterCTA />
                     </div>
                 <FooterCopy />
-                <div className="absolute bottom-0 left-0 h-screen">
+                <div className="absolute bottom-0 left-0 h-screen w-screen">
                     <Suspense>
                         <FractalGlassModelWrapper img={"/assets/models/hero-bg.png"} />
                     </Suspense>

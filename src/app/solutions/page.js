@@ -30,11 +30,11 @@ const page = () => {
              <FAQs content={faqContent} />
              <div className="w-screen h-auto">
                <Image
-                 src={"/assets/images/gradient.webp"}
+                 src={"/assets/images/gradient.png"}
                  alt="gradient"
                  width={1920}
                  height={1080}
-                 className="w-screen h-[50vw] absolute top-[70%] z-[2]"
+                 className="w-screen h-[50vw] absolute top-[73%] z-[2]"
                />
              </div>
              </div>

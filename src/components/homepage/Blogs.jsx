@@ -119,6 +119,7 @@ const Blogs = () => {
             speed={500}
             initialSlide={0} 
             spaceBetween={30}
+            loop
             slidesPerView={1.2}
             breakpoints={{
               480: {

@@ -6,6 +6,7 @@ import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import WaveShader from "../WaveShader";
 import Copy from "../Copy";
 import { fadeUpAnim } from "../gsapAnimations";
+import Link from "next/link";
 gsap.registerPlugin(ScrollTrigger);
 
 const Work = () => {
@@ -191,6 +192,7 @@ const Work = () => {
             className="w-full h-full bg-[#33EAFF] absolute z-[2] work-1-mockup "
             style={{ clipPath: "inset(0% 0% 0% 0%)" }}
           >
+            <Link className="w-full h-full" href={"/mockup-1"}>
             <Image
               src={"/assets/images/homepage/work/work-mockup-1.png"}
               alt=""
@@ -198,8 +200,11 @@ const Work = () => {
               width={800}
               height={500}
             />
+            
+            </Link>
           </div>
           <div className="w-full h-[90vh] absolute rounded-[2.5vw] bg-[#FF2226] flex flex-col justify-between ">
+          <Link className="w-full h-full" href={"/mockup-2"}>
             <Image
               src={"/assets/images/homepage/work/work-mockup-1.png"}
               alt=""
@@ -207,6 +212,7 @@ const Work = () => {
               width={800}
               height={500}
             />
+            </Link>
           </div>
         </div>
         <div className="w-[45vw] h-[90vh] rounded-[2.5vw] overflow-hidden bg-primary p-[2vw] flex flex-col justify-between work-2-content translate-x-[104%] z-[3]">
@@ -229,6 +235,7 @@ const Work = () => {
             className="w-full h-full bg-[#235DFF] absolute top-0 left-0 z-[2] work-3-mockup "
             style={{ clipPath: "inset(0% 0% 0% 0%)" }}
           >
+              <Link className="w-full h-full" href={"/mockup-3"}>
             <Image
               src={"/assets/images/homepage/work/work-mockup-1.png"}
               alt=""
@@ -236,8 +243,10 @@ const Work = () => {
               width={800}
               height={500}
             />
+            </Link>
           </div>
           <div className="w-full h-[90vh] absolute top-0 left-0 rounded-[2.5vw] bg-[#19A760] flex flex-col justify-between">
+          <Link className="w-full h-full" href={"/mockup-4"}>
             <Image
               src={"/assets/images/homepage/work/work-mockup-1.png"}
               alt=""
@@ -245,6 +254,7 @@ const Work = () => {
               width={800}
               height={500}
             />
+            </Link>
           </div>
         </div>
         <div className="w-[45vw] h-[90vh] rounded-[2.5vw] overflow-hidden bg-primary p-[2vw] flex flex-col justify-between work-4-content translate-x-[104%] translate-y-[-100%] z-[1]">

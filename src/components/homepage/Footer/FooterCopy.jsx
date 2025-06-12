@@ -15,9 +15,9 @@ const FooterCopy = () => {
         <>
             <footer className='w-screen h-full relative'>
                 <div className='w-full h-full'>
-                    <div className='z-[10] relative h-full py-[4vw] px-[4vw]'>
-                        <div className='flex flex-col items-start justify-bewteen gap-[28vw]'>
-                            <div className='flex items-center justify-between w-full h-full text-white font-bold'>
+                    <div className='z-[10] relative h-full pb-[4%] px-[4vw]'>
+                        <div className='flex flex-col items-start justify-between h-screen'>
+                            <div className='flex items-center justify-between w-full h-fit text-white font-semibold pt-[10%]'>
                                 <Link href={"/"} data-split="letters" data-letters-delay className="buttonSplit">
                                     <div className="overflow-clip">
                                         <p className="buttonTextShadow ">

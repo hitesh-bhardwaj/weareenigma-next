@@ -304,8 +304,8 @@ const SolutionsCopy = () => {
             </div>
           </div>
         </div>
-        <div className="w-[110vw] h-auto absolute bottom-[-50%] left-0 z-[3]">
-          <Image src={"/assets/images/gradient.webp"} alt="bg-gradient" width={1920} height={1080} className="w-full h-full object-cover"/>
+        <div className="w-[100vw] h-auto absolute bottom-[-50%] scale-x-[-1] left-0 z-[3]">
+          <Image src={"/assets/images/gradient.png"} alt="bg-gradient" width={1920} height={1080} className="w-full h-full object-cover"/>
 
         </div>
       </div>

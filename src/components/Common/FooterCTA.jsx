@@ -7,7 +7,7 @@ const FooterCTA = () => {
   return (
     <>
     <section className='w-screen h-[45vw] bg-black-1 '>
-        <div className='w-full h-full px-[4vw] py-[4vw] flex items-center justify-center'>
+        <div className='w-full h-full px-[4vw] py-[4vw] pt-[10%] flex items-center justify-center'>
             <div className='w-[60%] text-white flex flex-col items-center gap-[4vw]'>
               <Copy>
             <p className='text-[8vw] leading-[1.2] font-display text-center'>Let's bring your

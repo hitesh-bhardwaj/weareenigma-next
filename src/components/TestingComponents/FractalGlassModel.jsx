@@ -46,8 +46,8 @@ function FractalGlassModel({ img, scale, scrollState, ...props }) {
 
     return (
         <>
-            <group receiveShadow scale={scale.xy.min() * 0.08} position={[0, 0, -100]} rotation={[0, 0, 0]} {...props}>
-                <directionalLight ref={lightRef} intensity={2} />
+            <group receiveShadow  castShadow scale={scale.xy.min() * 0.08} position={[0, -35, -100]} rotation={[0, 0, 0]} {...props}>
+                <directionalLight ref={lightRef} intensity={3} />
                 <mesh ref={meshRef} geometry={model.nodes.Plane002.geometry}>
                     <meshStandardMaterial map={texture} side={useThree.DoubleSide} />
                 </mesh>

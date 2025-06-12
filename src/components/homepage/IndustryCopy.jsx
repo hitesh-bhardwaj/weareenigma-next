@@ -114,7 +114,7 @@ const IndustryCopy = () => {
         ease: "power2.out",
       })
       .fromTo(".industry-1-container",{
-        yPercent:30,
+        yPercent:40,
       },{
         delay:-1.2,
         duration:2.5,
@@ -176,7 +176,7 @@ const IndustryCopy = () => {
         // xPercent:-220,
         delay:-1.3,
         duration:1.5,
-        yPercent:-5,
+        yPercent:10,
       })
     });
     return () => ctx.revert();

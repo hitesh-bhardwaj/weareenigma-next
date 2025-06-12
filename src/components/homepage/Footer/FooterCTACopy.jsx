@@ -11,7 +11,7 @@ const FooterCTACopy = () => {
         <>
                 <div className='w-full h-screen text-white flex flex-col items-start gap-[4vw] pl-[4vw] pt-[10%] relative z-[11]'>
                     <Copy>
-                        <p className='text-[8vw] leading-[1.05] font-display'>Let's bring your
+                        <p className='text-[8vw] leading-[1.15] font-display'>Let's bring your
                             ideas to life!</p>
                     </Copy>
                     <button className="w-fit flex">

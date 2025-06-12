@@ -24,28 +24,29 @@ extend({ MeshLineGeometry, MeshLineMaterial });
 export default function HangingCards({
   position = [0, -2, 30],
   fov = 20,
+  drop = false,
   transparent = true,
   gravity = [0, -80, 0],
 }) {
-  const [drop, setDrop] = useState(false);
+  // const [drop, setDrop] = useState(false);
 
-  useEffect(() => {
-    const el = document.getElementById("solutions");
-    if (!el) return;
+  // useEffect(() => {
+  //   const el = document.getElementById("solutions");
+  //   if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setDrop(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
+  //   const observer = new IntersectionObserver(
+  //     ([entry]) => {
+  //       if (entry.isIntersecting) {
+  //         setDrop(true);
+  //         observer.disconnect();
+  //       }
+  //     },
+  //     { threshold: 0.2 }
+  //   );
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  //   observer.observe(el);
+  //   return () => observer.disconnect();
+  // }, []);
 
   return (
     <div className="relative z-0 w-full h-screen flex justify-center items-center transform scale-100 origin-center">

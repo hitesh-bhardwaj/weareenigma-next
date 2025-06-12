@@ -20,14 +20,14 @@ const Clients = () => {
         scrollTrigger: {
           trigger: gridWrap,
           start: 'top bottom+=120%',
-          end: 'bottom center',
+          end: 'bottom top',
           scrub: true,
         }
       });
 
       gsap.set(gridItems, {
         transformOrigin: '10% 0%',
-        z: () => gsap.utils.random(-4000, -3000),
+        z: () => gsap.utils.random(-2000, -3000),
         rotationX: () => gsap.utils.random(-15, -5),
         filter: 'brightness(80%)',
       })
@@ -38,14 +38,15 @@ const Clients = () => {
       grid.style.setProperty('--perspective', '1500px');
 
       timeline.to(gridItems, {
-        xPercent: () => gsap.utils.random(-250, 150),
-        yPercent: () => gsap.utils.random(0, -200),
+        xPercent: () => gsap.utils.random(-100, 120),
+        yPercent: () => gsap.utils.random(100, -200),
+        z:()=>gsap.utils.random(-2000,1000),
         rotationX: 0,
         filter: 'brightness(150%)'
       }, 0)
         .to(gridWrap, {
-          yPercent: -200,
-          z: 6500
+          yPercent: -530,
+          z:()=>gsap.utils.random(5000,8000),
         }, 0)
     })
     return () => ctx.revert();
@@ -90,7 +91,7 @@ const Clients = () => {
           background-position: 50% 50%;
         }
       `}</style>
-      <section className='w-screen h-[400vh] mt-[-300vh] relative  bg-[#fefefe]' id='clients'>
+      <section className='w-screen h-[450vh] mt-[-300vh] relative  bg-[#fefefe]' id='clients'>
         <div className='w-full flex h-screen sticky justify-center items-center top-0'>
           <Copy>
             <h2 className='w-[70%] text-center'>

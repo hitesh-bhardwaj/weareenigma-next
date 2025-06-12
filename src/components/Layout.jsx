@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
         style={{ pointerEvents: 'none', height: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: 1  }}
         gl={{ antialias: true }}
       >
-        <ambientLight />
+        <ambientLight intensity />
         <Environment preset="city" />
       </GlobalCanvas>
       <SmoothScrollbar>

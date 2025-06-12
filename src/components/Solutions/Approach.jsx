@@ -55,6 +55,8 @@ const Approach = () => {
         <Copy>
         <p className='font-medium'>Review, refine, test and prepare final product for delivery. Launch and continue to evolve over time.</p>
         </Copy>
+        <span className='w-full h-[1px] bg-white block mt-[2vw] lineanim'></span>
+
     </div>
     </div>
 

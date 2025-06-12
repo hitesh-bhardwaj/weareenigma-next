@@ -30,7 +30,7 @@ const About = () => {
   },[])
 
   return (
-    <section className="w-screen h-[300vh] px-[4vw] py-[10%] bg-black-1 relative" id="about">
+    <section className="w-screen h-[300vh] px-[4vw] py-[10%] pt-[20%] bg-black-1 relative" id="about">
       <div className="w-full flex justify-between text-white">
         <div className="flex flex-col justify-between">
 
@@ -45,7 +45,7 @@ const About = () => {
           <div className="w-full h-[100vh] sticky top-0">
 
         <div
-        className="h-[45vw] w-[90vw] rounded-[3vw] overflow-hidden scale-[0.25] translate-x-[-50%] absolute top-[20%] left-[15%] video-container"
+        className="h-[45vw] w-[90vw] rounded-[3vw] overflow-hidden scale-[0.25] translate-x-[-50%] absolute top-[35%] left-[15%] video-container"
       >
         <video
           src={"/assets/videos/showreel.mp4"}
